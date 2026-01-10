@@ -160,17 +160,8 @@ export const getMyInquiries = async (agentId: string): Promise<FireberryInquiry[
     }
 
     if (!response.ok) {
-      console.warn("API failure for inquiries, using mock data");
-      return Array(6).fill(null).map((_, i) => ({
-        id: `f${i}`,
-        name: `פנייה חדשה ${i + 1}`,
-        phone: '0501234567',
-        email: 'test@bashiri.co.il',
-        description: 'מתעניין בנכס',
-        statuscode: 'לא טופל',
-        createdon: new Date().toISOString(),
-        agentId: agentId
-      }));
+      console.warn("API failure for inquiries");
+      return [];
     }
 
     const data = await response.json();
@@ -187,17 +178,8 @@ export const getMyInquiries = async (agentId: string): Promise<FireberryInquiry[
       agentId: item.pcfsystemfield758
     }));
   } catch (err) {
-    console.warn("Catch block for inquiries, using mock data:", err);
-    return Array(6).fill(null).map((_, i) => ({
-      id: `m${i}`,
-      name: `פנייה חדשה ${i + 1}`,
-      phone: '0501234567',
-      email: 'test@bashiri.co.il',
-      description: 'מתעניין בנכס',
-      statuscode: 'לא טופל',
-      createdon: new Date().toISOString(),
-      agentId: agentId
-    }));
+    console.warn("Error fetching inquiries:", err);
+    return [];
   }
 };
 
