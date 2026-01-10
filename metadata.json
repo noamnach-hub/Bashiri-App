@@ -1,0 +1,5 @@
+{
+  "name": "Bashiri Agent Portal",
+  "description": "A dedicated mobile-first portal for Bashiri Real Estate agents to manage leads, tasks, and follow-ups directly from the field, integrated with Fireberry CRM.",
+  "requestFramePermissions": []
+}

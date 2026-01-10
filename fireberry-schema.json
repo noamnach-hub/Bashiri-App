@@ -1,0 +1,3811 @@
+{
+  "timestamp": "2026-01-09T12:53:22.322Z",
+  "objects": [
+    {
+      "name": "ביקור לקוח בנכס",
+      "apiName": "ביקור לקוח בנכס",
+      "systemName": "AccountProduct",
+      "objectType": "33",
+      "fields": [
+        {
+          "label": "",
+          "fieldName": "accountproductid",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "AccountProduct"
+        },
+        {
+          "label": "תאריך סיום השכרה ",
+          "fieldName": "pcfsystemfield112",
+          "systemFieldTypeId": "83bf530c-e04c-462b-9ffc-a46f750fc072",
+          "systemName": "AccountProduct"
+        },
+        {
+          "label": "לאיזה בנק השמאות?",
+          "fieldName": "pcfsystemfield850",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "AccountProduct"
+        },
+        {
+          "label": "דירה ( לא פעיל ) ",
+          "fieldName": "pcfsystemfield107",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "AccountProduct"
+        },
+        {
+          "label": "נוצר על ידי",
+          "fieldName": "createdby",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "AccountProduct"
+        },
+        {
+          "label": "דמי תיווך מהשכרה ",
+          "fieldName": "pcfsystemfield118",
+          "systemFieldTypeId": "6a34bfe3-fece-4da1-9136-a7b1e5ae3319",
+          "systemName": "AccountProduct"
+        },
+        {
+          "label": "עודכן על ידי",
+          "fieldName": "modifiedby",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "AccountProduct"
+        },
+        {
+          "label": "דמי תיווך מקניה ",
+          "fieldName": "pcfsystemfield126",
+          "systemFieldTypeId": "6a34bfe3-fece-4da1-9136-a7b1e5ae3319",
+          "systemName": "AccountProduct"
+        },
+        {
+          "label": "הסבר על פיצ'ר 56 - ביקור לקוח בנכס",
+          "fieldName": "pcfhesber56bikur",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "AccountProduct"
+        },
+        {
+          "label": "שמאי הביקר בנכס (שמאי)",
+          "fieldName": "pcfsystemfield843",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "AccountProduct"
+        },
+        {
+          "label": "רשמצ ניירת שמאי",
+          "fieldName": "pcfsystemfield852",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "AccountProduct"
+        },
+        {
+          "label": "תאריך קניה",
+          "fieldName": "purchasedate",
+          "systemFieldTypeId": "ce972d02-5013-46d4-9d1d-f09df1ac346a",
+          "systemName": "AccountProduct"
+        },
+        {
+          "label": "Deleted on",
+          "fieldName": "deletedon",
+          "systemFieldTypeId": "ce972d02-5013-46d4-9d1d-f09df1ac346a",
+          "systemName": "AccountProduct"
+        },
+        {
+          "label": "טלפון המשכיר",
+          "fieldName": "pcfsystemfield116",
+          "systemFieldTypeId": "3f62f67a-1cee-403a-bec6-aa02a9804edb",
+          "systemName": "AccountProduct"
+        },
+        {
+          "label": "מחיר שהוצג בסיור",
+          "fieldName": "price",
+          "systemFieldTypeId": "6a34bfe3-fece-4da1-9136-a7b1e5ae3319",
+          "systemName": "AccountProduct"
+        },
+        {
+          "label": "תאריך התקנה",
+          "fieldName": "installdate",
+          "systemFieldTypeId": "ce972d02-5013-46d4-9d1d-f09df1ac346a",
+          "systemName": "AccountProduct"
+        },
+        {
+          "label": "מבצע פגישה בפועל",
+          "fieldName": "ownerid",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "AccountProduct"
+        },
+        {
+          "label": "טלפון הקונה ",
+          "fieldName": "pcfsystemfield124",
+          "systemFieldTypeId": "3f62f67a-1cee-403a-bec6-aa02a9804edb",
+          "systemName": "AccountProduct"
+        },
+        {
+          "label": "סטאטוס",
+          "fieldName": "statuscode",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "AccountProduct"
+        },
+        {
+          "label": "סדר כרונולוגי של הסיור: ",
+          "fieldName": "pcfsedrerBikurBneches",
+          "systemFieldTypeId": "6a34bfe3-fece-4da1-9136-a7b1e5ae3319",
+          "systemName": "AccountProduct"
+        },
+        {
+          "label": "שמאות שהתקבלה בפועל",
+          "fieldName": "pcfsystemfield848",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "AccountProduct"
+        },
+        {
+          "label": "לפני הסיור - למה נכנס לסיור ?",
+          "fieldName": "pcfBefurSiur102",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "AccountProduct"
+        },
+        {
+          "label": "מס' סבב",
+          "fieldName": "pcfsystemfield268",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "AccountProduct"
+        },
+        {
+          "label": "מספר סידורי",
+          "fieldName": "ordinalnumber",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "AccountProduct"
+        },
+        {
+          "label": "Deleted by",
+          "fieldName": "deletedby",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "AccountProduct"
+        },
+        {
+          "label": "נכס ",
+          "fieldName": "pcfsystemfield226",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "AccountProduct"
+        },
+        {
+          "label": "נוצר בתאריך",
+          "fieldName": "createdon",
+          "systemFieldTypeId": "ce972d02-5013-46d4-9d1d-f09df1ac346a",
+          "systemName": "AccountProduct"
+        },
+        {
+          "label": "תיאור",
+          "fieldName": "description",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "AccountProduct"
+        },
+        {
+          "label": "דירה",
+          "fieldName": "productid",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "AccountProduct"
+        },
+        {
+          "label": "תאריך הסיור",
+          "fieldName": "pcfsystemfield110",
+          "systemFieldTypeId": "83bf530c-e04c-462b-9ffc-a46f750fc072",
+          "systemName": "AccountProduct"
+        },
+        {
+          "label": " ואיך היה בנכס - חובה ✋",
+          "fieldName": "pcfsystemfield286",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "AccountProduct"
+        },
+        {
+          "label": "תאריך קניה ",
+          "fieldName": "pcfsystemfield120",
+          "systemFieldTypeId": "83bf530c-e04c-462b-9ffc-a46f750fc072",
+          "systemName": "AccountProduct"
+        },
+        {
+          "label": "טלפון המוכר",
+          "fieldName": "pcfsystemfield122",
+          "systemFieldTypeId": "3f62f67a-1cee-403a-bec6-aa02a9804edb",
+          "systemName": "AccountProduct"
+        },
+        {
+          "label": "תאריך פקיעת תוקף",
+          "fieldName": "expiredate",
+          "systemFieldTypeId": "ce972d02-5013-46d4-9d1d-f09df1ac346a",
+          "systemName": "AccountProduct"
+        },
+        {
+          "label": "שירות",
+          "fieldName": "service",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "AccountProduct"
+        },
+        {
+          "label": "סטטוס ביקור",
+          "fieldName": "pcfbikurbanechesstatus",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "AccountProduct"
+        },
+        {
+          "label": "שם לקוח שביקר בנכס",
+          "fieldName": "accountid",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "AccountProduct"
+        },
+        {
+          "label": "עודכן בתאריך",
+          "fieldName": "modifiedon",
+          "systemFieldTypeId": "ce972d02-5013-46d4-9d1d-f09df1ac346a",
+          "systemName": "AccountProduct"
+        },
+        {
+          "label": "סיור מקושר",
+          "fieldName": "pcftourrelatedtobikur",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "AccountProduct"
+        },
+        {
+          "label": "כמות",
+          "fieldName": "quantity",
+          "systemFieldTypeId": "6a34bfe3-fece-4da1-9136-a7b1e5ae3319",
+          "systemName": "AccountProduct"
+        },
+        {
+          "label": "סוכן שכירות בפועל(שכירות)",
+          "fieldName": "pcfsystemfield583",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "AccountProduct"
+        },
+        {
+          "label": "הערכת שמאות רצויה",
+          "fieldName": "pcfsystemfield846",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "AccountProduct"
+        },
+        {
+          "label": "טלפון השוכר",
+          "fieldName": "pcfsystemfield114",
+          "systemFieldTypeId": "3f62f67a-1cee-403a-bec6-aa02a9804edb",
+          "systemName": "AccountProduct"
+        }
+      ]
+    },
+    {
+      "name": "חוזה שכירות",
+      "apiName": "חוזה שכירות",
+      "systemName": "customobject1013",
+      "objectType": "1013",
+      "fields": [
+        {
+          "label": "ת.חוזה שכירות עוקב לחוזה קודם 🤨",
+          "fieldName": "pcfsystemfield929",
+          "systemFieldTypeId": "83bf530c-e04c-462b-9ffc-a46f750fc072",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "לא רלוונטי  - למחוק",
+          "fieldName": "pcfsystemfield927",
+          "systemFieldTypeId": "83bf530c-e04c-462b-9ffc-a46f750fc072",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "מספר סידורי לחוזה",
+          "fieldName": "pcfrentcontractnumber",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "📢 (23) ש.הודעה לכל הגורמים מוכן מראש (23) + ת.בהערה",
+          "fieldName": "pcfsystemfield699",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "שכר דירה",
+          "fieldName": "pcfsystemfield632",
+          "systemFieldTypeId": "6a34bfe3-fece-4da1-9136-a7b1e5ae3319",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "6.",
+          "fieldName": "pcfOshrat6",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "🛑 מידע חשוב לרישום בעזיבה ומעקב עזיבה",
+          "fieldName": "pcfsystemfield922",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "איך שילמו תיווך ?",
+          "fieldName": "pcfsystemfield926",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "שקים סרוקים ?",
+          "fieldName": "pcfsystemfield671",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "וועד בית",
+          "fieldName": "pcfsystemfield691",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "נותר לסיום החוזה (חודשים)",
+          "fieldName": "pcfsystemfield661",
+          "systemFieldTypeId": "6a34bfe3-fece-4da1-9136-a7b1e5ae3319",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "יצירת קבוצת וואצאפ עם כל השוכרים + עמרי + אושרת (106)",
+          "fieldName": "pcfcontractcreatewagroup",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "5.",
+          "fieldName": "pcfOshrat5",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "",
+          "fieldName": "customobject1013id",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "🏠 תיאום תאריך בדיקת יציאה ש.הודעה (101)",
+          "fieldName": "pcfsystemfield928",
+          "systemFieldTypeId": "ce972d02-5013-46d4-9d1d-f09df1ac346a",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "8.",
+          "fieldName": "pcfOshrat8",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "נכס מקושר",
+          "fieldName": "pcfsystemfield634",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "סוג נכס יובלים",
+          "fieldName": "pcfsystemfield881",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "לא רלוונטי - היה לעלות קובץ תמונה בדיקה",
+          "fieldName": "pcfBdika1",
+          "systemFieldTypeId": "ed2ad39d-32fc-4585-8f5b-2e93463f050a",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "עודכן בתאריך",
+          "fieldName": "modifiedon",
+          "systemFieldTypeId": "ce972d02-5013-46d4-9d1d-f09df1ac346a",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "הערות חשובות",
+          "fieldName": "pcfsystemfield695",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "גובה עמלת תיווך",
+          "fieldName": "pcfsystemfield681",
+          "systemFieldTypeId": "6a34bfe3-fece-4da1-9136-a7b1e5ae3319",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": " - לא רלוונטי",
+          "fieldName": "pcfSHULAMLASOCHEN",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "חוסר שוכר 3",
+          "fieldName": "pcfsystemfield717",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "שוכר 1 (חש)",
+          "fieldName": "pcfsystemfield637",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "נוצר על ידי",
+          "fieldName": "createdby",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "תקופת השכירות (חודשים)",
+          "fieldName": "pcfsystemfield659",
+          "systemFieldTypeId": "6a34bfe3-fece-4da1-9136-a7b1e5ae3319",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "(5) ❌ חוסרים ש.הודעה לכל הגורמים (5)",
+          "fieldName": "pcfsystemfield707",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "3.",
+          "fieldName": "pcfOshrat3",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "שם חוזה השכירות ✔",
+          "fieldName": "name",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "מידע מבדיקת היציאה - 90 יום מלל חופשי ",
+          "fieldName": "pcfsystemfield871",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "ארנונה",
+          "fieldName": "pcfsystemfield693",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "ניהול נכסים ?",
+          "fieldName": "pcfsystemfield924",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "מים",
+          "fieldName": "pcfsystemfield687",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "2.",
+          "fieldName": "pcfOshrat2",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "הסבר על השקים שנמסרו",
+          "fieldName": "pcfsystemfield697",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "סיום תקופת שכירות",
+          "fieldName": "pcfsystemfield648",
+          "systemFieldTypeId": "83bf530c-e04c-462b-9ffc-a46f750fc072",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "חוסר שוכר 1",
+          "fieldName": "pcfsystemfield713",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "חוסר של שוכרים כולם יחד (נשלח לשוכר בהודעה אוט') מה השוכרים צריכים להשלים?",
+          "fieldName": "pcfsystemfield709",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "סטטוס (ח\"ש)",
+          "fieldName": "pcfsystemfield657",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "שולם לסוכן את העמלה ?",
+          "fieldName": "pcfTASHLOMSOCHEN",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "תחילת תקופת שכירות",
+          "fieldName": "pcfsystemfield646",
+          "systemFieldTypeId": "83bf530c-e04c-462b-9ffc-a46f750fc072",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "הסבר 💬 הדרכה בחוזה",
+          "fieldName": "pcfHesberHuzeSchirut",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "סטטוס עתידי (השוכר)",
+          "fieldName": "pcfsystemfield655",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "הסבר על החוב של דמי התיווך",
+          "fieldName": "pcfsystemfield925",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "הסבר של אושרת על 7+8",
+          "fieldName": "pcfsystemfield931",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "נותר לסיום החוזה (ימים)",
+          "fieldName": "pcfsystemfield663",
+          "systemFieldTypeId": "6a34bfe3-fece-4da1-9136-a7b1e5ae3319",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "מה שולם ואיך בחתימה? (לא כולל השקים)",
+          "fieldName": "pcfsystemfield673",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "4.",
+          "fieldName": "pcfOshrat4",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "איזה מיסים כולל ?",
+          "fieldName": "pcfMisimKolelHoze",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "חוזה סרוק ?",
+          "fieldName": "pcfsystemfield683",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "חוסר שוכר 2",
+          "fieldName": "pcfsystemfield715",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "מידע על מימוש אופציה רישום חופשי",
+          "fieldName": "pcfsystemfield906",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "משתמש",
+          "fieldName": "ownerid",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "📲 קישור קבוצה ואטאפ ",
+          "fieldName": "pcfKishorKvoza",
+          "systemFieldTypeId": "c820d32f-44df-4c2a-9c1e-18734e864fd5",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "ID קבוצת וואצאפ",
+          "fieldName": "pcfcontractwagroupid",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "שוכר 2 (חש)",
+          "fieldName": "pcfsystemfield640",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "נוצר בתאריך",
+          "fieldName": "createdon",
+          "systemFieldTypeId": "ce972d02-5013-46d4-9d1d-f09df1ac346a",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "9. ",
+          "fieldName": "pcfOshrat9",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "חשמל",
+          "fieldName": "pcfsystemfield685",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "חוסרים משרד להשלמה (נשלח למשרד) מה צריך לעשות בדירה ?",
+          "fieldName": "pcfsystemfield653",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "1.",
+          "fieldName": "pcfOshrat1",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "עודכן על ידי",
+          "fieldName": "modifiedby",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "ת.ז. שוכר",
+          "fieldName": "pcfsystemfield669",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "שליחת עדכון צ'קליסט(16)",
+          "fieldName": "pcfsystemfield755",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "סוכן שכירות שסגר",
+          "fieldName": "pcfsystemfield650",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "איש קשר נוסף לחוזה (ח\"ש)",
+          "fieldName": "pcfsystemfield930",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "Deleted on",
+          "fieldName": "deletedon",
+          "systemFieldTypeId": "ce972d02-5013-46d4-9d1d-f09df1ac346a",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "שוכר 3 (חש)",
+          "fieldName": "pcfsystemfield643",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "שולם? דמי תיווך",
+          "fieldName": "pcfsystemfield679",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "ימים שנותרו לאכלוס",
+          "fieldName": "pcfsystemfield665",
+          "systemFieldTypeId": "6a34bfe3-fece-4da1-9136-a7b1e5ae3319",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "Deleted by",
+          "fieldName": "deletedby",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "הצהרת נכס מושכר (4)",
+          "fieldName": "pcfsystemfield716",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "גז",
+          "fieldName": "pcfsystemfield689",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "בעל נכס מקושר",
+          "fieldName": "pcfsystemfield629",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "(23) מלל מצורף להודעה 👇",
+          "fieldName": "pcfsystemfield873",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "7.",
+          "fieldName": "pcfOshrat7",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "customobject1013"
+        },
+        {
+          "label": "שלח הודעה ליום האכלוס",
+          "fieldName": "pcfsystemfield719",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "customobject1013"
+        }
+      ]
+    },
+    {
+      "name": "לקוח",
+      "apiName": "לקוח",
+      "systemName": "Account",
+      "objectType": "1",
+      "fields": [
+        {
+          "label": "לא רלוונטי - למחוק",
+          "fieldName": "pcfsystemfield902",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "Account"
+        },
+        {
+          "label": "טלפון ראשי",
+          "fieldName": "telephone1",
+          "systemFieldTypeId": "3f62f67a-1cee-403a-bec6-aa02a9804edb",
+          "systemName": "Account"
+        },
+        {
+          "label": "נוצר על ידי",
+          "fieldName": "createdby",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "Account"
+        },
+        {
+          "label": "הכנסות",
+          "fieldName": "revenue",
+          "systemFieldTypeId": "6a34bfe3-fece-4da1-9136-a7b1e5ae3319",
+          "systemName": "Account"
+        },
+        {
+          "label": "מנהל לקוח - 3 חודשים ראשונים",
+          "fieldName": "pcfsystemfield324",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "מספר סידורי לקוח",
+          "fieldName": "accountnumber",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "Account"
+        },
+        {
+          "label": "בלעדיות (מו)",
+          "fieldName": "pcfsystemfield503",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "מצב רשומה",
+          "fieldName": "statecode",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "מספר יעד",
+          "fieldName": "pcfsystemfield376",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "Account"
+        },
+        {
+          "label": "פניות כמות לקוח",
+          "fieldName": "pcfKamutPnut1014",
+          "systemFieldTypeId": "6a34bfe3-fece-4da1-9136-a7b1e5ae3319",
+          "systemName": "Account"
+        },
+        {
+          "label": "סוג לקוח 1",
+          "fieldName": "accounttypecode",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "יתרת משכנתא (מו)",
+          "fieldName": "pcfsystemfield507",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "Account"
+        },
+        {
+          "label": "נכס מועדף (ש)",
+          "fieldName": "pcfsystemfield426",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "תאריך סיום חוזה (מש)",
+          "fieldName": "pcfsystemfield519",
+          "systemFieldTypeId": "83bf530c-e04c-462b-9ffc-a46f750fc072",
+          "systemName": "Account"
+        },
+        {
+          "label": "מידע נוסף על מחיר למשתכן",
+          "fieldName": "pcfsystemfield910",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "Account"
+        },
+        {
+          "label": "שכד מקסימלי (ש)",
+          "fieldName": "pcfsystemfield432",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "ארץ",
+          "fieldName": "billingcountry",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "Account"
+        },
+        {
+          "label": "הסבר על הפיצ'ר 102/3",
+          "fieldName": "pcfsystemfield929",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "Account"
+        },
+        {
+          "label": "סיורים כמות (105- לקוח)",
+          "fieldName": "pcfTotal105Siurim",
+          "systemFieldTypeId": "6a34bfe3-fece-4da1-9136-a7b1e5ae3319",
+          "systemName": "Account"
+        },
+        {
+          "label": "מספר טלפון של המתקשר",
+          "fieldName": "pcfsystemfield370",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "Account"
+        },
+        {
+          "label": "מחיר מקסימלי לרכישה",
+          "fieldName": "pcfsystemfield396",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "למה לא רלוונטי? (ש)",
+          "fieldName": "pcfsystemfield461",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "זיהוי שוכר (ש)",
+          "fieldName": "pcfsystemfield456",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "🎓 הצעה לנכס לשכירות (103)",
+          "fieldName": "pcfsystemfield927",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "Account"
+        },
+        {
+          "label": "הפעל Ai (62) על הלקוח ",
+          "fieldName": "pcfAiOnClient",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "תאריך כניסה ",
+          "fieldName": "pcfsystemfield50",
+          "systemFieldTypeId": "83bf530c-e04c-462b-9ffc-a46f750fc072",
+          "systemName": "Account"
+        },
+        {
+          "label": "סוכן מכירות",
+          "fieldName": "pcfsystemfield412",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "פירוט בעלי חיים (ש)",
+          "fieldName": "pcfBaleyHaimHascra",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "Account"
+        },
+        {
+          "label": "שם קבוצה",
+          "fieldName": "pcfsystemfield384",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "Account"
+        },
+        {
+          "label": "עודכן בתאריך",
+          "fieldName": "modifiedon",
+          "systemFieldTypeId": "ce972d02-5013-46d4-9d1d-f09df1ac346a",
+          "systemName": "Account"
+        },
+        {
+          "label": "שליחת דואר אלקטרוני",
+          "fieldName": "isvalidforemailcode",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "שוכר 3 (מש)",
+          "fieldName": "pcfsystemfield527",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "Account"
+        },
+        {
+          "label": "דרישה למיגון (ה)",
+          "fieldName": "pcfMigunSchirot",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "אזור ",
+          "fieldName": "pcfsystemfield12",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "Account"
+        },
+        {
+          "label": "כתובת נכס (מש)",
+          "fieldName": "pcfsystemfield515",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "Account"
+        },
+        {
+          "label": "כמות נפשות",
+          "fieldName": "pcfsystemfield891",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "מנהל לקוח ראשי (יוזר)",
+          "fieldName": "ownerid",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "Account"
+        },
+        {
+          "label": "איש קשר עיקרי",
+          "fieldName": "primarycontactid",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "Account"
+        },
+        {
+          "label": "לינק וואטסאפ",
+          "fieldName": "pcfsystemfield627",
+          "systemFieldTypeId": "c820d32f-44df-4c2a-9c1e-18734e864fd5",
+          "systemName": "Account"
+        },
+        {
+          "label": "VIP/ רגיל",
+          "fieldName": "pcfsystemfield251",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "אפיון לקוח מוכר",
+          "fieldName": "pcfsystemfield288",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "מינימום מ\"ר ",
+          "fieldName": "pcfsystemfield20",
+          "systemFieldTypeId": "6a34bfe3-fece-4da1-9136-a7b1e5ae3319",
+          "systemName": "Account"
+        },
+        {
+          "label": "מייל ישן",
+          "fieldName": "pcfsystemfield336",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "Account"
+        },
+        {
+          "label": "ריהוט (ש) ",
+          "fieldName": "pcfRihotShirut1",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "Account"
+        },
+        {
+          "label": "שעת סיום",
+          "fieldName": "pcfsystemfield388",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "Account"
+        },
+        {
+          "label": "שם 2",
+          "fieldName": "pcfsystemfield222",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "Account"
+        },
+        {
+          "label": "נכסים בבעלות",
+          "fieldName": "pcfsystemfield424",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "מחסן ",
+          "fieldName": "pcfsystemfield40",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "מרפסת שמש ",
+          "fieldName": "pcfsystemfield38",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "מס' בחירה מ.ל. הדר",
+          "fieldName": "pcfsystemfield908",
+          "systemFieldTypeId": "6a34bfe3-fece-4da1-9136-a7b1e5ae3319",
+          "systemName": "Account"
+        },
+        {
+          "label": "גינה",
+          "fieldName": "pcfsystemfield416",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "מיזוג ",
+          "fieldName": "pcfsystemfield30",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "סוג נכס ",
+          "fieldName": "pcfsystemfield14",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "עודכן על ידי",
+          "fieldName": "modifiedby",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "Account"
+        },
+        {
+          "label": "מספר עובדים",
+          "fieldName": "numberofemployees",
+          "systemFieldTypeId": "6a34bfe3-fece-4da1-9136-a7b1e5ae3319",
+          "systemName": "Account"
+        },
+        {
+          "label": "לקוח",
+          "fieldName": "accountid",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "Account"
+        },
+        {
+          "label": "Deleted on",
+          "fieldName": "deletedon",
+          "systemFieldTypeId": "ce972d02-5013-46d4-9d1d-f09df1ac346a",
+          "systemName": "Account"
+        },
+        {
+          "label": "סיבת המכירה (מו)",
+          "fieldName": "pcfsystemfield499",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "Account"
+        },
+        {
+          "label": "עמלת תיווך (מו)",
+          "fieldName": "pcfsystemfield501",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "Account"
+        },
+        {
+          "label": "חייב ורוצה למכור ? (מו)",
+          "fieldName": "pcfsystemfield497",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "מרפסת ",
+          "fieldName": "pcfsystemfield36",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "טלפון פורמט נוסף",
+          "fieldName": "pcfClientFormattedPhone",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "Account"
+        },
+        {
+          "label": "שלח הודעה ללקוח (104)",
+          "fieldName": "pcfsystemfield877",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "סוכן מטפל (שכירות)",
+          "fieldName": "pcfsystemfield443",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "Account"
+        },
+        {
+          "label": "קישור לבשירי יד 2",
+          "fieldName": "pcfyad2bashiri",
+          "systemFieldTypeId": "c820d32f-44df-4c2a-9c1e-18734e864fd5",
+          "systemName": "Account"
+        },
+        {
+          "label": "Deleted by",
+          "fieldName": "deletedby",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "Account"
+        },
+        {
+          "label": "קישור להקלטה - הורדה",
+          "fieldName": "pcfsystemfield382",
+          "systemFieldTypeId": "c820d32f-44df-4c2a-9c1e-18734e864fd5",
+          "systemName": "Account"
+        },
+        {
+          "label": "קומה מועדפת",
+          "fieldName": "pcfsystemfield414",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "ודים 🍋",
+          "fieldName": "pcfVadim123",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "סטטוס לקוח",
+          "fieldName": "pcfsystemfield238",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "ממ\"ד ",
+          "fieldName": "pcfsystemfield32",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "שכ\"ד מבוקש (מש)",
+          "fieldName": "pcfsystemfield477",
+          "systemFieldTypeId": "6a34bfe3-fece-4da1-9136-a7b1e5ae3319",
+          "systemName": "Account"
+        },
+        {
+          "label": "סוכן שכירות",
+          "fieldName": "pcfsystemfield390",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "תאריך למעקב רימה",
+          "fieldName": "pcfRima2Tarich",
+          "systemFieldTypeId": "83bf530c-e04c-462b-9ffc-a46f750fc072",
+          "systemName": "Account"
+        },
+        {
+          "label": "אישור משכנתא",
+          "fieldName": "pcfsystemfield418",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "שוכר 3 (מש) לא רלוונטי",
+          "fieldName": "pcfsystemfield471",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "Account"
+        },
+        {
+          "label": "גיל",
+          "fieldName": "pcfsystemfield420",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "פקס",
+          "fieldName": "fax1",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "Account"
+        },
+        {
+          "label": "ותק משכיר במשרד (מש)",
+          "fieldName": "pcfsystemfield479",
+          "systemFieldTypeId": "6a34bfe3-fece-4da1-9136-a7b1e5ae3319",
+          "systemName": "Account"
+        },
+        {
+          "label": "דואר אלקטרוני",
+          "fieldName": "emailaddress1",
+          "systemFieldTypeId": "c713d2f7-8fa9-43c3-8062-f07486eaf567",
+          "systemName": "Account"
+        },
+        {
+          "label": "דואר אלקטרוני 3",
+          "fieldName": "emailaddress3",
+          "systemFieldTypeId": "c713d2f7-8fa9-43c3-8062-f07486eaf567",
+          "systemName": "Account"
+        },
+        {
+          "label": "יוזר המקבל דוגמה (102) ",
+          "fieldName": "pcfMessagesampletoagent",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "Account"
+        },
+        {
+          "label": "מתעניין",
+          "fieldName": "leadid",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "Account"
+        },
+        {
+          "label": "חוב לקוח",
+          "fieldName": "accountdebt",
+          "systemFieldTypeId": "6a34bfe3-fece-4da1-9136-a7b1e5ae3319",
+          "systemName": "Account"
+        },
+        {
+          "label": "קטגוריה",
+          "fieldName": "categorycode",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "תחום פעילות",
+          "fieldName": "industrycode",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "טלפון שלישי",
+          "fieldName": "telephone3",
+          "systemFieldTypeId": "3f62f67a-1cee-403a-bec6-aa02a9804edb",
+          "systemName": "Account"
+        },
+        {
+          "label": "מס' חדרים ",
+          "fieldName": "pcfsystemfield16",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "ת.ז",
+          "fieldName": "idnumber",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "Account"
+        },
+        {
+          "label": "שמאות (משכ)",
+          "fieldName": "pcfsystemfield923",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "בבעלותי בעל חיים (ש)",
+          "fieldName": "pcfsystemfield489",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "שעת התחלה",
+          "fieldName": "pcfsystemfield386",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "Account"
+        },
+        {
+          "label": "טלפון עורך דין",
+          "fieldName": "pcfsystemfield228",
+          "systemFieldTypeId": "3f62f67a-1cee-403a-bec6-aa02a9804edb",
+          "systemName": "Account"
+        },
+        {
+          "label": "טלפון משני",
+          "fieldName": "telephone2",
+          "systemFieldTypeId": "3f62f67a-1cee-403a-bec6-aa02a9804edb",
+          "systemName": "Account"
+        },
+        {
+          "label": "מלל להודעה 📑 (104) תכון TXT",
+          "fieldName": "pcfsystemfield928",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "Account"
+        },
+        {
+          "label": "מספר לחיוג",
+          "fieldName": "pcfsystemfield372",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "Account"
+        },
+        {
+          "label": "סוג האוטמציה (102) 📢",
+          "fieldName": "pcfsystemfield926",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "ת. פעולה הבאה",
+          "fieldName": "nextactiondate",
+          "systemFieldTypeId": "ce972d02-5013-46d4-9d1d-f09df1ac346a",
+          "systemName": "Account"
+        },
+        {
+          "label": "domain",
+          "fieldName": "domain",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "Account"
+        },
+        {
+          "label": "פעולות אוטו למנהלים (לקוח)",
+          "fieldName": "pcfsystemfield904",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "עודאי🤠 - לא רלוונטי",
+          "fieldName": "pcfOdaiStatos931",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "אופציה 2 - 106 - Ai 🤖",
+          "fieldName": "pcfpcfAi2Opzya104",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "Account"
+        },
+        {
+          "label": "תאריך פעולה הבאה",
+          "fieldName": "nextactivitydate",
+          "systemFieldTypeId": "ce972d02-5013-46d4-9d1d-f09df1ac346a",
+          "systemName": "Account"
+        },
+        {
+          "label": "דירוג",
+          "fieldName": "accountratingcode",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "שם 1",
+          "fieldName": "pcfsystemfield308",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "Account"
+        },
+        {
+          "label": "טיפוס המוכר (מו)",
+          "fieldName": "pcfsystemfield509",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "מספר שיחה",
+          "fieldName": "pcfsystemfield368",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "Account"
+        },
+        {
+          "label": "מידע לספק - Ai בוט 106 🎓",
+          "fieldName": "pcfMelelLenituch106",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "Account"
+        },
+        {
+          "label": "מקסימום מ\"ר",
+          "fieldName": "pcfsystemfield22",
+          "systemFieldTypeId": "6a34bfe3-fece-4da1-9136-a7b1e5ae3319",
+          "systemName": "Account"
+        },
+        {
+          "label": "קישור לפייס F",
+          "fieldName": "pcfsystemfield530",
+          "systemFieldTypeId": "c820d32f-44df-4c2a-9c1e-18734e864fd5",
+          "systemName": "Account"
+        },
+        {
+          "label": "סכום דמי תיווך מוסכם (מש)",
+          "fieldName": "pcfsystemfield485",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "Account"
+        },
+        {
+          "label": "כתובת השכירות (שו)",
+          "fieldName": "pcfsystemfield517",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "Account"
+        },
+        {
+          "label": "מעלית ",
+          "fieldName": "pcfsystemfield28",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "חניה ",
+          "fieldName": "pcfsystemfield26",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "לקוח אב",
+          "fieldName": "parentaccountid",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "Account"
+        },
+        {
+          "label": "איכלוס מועדף (ש)",
+          "fieldName": "pcfsystemfield705",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "Account"
+        },
+        {
+          "label": "הון עצמי",
+          "fieldName": "pcfsystemfield392",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "Account"
+        },
+        {
+          "label": "הסבר על 104 הודעה ",
+          "fieldName": "pcfhesberhodatv104",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "Account"
+        },
+        {
+          "label": "תאריך יום הולדת",
+          "fieldName": "birthdaydate",
+          "systemFieldTypeId": "83bf530c-e04c-462b-9ffc-a46f750fc072",
+          "systemName": "Account"
+        },
+        {
+          "label": "גישה לנכים",
+          "fieldName": "pcfsystemfield42",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "כפול",
+          "fieldName": "duplicaterecordcode",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "טקסט חופשי ",
+          "fieldName": "pcfsystemfield56",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "Account"
+        },
+        {
+          "label": "שם יעד",
+          "fieldName": "pcfsystemfield378",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "Account"
+        },
+        {
+          "label": "מצב אישי",
+          "fieldName": "pcfsystemfield422",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "מתי לשלוח לקונה את הנכס ?",
+          "fieldName": "pcf102whentosend",
+          "systemFieldTypeId": "ce972d02-5013-46d4-9d1d-f09df1ac346a",
+          "systemName": "Account"
+        },
+        {
+          "label": "שוכר 1 (מש)",
+          "fieldName": "pcfsystemfield521",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "Account"
+        },
+        {
+          "label": "אופציה 1-  106 - Ai 🤖",
+          "fieldName": "pcfAiOpzya104",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "Account"
+        },
+        {
+          "label": "קמפיין",
+          "fieldName": "campaignid",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "Account"
+        },
+        {
+          "label": "סיכום (62) של Ai - מלל",
+          "fieldName": "pcfCikum1ovdot",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "Account"
+        },
+        {
+          "label": "סטטוס משולש 🔽",
+          "fieldName": "pcfsystemfield394",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "משופצת ",
+          "fieldName": "pcfsystemfield34",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "הסבר 💬 של עמרי לסוכן",
+          "fieldName": "pcfHesber1Lakuach090909",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "Account"
+        },
+        {
+          "label": "הוסף לקוח לאנשי קשר",
+          "fieldName": "pcfaddclienttocontacts63",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "שוכר 2 (מש) לא רלוונטי",
+          "fieldName": "pcfsystemfield468",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "Account"
+        },
+        {
+          "label": "אזור חיפוש  - משקיע",
+          "fieldName": "pcfsystemfield340",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "שם לקוח (משפחה_פרטי)",
+          "fieldName": "accountname",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "Account"
+        },
+        {
+          "label": "עיר מגורים ",
+          "fieldName": "billingcity",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "Account"
+        },
+        {
+          "label": "סיבת סגירה",
+          "fieldName": "lostreason",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "פירוט",
+          "fieldName": "pcfsystemfield141",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "Account"
+        },
+        {
+          "label": "כיצד רכש הנכס ? (מו)",
+          "fieldName": "pcfsystemfield511",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "שם פרטי",
+          "fieldName": "firstname",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "Account"
+        },
+        {
+          "label": "כניסה מידית ",
+          "fieldName": "pcfsystemfield44",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "📢 הצעה לנכס למכירה (102)",
+          "fieldName": "pcfsystemfield925",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "Account"
+        },
+        {
+          "label": "גיוס (משכ)",
+          "fieldName": "pcfsystemfield922",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "שיחה אחרונה",
+          "fieldName": "lastconversation",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "Account"
+        },
+        {
+          "label": "תאריך המרה",
+          "fieldName": "convertdate",
+          "systemFieldTypeId": "ce972d02-5013-46d4-9d1d-f09df1ac346a",
+          "systemName": "Account"
+        },
+        {
+          "label": "שיטת משלוח דואר",
+          "fieldName": "shippingmethodcode",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "יום הולדת (יום)",
+          "fieldName": "birthdayday",
+          "systemFieldTypeId": "6a34bfe3-fece-4da1-9136-a7b1e5ae3319",
+          "systemName": "Account"
+        },
+        {
+          "label": "שולח הליד (ש)",
+          "fieldName": "pcfsystemfield491",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "מספר טלפון ביעד",
+          "fieldName": "pcfsystemfield374",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "Account"
+        },
+        {
+          "label": "אתר אינטרנט",
+          "fieldName": "websiteurl",
+          "systemFieldTypeId": "c820d32f-44df-4c2a-9c1e-18734e864fd5",
+          "systemName": "Account"
+        },
+        {
+          "label": "כתובת הנכס (מו)",
+          "fieldName": "pcfsystemfield516",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "Account"
+        },
+        {
+          "label": "אפשרות מעקב לרימה",
+          "fieldName": "pcfRima1",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "קטגוריה 2",
+          "fieldName": "secondcategorycode",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "אורך השיחה בשניות",
+          "fieldName": "pcfsystemfield380",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "Account"
+        },
+        {
+          "label": "לא רלוונטי 23ק234",
+          "fieldName": "pcfhesber",
+          "systemFieldTypeId": "ed2ad39d-32fc-4585-8f5b-2e93463f050a",
+          "systemName": "Account"
+        },
+        {
+          "label": "מקור הגעה ראשון",
+          "fieldName": "originatingleadcode",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "מלל על השמאות (משכ)",
+          "fieldName": "pcfsystemfield924",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "Account"
+        },
+        {
+          "label": "סוג לקוח 2",
+          "fieldName": "pcfsystemfield208",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "מספר ימים מפעולה אחרונה - נוסחה",
+          "fieldName": "pcfsystemfield364",
+          "systemFieldTypeId": "6a34bfe3-fece-4da1-9136-a7b1e5ae3319",
+          "systemName": "Account"
+        },
+        {
+          "label": "תבניות שניתן לשלוח ללקוחות",
+          "fieldName": "pcftavniot104fizer",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "Account"
+        },
+        {
+          "label": "אזור חיפוש - מגורים",
+          "fieldName": "pcfsystemfield342",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "מרפסת (ש)",
+          "fieldName": "pcfsystemfield434",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "מדינה",
+          "fieldName": "billingstate",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "Account"
+        },
+        {
+          "label": "Status",
+          "fieldName": "pcfsystemfield366",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "Account"
+        },
+        {
+          "label": "ת.ז 2",
+          "fieldName": "pcfsystemfield564",
+          "systemFieldTypeId": "6a34bfe3-fece-4da1-9136-a7b1e5ae3319",
+          "systemName": "Account"
+        },
+        {
+          "label": "מידע משלים אנשי קשר נוספים",
+          "fieldName": "pcfsystemfield921",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "Account"
+        },
+        {
+          "label": "פעיל/ לא פעיל",
+          "fieldName": "pcfsystemfield284",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "מגזר (מש)",
+          "fieldName": "pcfsystemfield836",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "קומה מקסימלית ",
+          "fieldName": "pcfsystemfield54",
+          "systemFieldTypeId": "6a34bfe3-fece-4da1-9136-a7b1e5ae3319",
+          "systemName": "Account"
+        },
+        {
+          "label": "LEAD_ID_FACEBOOK",
+          "fieldName": "pcfsystemfield806",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "Account"
+        },
+        {
+          "label": "סוג לקוח 3",
+          "fieldName": "pcfsystemfield210",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "תנאי תשלום",
+          "fieldName": "paymenttermscode",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "שם 3",
+          "fieldName": "pcfsystemfield224",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "Account"
+        },
+        {
+          "label": "משכנתא ?",
+          "fieldName": "pcfsystemfield920",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "תיאור ומידע חשוב",
+          "fieldName": "description",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "Account"
+        },
+        {
+          "label": "תאריך פינוי מועדף (מו)",
+          "fieldName": "pcfsystemfield505",
+          "systemFieldTypeId": "83bf530c-e04c-462b-9ffc-a46f750fc072",
+          "systemName": "Account"
+        },
+        {
+          "label": "למה לא רלוונטי (ק)",
+          "fieldName": "pcfsystemfield463",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "ישן - תוכן ההודעה לשליחה (104) - לא רלוונטי ",
+          "fieldName": "pcfsystemfield879",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "Account"
+        },
+        {
+          "label": "עורך דין ",
+          "fieldName": "pcfsystemfield227",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "Account"
+        },
+        {
+          "label": "סטטוס טיפול",
+          "fieldName": "actionstatuscode",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "נוצר בתאריך",
+          "fieldName": "createdon",
+          "systemFieldTypeId": "ce972d02-5013-46d4-9d1d-f09df1ac346a",
+          "systemName": "Account"
+        },
+        {
+          "label": "שמות מצטברים של אנשים",
+          "fieldName": "pcfShemut550Lakuach",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "Account"
+        },
+        {
+          "label": "שם משפחה",
+          "fieldName": "lastname",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "Account"
+        },
+        {
+          "label": "בעלות",
+          "fieldName": "businesstypecode",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "בעל חיים (מש)",
+          "fieldName": "pcfsystemfield487",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "מנהל לקוח - 3 חודשים ראשונים",
+          "fieldName": "pcfsystemfield322",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "Account"
+        },
+        {
+          "label": "שוכר 2 (מש)",
+          "fieldName": "pcfsystemfield524",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "Account"
+        },
+        {
+          "label": "כמות חדרים (ש)",
+          "fieldName": "pcfsystemfield430",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "דוח מאזן חתום (מש)",
+          "fieldName": "pcfsystemfield483",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "יום הולדת (חודש)",
+          "fieldName": "birthdaymonth",
+          "systemFieldTypeId": "6a34bfe3-fece-4da1-9136-a7b1e5ae3319",
+          "systemName": "Account"
+        },
+        {
+          "label": "תאריך כניסה",
+          "fieldName": "pcfsystemfield225",
+          "systemFieldTypeId": "ce972d02-5013-46d4-9d1d-f09df1ac346a",
+          "systemName": "Account"
+        },
+        {
+          "label": "איזור מגורים רצוי (ש)",
+          "fieldName": "pcfsystemfield428",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "סטטוס שיווק",
+          "fieldName": "pcfsystemfield832",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "מיקוד",
+          "fieldName": "billingzipcode",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "Account"
+        },
+        {
+          "label": "שגר לי 106 מלל ⚡Ai ",
+          "fieldName": "pcfsystemfield930",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "התנגדויות",
+          "fieldName": "systemfield10",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "Account"
+        },
+        {
+          "label": "צרכים",
+          "fieldName": "needs",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "Account"
+        },
+        {
+          "label": "שוכר 1 (מש) - לא רלוונטי",
+          "fieldName": "pcfsystemfield465",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "Account"
+        },
+        {
+          "label": "מחיר קניית דירה",
+          "fieldName": "pcfsystemfield338",
+          "systemFieldTypeId": "6a34bfe3-fece-4da1-9136-a7b1e5ae3319",
+          "systemName": "Account"
+        },
+        {
+          "label": "כתובת מגורים",
+          "fieldName": "billingstreet",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "Account"
+        },
+        {
+          "label": "דואר אלקטרוני 2",
+          "fieldName": "emailaddress2",
+          "systemFieldTypeId": "c713d2f7-8fa9-43c3-8062-f07486eaf567",
+          "systemName": "Account"
+        },
+        {
+          "label": "עיר ",
+          "fieldName": "pcfsystemfield24",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "Account"
+        },
+        {
+          "label": "קומה מינימלית ",
+          "fieldName": "pcfsystemfield52",
+          "systemFieldTypeId": "6a34bfe3-fece-4da1-9136-a7b1e5ae3319",
+          "systemName": "Account"
+        },
+        {
+          "label": "טווח מחירים ",
+          "fieldName": "pcfsystemfield18",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "לא רלוונטי",
+          "fieldName": "pcfsystemfield721",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "בעל הדירה (שו)",
+          "fieldName": "pcfsystemfield518",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "Account"
+        },
+        {
+          "label": "תאריך פעולה אחרונה",
+          "fieldName": "lastactiondate",
+          "systemFieldTypeId": "ce972d02-5013-46d4-9d1d-f09df1ac346a",
+          "systemName": "Account"
+        },
+        {
+          "label": "גינה (ש)",
+          "fieldName": "pcfsystemfield436",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "ותק",
+          "fieldName": "accountageindays",
+          "systemFieldTypeId": "6a34bfe3-fece-4da1-9136-a7b1e5ae3319",
+          "systemName": "Account"
+        },
+        {
+          "label": "תאריך כניסה ",
+          "fieldName": "pcfsystemfield46",
+          "systemFieldTypeId": "83bf530c-e04c-462b-9ffc-a46f750fc072",
+          "systemName": "Account"
+        },
+        {
+          "label": "כניסה מידית ",
+          "fieldName": "pcfsystemfield48",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "מצב נוכחי ",
+          "fieldName": "statuscode",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "ניהול נכס (מש)",
+          "fieldName": "pcfsystemfield481",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        },
+        {
+          "label": "מי תגורר בנכס ? (מו)",
+          "fieldName": "pcfsystemfield495",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Account"
+        }
+      ]
+    },
+    {
+      "name": "נכס",
+      "apiName": "נכס",
+      "systemName": "Product",
+      "objectType": "14",
+      "fields": [
+        {
+          "label": "תיקייה בענן (נ) (מ)",
+          "fieldName": "pcfDropboxMechera1",
+          "systemFieldTypeId": "c820d32f-44df-4c2a-9c1e-18734e864fd5",
+          "systemName": "Product"
+        },
+        {
+          "label": "📑 האם להשכרה / לקרדה ?",
+          "fieldName": "pcfHaskarhRashy1",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Product"
+        },
+        {
+          "label": "שוכר 3 ",
+          "fieldName": "pcfsystemfield315",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "Product"
+        },
+        {
+          "label": "מיזוג ",
+          "fieldName": "pcfsystemfield105",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Product"
+        },
+        {
+          "label": "כולל חשמל? (ה)",
+          "fieldName": "pcfsystemfield551",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Product"
+        },
+        {
+          "label": "משופצת",
+          "fieldName": "pcfsystemfield154",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Product"
+        },
+        {
+          "label": "קישור מקוצר bitly (61)",
+          "fieldName": "pcfshortenedlink61",
+          "systemFieldTypeId": "c820d32f-44df-4c2a-9c1e-18734e864fd5",
+          "systemName": "Product"
+        },
+        {
+          "label": "סיום חוזה שכירות",
+          "fieldName": "pcfsystemfield537",
+          "systemFieldTypeId": "83bf530c-e04c-462b-9ffc-a46f750fc072",
+          "systemName": "Product"
+        },
+        {
+          "label": "ב\"ח בעלי חיים (ה)",
+          "fieldName": "pcfsystemfield925",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Product"
+        },
+        {
+          "label": "גודל המגרש",
+          "fieldName": "pcfsystemfield168",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "Product"
+        },
+        {
+          "label": "יד 2 ",
+          "fieldName": "pcfsystemfield178",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Product"
+        },
+        {
+          "label": "בנוי בארנונה",
+          "fieldName": "pcfsystemfield561",
+          "systemFieldTypeId": "6a34bfe3-fece-4da1-9136-a7b1e5ae3319",
+          "systemName": "Product"
+        },
+        {
+          "label": "פירוט גינה",
+          "fieldName": "pcfsystemfield214",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "Product"
+        },
+        {
+          "label": "האם לעשות",
+          "fieldName": "pcfsystemfield334",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Product"
+        },
+        {
+          "label": "להודיע לצוות מכירה? (57)",
+          "fieldName": "pcfsystemfield298",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Product"
+        },
+        {
+          "label": "Deleted by",
+          "fieldName": "deletedby",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "Product"
+        },
+        {
+          "label": "שם יצרן",
+          "fieldName": "vendorname",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "Product"
+        },
+        {
+          "label": "ריהוט (ה)",
+          "fieldName": "pcfRihutSchirut1",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Product"
+        },
+        {
+          "label": "גינה",
+          "fieldName": "pcfsystemfield184",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Product"
+        },
+        {
+          "label": "קישור סרטון לצוות 🎬",
+          "fieldName": "pcfDropBoxLinkteamneches1",
+          "systemFieldTypeId": "c820d32f-44df-4c2a-9c1e-18734e864fd5",
+          "systemName": "Product"
+        },
+        {
+          "label": "שטח דירה",
+          "fieldName": "pcfsystemfield808",
+          "systemFieldTypeId": "6a34bfe3-fece-4da1-9136-a7b1e5ae3319",
+          "systemName": "Product"
+        },
+        {
+          "label": "עודכן בתאריך",
+          "fieldName": "modifiedon",
+          "systemFieldTypeId": "ce972d02-5013-46d4-9d1d-f09df1ac346a",
+          "systemName": "Product"
+        },
+        {
+          "label": "כתובת ארוכה לקיצור (61)",
+          "fieldName": "pcflongurltoshort",
+          "systemFieldTypeId": "c820d32f-44df-4c2a-9c1e-18734e864fd5",
+          "systemName": "Product"
+        },
+        {
+          "label": "כולל ארנונה ? (ה)",
+          "fieldName": "pcfsystemfield545",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Product"
+        },
+        {
+          "label": "שיטת חישוב תשואה",
+          "fieldName": "pcfsystemfield816",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "Product"
+        },
+        {
+          "label": "כמות",
+          "fieldName": "itemquantity",
+          "systemFieldTypeId": "6a34bfe3-fece-4da1-9136-a7b1e5ae3319",
+          "systemName": "Product"
+        },
+        {
+          "label": "שוכר 1",
+          "fieldName": "pcfsystemfield253",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "Product"
+        },
+        {
+          "label": "מושכר?",
+          "fieldName": "pcfsystemfield557",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Product"
+        },
+        {
+          "label": "קישור לתיקיה בענן לסוכן ⏹ ",
+          "fieldName": "pcfDropBoxSochen1",
+          "systemFieldTypeId": "c820d32f-44df-4c2a-9c1e-18734e864fd5",
+          "systemName": "Product"
+        },
+        {
+          "label": "עורך דין ",
+          "fieldName": "pcfsystemfield190",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "Product"
+        },
+        {
+          "label": "תאריך איכלוס (ה)",
+          "fieldName": "pcfTarichEchlus1",
+          "systemFieldTypeId": "83bf530c-e04c-462b-9ffc-a46f750fc072",
+          "systemName": "Product"
+        },
+        {
+          "label": "הערה סוכן מגייס לצוות (57/8)",
+          "fieldName": "pcfsystemfield300",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "Product"
+        },
+        {
+          "label": "כתובת - לא רלוונטי",
+          "fieldName": "pcfsystemfield158",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "Product"
+        },
+        {
+          "label": "חבילת חשמל",
+          "fieldName": "pcfsystemfield826",
+          "systemFieldTypeId": "6a34bfe3-fece-4da1-9136-a7b1e5ae3319",
+          "systemName": "Product"
+        },
+        {
+          "label": "כניסה למערכת",
+          "fieldName": "pcfsystemfield318",
+          "systemFieldTypeId": "83bf530c-e04c-462b-9ffc-a46f750fc072",
+          "systemName": "Product"
+        },
+        {
+          "label": "שכ\"ד",
+          "fieldName": "pcfsystemfield264",
+          "systemFieldTypeId": "6a34bfe3-fece-4da1-9136-a7b1e5ae3319",
+          "systemName": "Product"
+        },
+        {
+          "label": "סטטוס נכס מכירה ? ",
+          "fieldName": "pcfStatosSell001",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Product"
+        },
+        {
+          "label": "מרפסת",
+          "fieldName": "pcfsystemfield87",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Product"
+        },
+        {
+          "label": "הדייר הגר בדירה",
+          "fieldName": "pcfsystemfield534",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "Product"
+        },
+        {
+          "label": "עדכוני מחירים",
+          "fieldName": "pcfsystemfield306",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "Product"
+        },
+        {
+          "label": "סוכן שכירות",
+          "fieldName": "pcfsystemfield725",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "Product"
+        },
+        {
+          "label": "תאריך סיום בלעדיות",
+          "fieldName": "pcfsystemfield320",
+          "systemFieldTypeId": "83bf530c-e04c-462b-9ffc-a46f750fc072",
+          "systemName": "Product"
+        },
+        {
+          "label": "קוד מוצר יצרן",
+          "fieldName": "vendorpartnumber",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "Product"
+        },
+        {
+          "label": "רשימה של עמרי",
+          "fieldName": "pcfRshimaSelOmriMehera1",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Product"
+        },
+        {
+          "label": "שם ישוב/ קיבוץ (ה)",
+          "fieldName": "pcfsystemfield147",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "Product"
+        },
+        {
+          "label": "תאריך התחלת בלעדיות",
+          "fieldName": "pcfsystemfield172",
+          "systemFieldTypeId": "ce972d02-5013-46d4-9d1d-f09df1ac346a",
+          "systemName": "Product"
+        },
+        {
+          "label": "מטרג'",
+          "fieldName": "pcfsystemfield166",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "Product"
+        },
+        {
+          "label": "מסר לקונה במלל 📑 (נ) (מ)",
+          "fieldName": "pcfmelel0lesloah",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "Product"
+        },
+        {
+          "label": "תשואה שנתית ",
+          "fieldName": "pcfsystemfield266",
+          "systemFieldTypeId": "6a34bfe3-fece-4da1-9136-a7b1e5ae3319",
+          "systemName": "Product"
+        },
+        {
+          "label": "כתובת הנכס",
+          "fieldName": "name",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "Product"
+        },
+        {
+          "label": "שק מפתחות ",
+          "fieldName": "pcfsystemfield220",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Product"
+        },
+        {
+          "label": "צילום נכס",
+          "fieldName": "pcfsystemfield198",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Product"
+        },
+        {
+          "label": "פייסבוק (נ) (מ)",
+          "fieldName": "pcfsystemfield921",
+          "systemFieldTypeId": "c820d32f-44df-4c2a-9c1e-18734e864fd5",
+          "systemName": "Product"
+        },
+        {
+          "label": "תאריך תזכורת מכירה אחרון (64)",
+          "fieldName": "pcfNechesLastSellReminderDate",
+          "systemFieldTypeId": "ce972d02-5013-46d4-9d1d-f09df1ac346a",
+          "systemName": "Product"
+        },
+        {
+          "label": "גיוס טרום מערכת",
+          "fieldName": "pcfsystemfield290",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "Product"
+        },
+        {
+          "label": "רשימת תפוצה",
+          "fieldName": "pcfreshimatTpuzanehes1",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Product"
+        },
+        {
+          "label": "לא רלוונטי",
+          "fieldName": "pcfsystemfield71",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "Product"
+        },
+        {
+          "label": "מכירה/ השכרה",
+          "fieldName": "statuscode",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Product"
+        },
+        {
+          "label": "תאריך כניסה ",
+          "fieldName": "pcfsystemfield97",
+          "systemFieldTypeId": "83bf530c-e04c-462b-9ffc-a46f750fc072",
+          "systemName": "Product"
+        },
+        {
+          "label": "קריית שמונה/ מחוץ לה",
+          "fieldName": "pcfsystemfield152",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Product"
+        },
+        {
+          "label": "קישור לתמונות בענן 🖼",
+          "fieldName": "pcfCloudPhotosFolderLink",
+          "systemFieldTypeId": "c820d32f-44df-4c2a-9c1e-18734e864fd5",
+          "systemName": "Product"
+        },
+        {
+          "label": "YouTube 🍿",
+          "fieldName": "pcfnechesyoutubeIN",
+          "systemFieldTypeId": "ed2ad39d-32fc-4585-8f5b-2e93463f050a",
+          "systemName": "Product"
+        },
+        {
+          "label": "לא רלוונטי - היה מתוך קומות",
+          "fieldName": "pcfsystemfield304",
+          "systemFieldTypeId": "6a34bfe3-fece-4da1-9136-a7b1e5ae3319",
+          "systemName": "Product"
+        },
+        {
+          "label": "איך מראים הנכס?",
+          "fieldName": "pcfsystemfield310",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Product"
+        },
+        {
+          "label": "סה\"כ בנוי בטאבו (ה)",
+          "fieldName": "pcfsystemfield77",
+          "systemFieldTypeId": "6a34bfe3-fece-4da1-9136-a7b1e5ae3319",
+          "systemName": "Product"
+        },
+        {
+          "label": "Deleted on",
+          "fieldName": "deletedon",
+          "systemFieldTypeId": "ce972d02-5013-46d4-9d1d-f09df1ac346a",
+          "systemName": "Product"
+        },
+        {
+          "label": "תאריך ושעה",
+          "fieldName": "pcfsystemfield186",
+          "systemFieldTypeId": "ce972d02-5013-46d4-9d1d-f09df1ac346a",
+          "systemName": "Product"
+        },
+        {
+          "label": "מחיר שיווק (מ) (הוד) 💲",
+          "fieldName": "pcfsystemfield61",
+          "systemFieldTypeId": "6a34bfe3-fece-4da1-9136-a7b1e5ae3319",
+          "systemName": "Product"
+        },
+        {
+          "label": "מיגון",
+          "fieldName": "pcfsystemfield83",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Product"
+        },
+        {
+          "label": "עיר/ יישוב/ קיבוץ - לא פעיל",
+          "fieldName": "pcfsystemfield65",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "Product"
+        },
+        {
+          "label": "פרויקט",
+          "fieldName": "pcfsystemfield128",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "Product"
+        },
+        {
+          "label": "סינון קטגוריה מחסנית",
+          "fieldName": "categorycode",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Product"
+        },
+        {
+          "label": "חניה",
+          "fieldName": "pcfsystemfield79",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Product"
+        },
+        {
+          "label": "מחיר שיווק (ל) 🦈",
+          "fieldName": "pcfLakedaMechira1Michir",
+          "systemFieldTypeId": "6a34bfe3-fece-4da1-9136-a7b1e5ae3319",
+          "systemName": "Product"
+        },
+        {
+          "label": "תאריך תזכורת שכירות אחרון (65)",
+          "fieldName": "pcfNechesLastRentReminderDate",
+          "systemFieldTypeId": "ce972d02-5013-46d4-9d1d-f09df1ac346a",
+          "systemName": "Product"
+        },
+        {
+          "label": "פינוי מיידי",
+          "fieldName": "pcfsystemfield95",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Product"
+        },
+        {
+          "label": "משך זמן ניהול תשואה",
+          "fieldName": "pcfsystemfield818",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "Product"
+        },
+        {
+          "label": "קישור לדרופ ישן לא רלוונטי",
+          "fieldName": "pcfsystemfield103",
+          "systemFieldTypeId": "ed2ad39d-32fc-4585-8f5b-2e93463f050a",
+          "systemName": "Product"
+        },
+        {
+          "label": "מספר סידורי של החניה",
+          "fieldName": "pcfsystemfield814",
+          "systemFieldTypeId": "6a34bfe3-fece-4da1-9136-a7b1e5ae3319",
+          "systemName": "Product"
+        },
+        {
+          "label": "טקסט חופשי ",
+          "fieldName": "pcfsystemfield101",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "Product"
+        },
+        {
+          "label": "נוצר בתאריך",
+          "fieldName": "createdon",
+          "systemFieldTypeId": "ce972d02-5013-46d4-9d1d-f09df1ac346a",
+          "systemName": "Product"
+        },
+        {
+          "label": "תאריך התחלת בלעדיות",
+          "fieldName": "pcfsystemfield296",
+          "systemFieldTypeId": "83bf530c-e04c-462b-9ffc-a46f750fc072",
+          "systemName": "Product"
+        },
+        {
+          "label": "לינק לנכס בפיירברי",
+          "fieldName": "pcflinktonechesFireberry",
+          "systemFieldTypeId": "c820d32f-44df-4c2a-9c1e-18734e864fd5",
+          "systemName": "Product"
+        },
+        {
+          "label": "סטטוס שיווק - לא פעיל",
+          "fieldName": "pcfsystemfield834",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Product"
+        },
+        {
+          "label": "מלל להשכרה ללקוח (נ) (הש)",
+          "fieldName": "pcfMelelhaskara1",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "Product"
+        },
+        {
+          "label": "משופצת ",
+          "fieldName": "pcfsystemfield85",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Product"
+        },
+        {
+          "label": "גיוס עבור אייל",
+          "fieldName": "pcfsystemfield927",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Product"
+        },
+        {
+          "label": "מתוך קומות",
+          "fieldName": "pcfsystemfield164",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "Product"
+        },
+        {
+          "label": "סוג נכס (ה)",
+          "fieldName": "pcfsystemfield73",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Product"
+        },
+        {
+          "label": "כתובת בניין - לא רלוונטי ",
+          "fieldName": "pcfsystemfield810",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "Product"
+        },
+        {
+          "label": "איזה ריהוט בדירה ? (ה)",
+          "fieldName": "pcfsystemfield555",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "Product"
+        },
+        {
+          "label": "שם בעל הדירה",
+          "fieldName": "pcfsystemfield58",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "Product"
+        },
+        {
+          "label": "פירוט שיפוץ ",
+          "fieldName": "pcfsystemfield292",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "Product"
+        },
+        {
+          "label": "עלות יחידה",
+          "fieldName": "ProductCost",
+          "systemFieldTypeId": "6a34bfe3-fece-4da1-9136-a7b1e5ae3319",
+          "systemName": "Product"
+        },
+        {
+          "label": "בעל דירה קודם",
+          "fieldName": "pcfsystemfield565",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "Product"
+        },
+        {
+          "label": "",
+          "fieldName": "productid",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "Product"
+        },
+        {
+          "label": "תיאור הנכס בלבד לסוכנים",
+          "fieldName": "description",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "Product"
+        },
+        {
+          "label": "תאריך עלייה למדף",
+          "fieldName": "pcfNechesDateOnShelf",
+          "systemFieldTypeId": "83bf530c-e04c-462b-9ffc-a46f750fc072",
+          "systemName": "Product"
+        },
+        {
+          "label": "פייסבוק (נ) (הש)",
+          "fieldName": "pcffichascara1kishor",
+          "systemFieldTypeId": "c820d32f-44df-4c2a-9c1e-18734e864fd5",
+          "systemName": "Product"
+        },
+        {
+          "label": "פירוט ריהוט",
+          "fieldName": "pcfsystemfield830",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "Product"
+        },
+        {
+          "label": "מרפסת",
+          "fieldName": "pcfsystemfield156",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Product"
+        },
+        {
+          "label": "תאריך סיום ניהול",
+          "fieldName": "pcfsystemfield822",
+          "systemFieldTypeId": "83bf530c-e04c-462b-9ffc-a46f750fc072",
+          "systemName": "Product"
+        },
+        {
+          "label": "נוצר על ידי",
+          "fieldName": "createdby",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "Product"
+        },
+        {
+          "label": "שוכר 2 ",
+          "fieldName": "pcfsystemfield312",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "Product"
+        },
+        {
+          "label": "מי מתגורר בנכס ?",
+          "fieldName": "pcfsystemfield532",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Product"
+        },
+        {
+          "label": "מידע על הקישור המקוצר (61)",
+          "fieldName": "pcfTextKishorIfn",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "Product"
+        },
+        {
+          "label": "גישה לנכים ",
+          "fieldName": "pcfsystemfield93",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Product"
+        },
+        {
+          "label": "מחיר סגירה (ה)",
+          "fieldName": "pcfsystemfield543",
+          "systemFieldTypeId": "6a34bfe3-fece-4da1-9136-a7b1e5ae3319",
+          "systemName": "Product"
+        },
+        {
+          "label": "שילוט",
+          "fieldName": "pcfsystemfield182",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Product"
+        },
+        {
+          "label": "לא רלוונטי",
+          "fieldName": "pcfsystemfield188",
+          "systemFieldTypeId": "ce972d02-5013-46d4-9d1d-f09df1ac346a",
+          "systemName": "Product"
+        },
+        {
+          "label": "מרפסת שמש ",
+          "fieldName": "pcfsystemfield89",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Product"
+        },
+        {
+          "label": "מספר דירה",
+          "fieldName": "pcfsystemfield162",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "Product"
+        },
+        {
+          "label": "ניהול נכסים ?🔧",
+          "fieldName": "pcfNiholNechasim",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Product"
+        },
+        {
+          "label": "ניהול נכסים - ישן לא רלוונטי",
+          "fieldName": "pcfsystemfield143",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Product"
+        },
+        {
+          "label": "יחידות נוספות",
+          "fieldName": "pcfsystemfield294",
+          "systemFieldTypeId": "6a34bfe3-fece-4da1-9136-a7b1e5ae3319",
+          "systemName": "Product"
+        },
+        {
+          "label": "מיוחד (ה)",
+          "fieldName": "pcfMeuchadSchirut1",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Product"
+        },
+        {
+          "label": "קוד מוצר",
+          "fieldName": "catalognumber",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "Product"
+        },
+        {
+          "label": "אזור",
+          "fieldName": "pcfsystemfield150",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Product"
+        },
+        {
+          "label": "פייסבוק",
+          "fieldName": "pcfFacebook1post",
+          "systemFieldTypeId": "ed2ad39d-32fc-4585-8f5b-2e93463f050a",
+          "systemName": "Product"
+        },
+        {
+          "label": "משימות לצורך שיווק 📢",
+          "fieldName": "pcfsystemfield926",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Product"
+        },
+        {
+          "label": "מחסן ",
+          "fieldName": "pcfsystemfield91",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Product"
+        },
+        {
+          "label": "מחיר סגירה (מ) 🤝",
+          "fieldName": "pcfsystemfield63",
+          "systemFieldTypeId": "6a34bfe3-fece-4da1-9136-a7b1e5ae3319",
+          "systemName": "Product"
+        },
+        {
+          "label": "מספר בית",
+          "fieldName": "pcfsystemfield160",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "Product"
+        },
+        {
+          "label": "יוטיוב (נ) (הש)",
+          "fieldName": "pcfotubhaskara1",
+          "systemFieldTypeId": "c820d32f-44df-4c2a-9c1e-18734e864fd5",
+          "systemName": "Product"
+        },
+        {
+          "label": "יד 2 (נ) (מ)",
+          "fieldName": "pcfsystemfield922",
+          "systemFieldTypeId": "c820d32f-44df-4c2a-9c1e-18734e864fd5",
+          "systemName": "Product"
+        },
+        {
+          "label": "מעלית",
+          "fieldName": "pcfsystemfield81",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Product"
+        },
+        {
+          "label": "להשכרה בכל מחיר ",
+          "fieldName": "pcfLhascara0Mchir",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "Product"
+        },
+        {
+          "label": "לא רלוונטי - למחוק",
+          "fieldName": "pcfsystemfield920",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "Product"
+        },
+        {
+          "label": "בלעדיות",
+          "fieldName": "pcfsystemfield170",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Product"
+        },
+        {
+          "label": "גיוס ",
+          "fieldName": "pcfsystemfield236",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Product"
+        },
+        {
+          "label": "החתמה על בלעדיות וסריקה למערכת",
+          "fieldName": "pcfsystemfield196",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Product"
+        },
+        {
+          "label": "לא רלוונטי",
+          "fieldName": "pcfsystemfield99",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "Product"
+        },
+        {
+          "label": "בוילר",
+          "fieldName": "pcfsystemfield919",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Product"
+        },
+        {
+          "label": "אינסטגרם",
+          "fieldName": "pcfinstegram1",
+          "systemFieldTypeId": "c820d32f-44df-4c2a-9c1e-18734e864fd5",
+          "systemName": "Product"
+        },
+        {
+          "label": "טקסט",
+          "fieldName": "pcfsystemfield69",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "Product"
+        },
+        {
+          "label": "קישור למפה GOV",
+          "fieldName": "pcfsystemfield549",
+          "systemFieldTypeId": "c820d32f-44df-4c2a-9c1e-18734e864fd5",
+          "systemName": "Product"
+        },
+        {
+          "label": "⚡ האם למכירה / לקרדה ?",
+          "fieldName": "pcfExelLemechira1",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Product"
+        },
+        {
+          "label": "פייסבוק",
+          "fieldName": "pcfsystemfield176",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Product"
+        },
+        {
+          "label": "בניין/מבנה ביובלים",
+          "fieldName": "pcfsystemfield918",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Product"
+        },
+        {
+          "label": "אזור - לא פעיל",
+          "fieldName": "pcfsystemfield67",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "Product"
+        },
+        {
+          "label": "מיסי קהילה ? (ה)",
+          "fieldName": "pcfMisiKehilaHaskara",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Product"
+        },
+        {
+          "label": "מנהל לקוח",
+          "fieldName": "ownerid",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "Product"
+        },
+        {
+          "label": "מידע חשוב לצוות שכירות (ה)",
+          "fieldName": "pcfsystemfield893",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "Product"
+        },
+        {
+          "label": "יוטיוב (נ) (מ)",
+          "fieldName": "pcfsystemfield923",
+          "systemFieldTypeId": "c820d32f-44df-4c2a-9c1e-18734e864fd5",
+          "systemName": "Product"
+        },
+        {
+          "label": "כולל מים? (ה)",
+          "fieldName": "pcfsystemfield547",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Product"
+        },
+        {
+          "label": "מדלן ",
+          "fieldName": "pcfsystemfield180",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Product"
+        },
+        {
+          "label": "חוזה שכירות בתוקף מקושר",
+          "fieldName": "pcfsystemfield895",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "Product"
+        },
+        {
+          "label": "תאריך ושעה",
+          "fieldName": "pcfsystemfield174",
+          "systemFieldTypeId": "ce972d02-5013-46d4-9d1d-f09df1ac346a",
+          "systemName": "Product"
+        },
+        {
+          "label": "פירוט מרפסת",
+          "fieldName": "pcfsystemfield212",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "Product"
+        },
+        {
+          "label": "קומה (ה)",
+          "fieldName": "pcfsystemfield559",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Product"
+        },
+        {
+          "label": "שכ\"ד משווק (ה)",
+          "fieldName": "pcfsystemfield541",
+          "systemFieldTypeId": "6a34bfe3-fece-4da1-9136-a7b1e5ae3319",
+          "systemName": "Product"
+        },
+        {
+          "label": "סוג לקוח",
+          "fieldName": "pcfsystemfield145",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Product"
+        },
+        {
+          "label": "כיוון",
+          "fieldName": "pcfsystemfield812",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Product"
+        },
+        {
+          "label": "מיסים (ה)",
+          "fieldName": "pcfsyMisimScherut1",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Product"
+        },
+        {
+          "label": "כולל כבלים? (ה)",
+          "fieldName": "pcfsystemfield553",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Product"
+        },
+        {
+          "label": "לא רלוונטי",
+          "fieldName": "pcfsystemfield563",
+          "systemFieldTypeId": "ce972d02-5013-46d4-9d1d-f09df1ac346a",
+          "systemName": "Product"
+        },
+        {
+          "label": "יד 2 (נ) (הש)",
+          "fieldName": "pcfiad2haskara1",
+          "systemFieldTypeId": "c820d32f-44df-4c2a-9c1e-18734e864fd5",
+          "systemName": "Product"
+        },
+        {
+          "label": "מספר חניות",
+          "fieldName": "itemprice",
+          "systemFieldTypeId": "6a34bfe3-fece-4da1-9136-a7b1e5ae3319",
+          "systemName": "Product"
+        },
+        {
+          "label": "מוצע להשכרה? (58)",
+          "fieldName": "pcfsystemfield898",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Product"
+        },
+        {
+          "label": "גיוס ע\"י",
+          "fieldName": "pcfsystemfield233",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "Product"
+        },
+        {
+          "label": "מיקום מפתח ",
+          "fieldName": "pcfsystemfield218",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Product"
+        },
+        {
+          "label": "חבילת ריהוט",
+          "fieldName": "pcfsystemfield828",
+          "systemFieldTypeId": "6a34bfe3-fece-4da1-9136-a7b1e5ae3319",
+          "systemName": "Product"
+        },
+        {
+          "label": "תאריך התחלת ניהול",
+          "fieldName": "pcfsystemfield820",
+          "systemFieldTypeId": "83bf530c-e04c-462b-9ffc-a46f750fc072",
+          "systemName": "Product"
+        },
+        {
+          "label": "גיוס ע\"י",
+          "fieldName": "pcfsystemfield259",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "Product"
+        },
+        {
+          "label": "החתמה על טפסי תיווך וסריקה למערכת",
+          "fieldName": "pcfsystemfield194",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Product"
+        },
+        {
+          "label": "פירוט חשמל",
+          "fieldName": "pcfsystemfield824",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "Product"
+        },
+        {
+          "label": "בכמה הושכר הנכס ?",
+          "fieldName": "pcfsystemfield539",
+          "systemFieldTypeId": "6a34bfe3-fece-4da1-9136-a7b1e5ae3319",
+          "systemName": "Product"
+        },
+        {
+          "label": "פירוט מיזוג",
+          "fieldName": "pcfsystemfield216",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "Product"
+        },
+        {
+          "label": "מ' חדרים (ה)",
+          "fieldName": "pcfsystemfield75",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Product"
+        },
+        {
+          "label": "בדיקה אויה",
+          "fieldName": "pcfsystemfield924",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "Product"
+        },
+        {
+          "label": "קומה",
+          "fieldName": "pcfsystemfield302",
+          "systemFieldTypeId": "6a34bfe3-fece-4da1-9136-a7b1e5ae3319",
+          "systemName": "Product"
+        },
+        {
+          "label": "עודכן על ידי",
+          "fieldName": "modifiedby",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "Product"
+        }
+      ]
+    },
+    {
+      "name": "סוכן",
+      "apiName": "סוכן",
+      "systemName": "customobject1012",
+      "objectType": "1012",
+      "fields": [
+        {
+          "label": "צוות שכירות",
+          "fieldName": "pcfsystemfield900",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "customobject1012"
+        },
+        {
+          "label": "נייד",
+          "fieldName": "pcfsystemfield438",
+          "systemFieldTypeId": "3f62f67a-1cee-403a-bec6-aa02a9804edb",
+          "systemName": "customobject1012"
+        },
+        {
+          "label": "Deleted by",
+          "fieldName": "deletedby",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "customobject1012"
+        },
+        {
+          "label": "",
+          "fieldName": "customobject1012id",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "customobject1012"
+        },
+        {
+          "label": "מספר סידורי",
+          "fieldName": "pcfsystemfield901",
+          "systemFieldTypeId": "6a34bfe3-fece-4da1-9136-a7b1e5ae3319",
+          "systemName": "customobject1012"
+        },
+        {
+          "label": "Deleted on",
+          "fieldName": "deletedon",
+          "systemFieldTypeId": "ce972d02-5013-46d4-9d1d-f09df1ac346a",
+          "systemName": "customobject1012"
+        },
+        {
+          "label": "מייל יומן גוגל",
+          "fieldName": "pcfsystemfield446",
+          "systemFieldTypeId": "c713d2f7-8fa9-43c3-8062-f07486eaf567",
+          "systemName": "customobject1012"
+        },
+        {
+          "label": "קישור קבוצת ווטאפ לסוכן",
+          "fieldName": "pcfKvuzaSuchenGREENapi1",
+          "systemFieldTypeId": "c820d32f-44df-4c2a-9c1e-18734e864fd5",
+          "systemName": "customobject1012"
+        },
+        {
+          "label": "ליד מקושר",
+          "fieldName": "pcfsystemfield440",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "customobject1012"
+        },
+        {
+          "label": "נוצר על ידי",
+          "fieldName": "createdby",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "customobject1012"
+        },
+        {
+          "label": "שם",
+          "fieldName": "name",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "customobject1012"
+        },
+        {
+          "label": "עודכן בתאריך",
+          "fieldName": "modifiedon",
+          "systemFieldTypeId": "ce972d02-5013-46d4-9d1d-f09df1ac346a",
+          "systemName": "customobject1012"
+        },
+        {
+          "label": "נוצר בתאריך",
+          "fieldName": "createdon",
+          "systemFieldTypeId": "ce972d02-5013-46d4-9d1d-f09df1ac346a",
+          "systemName": "customobject1012"
+        },
+        {
+          "label": "יוזר מקושר",
+          "fieldName": "ownerid",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "customobject1012"
+        },
+        {
+          "label": "עודכן על ידי",
+          "fieldName": "modifiedby",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "customobject1012"
+        }
+      ]
+    },
+    {
+      "name": "סיור שלם ללקוח",
+      "apiName": "סיור שלם ללקוח",
+      "systemName": "customobject1004",
+      "objectType": "1004",
+      "fields": [
+        {
+          "label": "לינק 📂 לתיקייה בדרופבוקס",
+          "fieldName": "pcfsiordropboxfolder",
+          "systemFieldTypeId": "c820d32f-44df-4c2a-9c1e-18734e864fd5",
+          "systemName": "customobject1004"
+        },
+        {
+          "label": "יום הסיור",
+          "fieldName": "pcfYomSiurLefiTarech105",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "customobject1004"
+        },
+        {
+          "label": "לא רלוונטי ",
+          "fieldName": "pcf105hadraha",
+          "systemFieldTypeId": "ed2ad39d-32fc-4585-8f5b-2e93463f050a",
+          "systemName": "customobject1004"
+        },
+        {
+          "label": "נוצר על ידי",
+          "fieldName": "createdby",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "customobject1004"
+        },
+        {
+          "label": "(105) 📢 להפעיל אוטומציה ",
+          "fieldName": "pcfwraptourandsendinfo",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "customobject1004"
+        },
+        {
+          "label": "סוכן קניה שיבצע הסיור (יוזר) (טר)",
+          "fieldName": "ownerid",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "customobject1004"
+        },
+        {
+          "label": "מועד הסיור *תאריך בלבד* לאוטמציה שקטה",
+          "fieldName": "pcfsystemfield277",
+          "systemFieldTypeId": "83bf530c-e04c-462b-9ffc-a46f750fc072",
+          "systemName": "customobject1004"
+        },
+        {
+          "label": "מועד תחילת הסיור (105)",
+          "fieldName": "pcfsiordateandtime",
+          "systemFieldTypeId": "ce972d02-5013-46d4-9d1d-f09df1ac346a",
+          "systemName": "customobject1004"
+        },
+        {
+          "label": "מלל נוסף על הלקוח לזכור פרטים חשובים :",
+          "fieldName": "pcfMele105Hofshy",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "customobject1004"
+        },
+        {
+          "label": "",
+          "fieldName": "customobject1004id",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "customobject1004"
+        },
+        {
+          "label": "סוג הסיור השקעה / מגורים / שכירות",
+          "fieldName": "pcfbayOR1rent",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "customobject1004"
+        },
+        {
+          "label": "עסקה",
+          "fieldName": "pcfsystemfield275",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "customobject1004"
+        },
+        {
+          "label": "נכס",
+          "fieldName": "pcfsystemfield270",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "customobject1004"
+        },
+        {
+          "label": "ID פגישה ביומן",
+          "fieldName": "pcfsiorcalanderidpgisha",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "customobject1004"
+        },
+        {
+          "label": "מועד ש.הודעה 105 (Ai) + שעה",
+          "fieldName": "pcfsystemfield276",
+          "systemFieldTypeId": "ce972d02-5013-46d4-9d1d-f09df1ac346a",
+          "systemName": "customobject1004"
+        },
+        {
+          "label": "עודכן בתאריך",
+          "fieldName": "modifiedon",
+          "systemFieldTypeId": "ce972d02-5013-46d4-9d1d-f09df1ac346a",
+          "systemName": "customobject1004"
+        },
+        {
+          "label": "האם לבצע תיזכורת AI עבור הסיור ? ",
+          "fieldName": "pcfOpen105Bdeka",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "customobject1004"
+        },
+        {
+          "label": "Deleted by",
+          "fieldName": "deletedby",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "customobject1004"
+        },
+        {
+          "label": "לינק 📑 לטופס האחרון",
+          "fieldName": "pcfsiorlastgeneratedfilelink",
+          "systemFieldTypeId": "c820d32f-44df-4c2a-9c1e-18734e864fd5",
+          "systemName": "customobject1004"
+        },
+        {
+          "label": "עודכן על ידי",
+          "fieldName": "modifiedby",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "customobject1004"
+        },
+        {
+          "label": "Ai - עדכון",
+          "fieldName": "pcfText105Ai",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "customobject1004"
+        },
+        {
+          "label": "סבב מס' (סיור)",
+          "fieldName": "pcftournumber",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "customobject1004"
+        },
+        {
+          "label": "תאריך הסיור - לא רלוונטאי",
+          "fieldName": "pcftourdate",
+          "systemFieldTypeId": "83bf530c-e04c-462b-9ffc-a46f750fc072",
+          "systemName": "customobject1004"
+        },
+        {
+          "label": "לקוח סיור",
+          "fieldName": "pcftourclient",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "customobject1004"
+        },
+        {
+          "label": "כותרת הסיור",
+          "fieldName": "name",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "customobject1004"
+        },
+        {
+          "label": "הסיור בוצע / בוטל / עתידי ?",
+          "fieldName": "pcfStatuSiur105",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "customobject1004"
+        },
+        {
+          "label": "סיור פיזי / וירטואלי ",
+          "fieldName": "pcfpcfSiurVRorFizi105",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "customobject1004"
+        },
+        {
+          "label": "Deleted on",
+          "fieldName": "deletedon",
+          "systemFieldTypeId": "ce972d02-5013-46d4-9d1d-f09df1ac346a",
+          "systemName": "customobject1004"
+        },
+        {
+          "label": "Ai - אופציה 2",
+          "fieldName": "pcfpcfText105AiOPTZIA2",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "customobject1004"
+        },
+        {
+          "label": "ההודעה שנשלחה אחרונה ביותר",
+          "fieldName": "pcfDogmaText105",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "customobject1004"
+        },
+        {
+          "label": "נוצר בתאריך",
+          "fieldName": "createdon",
+          "systemFieldTypeId": "ce972d02-5013-46d4-9d1d-f09df1ac346a",
+          "systemName": "customobject1004"
+        },
+        {
+          "label": "סוכן שכירות שביצע את הסיור בפועל",
+          "fieldName": "pcfrentEgent1",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "customobject1004"
+        },
+        {
+          "label": "איזה פרוייקט יד 1 ?",
+          "fieldName": "pcfsiurproject",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "customobject1004"
+        },
+        {
+          "label": "תאריך ושעת עריכת \"תאריך סיור\"",
+          "fieldName": "pcfdateandtimenowwhenedit",
+          "systemFieldTypeId": "ce972d02-5013-46d4-9d1d-f09df1ac346a",
+          "systemName": "customobject1004"
+        },
+        {
+          "label": "מי גרם לפגישה ?",
+          "fieldName": "pcfRima105Pgisha",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "customobject1004"
+        },
+        {
+          "label": "הסבר 💬 סיור שלם",
+          "fieldName": "pcfHesber105Siursalem0909090",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "customobject1004"
+        },
+        {
+          "label": "סוכן נוסף 1 ",
+          "fieldName": "pcfSochen2Pgisha105",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "customobject1004"
+        },
+        {
+          "label": "סוכן נוסף 2",
+          "fieldName": "pcfSochen3Pgisha105",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "customobject1004"
+        },
+        {
+          "label": "ערך הנכס",
+          "fieldName": "pcfsystemfield273",
+          "systemFieldTypeId": "6a34bfe3-fece-4da1-9136-a7b1e5ae3319",
+          "systemName": "customobject1004"
+        },
+        {
+          "label": "כמות נכסים שהוצגו בסיור",
+          "fieldName": "pcftoursumofnechasimshown",
+          "systemFieldTypeId": "6a34bfe3-fece-4da1-9136-a7b1e5ae3319",
+          "systemName": "customobject1004"
+        },
+        {
+          "label": "קישור לסרטון הדרכה 🎬 105",
+          "fieldName": "pcfhadrcha105link",
+          "systemFieldTypeId": "c820d32f-44df-4c2a-9c1e-18734e864fd5",
+          "systemName": "customobject1004"
+        }
+      ]
+    },
+    {
+      "name": "פניה",
+      "apiName": "פניה",
+      "systemName": "customobject1014",
+      "objectType": "1014",
+      "fields": [
+        {
+          "label": "שם ☎",
+          "fieldName": "name",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "customobject1014"
+        },
+        {
+          "label": "תמלול 🔠 השיחה בפועל (550)",
+          "fieldName": "pcfTimlul5Sicha5Ai",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "customobject1014"
+        },
+        {
+          "label": "עודכן בתאריך",
+          "fieldName": "modifiedon",
+          "systemFieldTypeId": "ce972d02-5013-46d4-9d1d-f09df1ac346a",
+          "systemName": "customobject1014"
+        },
+        {
+          "label": "משתמש",
+          "fieldName": "ownerid",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "customobject1014"
+        },
+        {
+          "label": "מייל",
+          "fieldName": "pcfsystemfield753",
+          "systemFieldTypeId": "c713d2f7-8fa9-43c3-8062-f07486eaf567",
+          "systemName": "customobject1014"
+        },
+        {
+          "label": "תשובות חשובות לשאלות נרי חתוכה ",
+          "fieldName": "pcfNirMida",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "customobject1014"
+        },
+        {
+          "label": "ציון לסוכן על 🎧 שיחה ",
+          "fieldName": "pcfziun550Sicha",
+          "systemFieldTypeId": "6a34bfe3-fece-4da1-9136-a7b1e5ae3319",
+          "systemName": "customobject1014"
+        },
+        {
+          "label": "מי טיפל בליד 550 ?",
+          "fieldName": "pcfSochenMetapelPniya550",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "customobject1014"
+        },
+        {
+          "label": "תיאור פניה על ידי הסוכן אנושי 😎",
+          "fieldName": "pcfsystemfield754",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "customobject1014"
+        },
+        {
+          "label": "סטטוס סוכן",
+          "fieldName": "pcfsystemfield875",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "customobject1014"
+        },
+        {
+          "label": "תקציר שיחה 📲 (550) אוט'",
+          "fieldName": "pcfTakzirSicha550Ai",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "customobject1014"
+        },
+        {
+          "label": "Deleted on",
+          "fieldName": "deletedon",
+          "systemFieldTypeId": "ce972d02-5013-46d4-9d1d-f09df1ac346a",
+          "systemName": "customobject1014"
+        },
+        {
+          "label": "🔍 נתונים סוכן + לקוח",
+          "fieldName": "pcfNetoni550SocenPLakuach",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "customobject1014"
+        },
+        {
+          "label": "אופציה 3 - טורבו יקר Ai",
+          "fieldName": "pcfBotAi20melel3",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "customobject1014"
+        },
+        {
+          "label": "סיכום שיחה+ צורך+ משימה (550) Ai ",
+          "fieldName": "pcfTiorPniyaAi550",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "customobject1014"
+        },
+        {
+          "label": "תמלול? ❌ או 🔠",
+          "fieldName": "pcfKaiyamTmlulORnot",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "customobject1014"
+        },
+        {
+          "label": "מענה (צד השירות)",
+          "fieldName": "pcfsystemfield732",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "customobject1014"
+        },
+        {
+          "label": "ניר חתוכה - מאמן אישי 🤖",
+          "fieldName": "pcfNIrAiMamen",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "customobject1014"
+        },
+        {
+          "label": "זמן תגובה בשעות",
+          "fieldName": "pcfsystemfield885",
+          "systemFieldTypeId": "6a34bfe3-fece-4da1-9136-a7b1e5ae3319",
+          "systemName": "customobject1014"
+        },
+        {
+          "label": "X",
+          "fieldName": "pcfsystemfield756",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "customobject1014"
+        },
+        {
+          "label": "הפעל את 🤖 Ai עבור הפניה",
+          "fieldName": "pcfTregerbot20ai",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "customobject1014"
+        },
+        {
+          "label": "תקציר ישן מקורי 👵",
+          "fieldName": "pcfTakzirYashan550",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "customobject1014"
+        },
+        {
+          "label": "כמות סעיפים בסיכום שיחה ?",
+          "fieldName": "pcfKamutSeifim5ad27",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "customobject1014"
+        },
+        {
+          "label": "נוצר בתאריך",
+          "fieldName": "createdon",
+          "systemFieldTypeId": "ce972d02-5013-46d4-9d1d-f09df1ac346a",
+          "systemName": "customobject1014"
+        },
+        {
+          "label": "שיפור העברית של קלוד Ai",
+          "fieldName": "pcfBotAi20melelClaude1",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "customobject1014"
+        },
+        {
+          "label": "סטטוס רימה מעקב 😁",
+          "fieldName": "pcfStatusRima550",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "customobject1014"
+        },
+        {
+          "label": "טלפון ☎ לקוח נשלח הודעה (20)",
+          "fieldName": "pcfsystemfield728",
+          "systemFieldTypeId": "3f62f67a-1cee-403a-bec6-aa02a9804edb",
+          "systemName": "customobject1014"
+        },
+        {
+          "label": "סטטוס",
+          "fieldName": "pcfsystemfield751",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "customobject1014"
+        },
+        {
+          "label": "עודכן על ידי",
+          "fieldName": "modifiedby",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "customobject1014"
+        },
+        {
+          "label": "כמה שורות יש בתמלול",
+          "fieldName": "pcfKamaSurotTimlul550Ai",
+          "systemFieldTypeId": "6a34bfe3-fece-4da1-9136-a7b1e5ae3319",
+          "systemName": "customobject1014"
+        },
+        {
+          "label": "בדיקה להלקטה",
+          "fieldName": "pcfsystemfield886",
+          "systemFieldTypeId": "ed2ad39d-32fc-4585-8f5b-2e93463f050a",
+          "systemName": "customobject1014"
+        },
+        {
+          "label": "סוג השיחה 550 (3מילים)",
+          "fieldName": "pcfsystemfield887Pnia550SUGSICA",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "customobject1014"
+        },
+        {
+          "label": "נוצר על ידי",
+          "fieldName": "createdby",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "customobject1014"
+        },
+        {
+          "label": "שולח הליד המקושר (8)",
+          "fieldName": "pcfsystemfield883",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "customobject1014"
+        },
+        {
+          "label": "מי קיבל את הליד? (20)",
+          "fieldName": "pcfsystemfield758",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "customobject1014"
+        },
+        {
+          "label": "הודעה אישית ללקוח",
+          "fieldName": "pcfsystemfield804",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "customobject1014"
+        },
+        {
+          "label": "מי ענה לשיחה ? (פניה) נכנסת",
+          "fieldName": "pcfsystemfield743",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "customobject1014"
+        },
+        {
+          "label": "אופצ' 2 הודעה לשליחה 📤",
+          "fieldName": "pcfBotAi20melel2",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "customobject1014"
+        },
+        {
+          "label": "שם לקוח מקושר 🙋‍♂️ (פניה)",
+          "fieldName": "pcfsystemfield740",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "customobject1014"
+        },
+        {
+          "label": "זמן שיחה (שניות)",
+          "fieldName": "pcfsystemfield746",
+          "systemFieldTypeId": "6a34bfe3-fece-4da1-9136-a7b1e5ae3319",
+          "systemName": "customobject1014"
+        },
+        {
+          "label": "קישור מצורף להודעה ולחיוג מהיר (20.5+20)",
+          "fieldName": "pcfpniashortenedlink1",
+          "systemFieldTypeId": "c820d32f-44df-4c2a-9c1e-18734e864fd5",
+          "systemName": "customobject1014"
+        },
+        {
+          "label": "קישור לא מקוצר לחיוג",
+          "fieldName": "pcfpniaunshortenedlink",
+          "systemFieldTypeId": "c820d32f-44df-4c2a-9c1e-18734e864fd5",
+          "systemName": "customobject1014"
+        },
+        {
+          "label": "שמות הנאמרים בתמלול 👨‍👨‍👦‍👦",
+          "fieldName": "pcfAnashimAi550Shemut",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "customobject1014"
+        },
+        {
+          "label": "ניסיון - ג'מיני 🙉",
+          "fieldName": "pcfTiorPniyaGiminiAi550",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "customobject1014"
+        },
+        {
+          "label": "Deleted by",
+          "fieldName": "deletedby",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "customobject1014"
+        },
+        {
+          "label": "מתי סוכן התקשר לליד",
+          "fieldName": "pcfwhenagentcalled",
+          "systemFieldTypeId": "ce972d02-5013-46d4-9d1d-f09df1ac346a",
+          "systemName": "customobject1014"
+        },
+        {
+          "label": "הסברים ושלבים של המערכת 💬",
+          "fieldName": "pcfPniyaShlavimhesber",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "customobject1014"
+        },
+        {
+          "label": "כמות הפעמים שהלינק נלחץ לחיוג",
+          "fieldName": "pcfpnialinkclicksamount1",
+          "systemFieldTypeId": "6a34bfe3-fece-4da1-9136-a7b1e5ae3319",
+          "systemName": "customobject1014"
+        },
+        {
+          "label": "",
+          "fieldName": "customobject1014id",
+          "systemFieldTypeId": "a8fcdf65-91bc-46fd-82f6-1234758345a1",
+          "systemName": "customobject1014"
+        },
+        {
+          "label": "אופצ' 1 הודעה לשליחה 📤",
+          "fieldName": "pcfBotAi20melel",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "customobject1014"
+        },
+        {
+          "label": "ענה/לא ענה (ישן)",
+          "fieldName": "pcfsystemfield736",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "customobject1014"
+        },
+        {
+          "label": "ענה/לא ענה",
+          "fieldName": "pcfsystemfield734",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "customobject1014"
+        },
+        {
+          "label": "סיכום פניה של הסוכן",
+          "fieldName": "pcfsicomsohenpnia1",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "customobject1014"
+        },
+        {
+          "label": "לינק להקלטת השיחה",
+          "fieldName": "pcf550RecordingDownloadLink",
+          "systemFieldTypeId": "c820d32f-44df-4c2a-9c1e-18734e864fd5",
+          "systemName": "customobject1014"
+        },
+        {
+          "label": "נא לרשום מטרות 🎯 עבור ה- Ai על מנת לשפר (20)",
+          "fieldName": "pcfHorut20aiPniya",
+          "systemFieldTypeId": "80108f9d-1e75-40fa-9fa9-02be4ddc1da1",
+          "systemName": "customobject1014"
+        },
+        {
+          "label": "מקור הגעה",
+          "fieldName": "pcfsystemfield752",
+          "systemFieldTypeId": "b4919f2e-2996-48e4-a03c-ba39fb64386c",
+          "systemName": "customobject1014"
+        },
+        {
+          "label": "זמן לתגובה בדקות",
+          "fieldName": "pcfsystemfield884",
+          "systemFieldTypeId": "6a34bfe3-fece-4da1-9136-a7b1e5ae3319",
+          "systemName": "customobject1014"
+        },
+        {
+          "label": "550 עדכון ⏱",
+          "fieldName": "pcfRishom550aiTariShsha",
+          "systemFieldTypeId": "ce972d02-5013-46d4-9d1d-f09df1ac346a",
+          "systemName": "customobject1014"
+        },
+        {
+          "label": "שם מתוך טופס ליד יד 2",
+          "fieldName": "pcfpnianamefromform",
+          "systemFieldTypeId": "a1e7ed6f-5083-477b-b44c-9943a6181359",
+          "systemName": "customobject1014"
+        },
+        {
+          "label": "מתי סוכן קיבל את הליד",
+          "fieldName": "pcfwhenagentgotlead",
+          "systemFieldTypeId": "ce972d02-5013-46d4-9d1d-f09df1ac346a",
+          "systemName": "customobject1014"
+        },
+        {
+          "label": "זמן שיחה (דקות)",
+          "fieldName": "pcfsystemfield750",
+          "systemFieldTypeId": "6a34bfe3-fece-4da1-9136-a7b1e5ae3319",
+          "systemName": "customobject1014"
+        }
+      ]
+    }
+  ]
+}
