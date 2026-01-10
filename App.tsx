@@ -64,24 +64,37 @@ const App = () => {
   useEffect(() => {
     const storedUser = localStorage.getItem(LOCAL_STORAGE_USER_KEY);
     if (storedUser) {
-      setCurrentUser(JSON.parse(storedUser));
-      setView(ViewState.DASHBOARD);
+      try {
+        setCurrentUser(JSON.parse(storedUser));
+        setView(ViewState.DASHBOARD);
+      } catch (e) {
+        console.error("Failed to parse stored user", e);
+        localStorage.removeItem(LOCAL_STORAGE_USER_KEY);
+      }
     }
 
     const storedCalls = localStorage.getItem(LOCAL_STORAGE_CALLS_KEY);
     if (storedCalls) {
-      const { date, count } = JSON.parse(storedCalls);
-      const today = new Date().toLocaleDateString();
-      if (date === today) {
-        setDailyCalls(count);
-      } else {
-        localStorage.setItem(LOCAL_STORAGE_CALLS_KEY, JSON.stringify({ date: today, count: 0 }));
+      try {
+        const { date, count } = JSON.parse(storedCalls);
+        const today = new Date().toLocaleDateString();
+        if (date === today) {
+          setDailyCalls(count);
+        } else {
+          localStorage.setItem(LOCAL_STORAGE_CALLS_KEY, JSON.stringify({ date: today, count: 0 }));
+        }
+      } catch (e) {
+        localStorage.removeItem(LOCAL_STORAGE_CALLS_KEY);
       }
     }
 
     const storedSnoozes = localStorage.getItem(LOCAL_STORAGE_SNOOZE_KEY);
     if (storedSnoozes) {
-      setSnoozedItems(JSON.parse(storedSnoozes));
+      try {
+        setSnoozedItems(JSON.parse(storedSnoozes));
+      } catch (e) {
+        localStorage.removeItem(LOCAL_STORAGE_SNOOZE_KEY);
+      }
     }
 
     checkConnection();
