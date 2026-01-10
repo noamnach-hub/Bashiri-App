@@ -14,13 +14,13 @@ const fetchWithProxy = async (endpointUrl: string, options: RequestInit) => {
   return fetch(proxyUrl, options);
 };
 
-// Updated Cached Users for testing/offline with correct GUIDs and realistic passwords
 const CACHED_USERS: FireberryUser[] = [
   { id: '151e8f1d-4db3-4051-bcd1-670c5155a0a5', agentId: 'a1', username: 'רווח שירה', emailaddress: 'shirarev3@gmail.com', password: '0532213320', isactive: true },
   { id: 'fab18467-1e42-427c-bfa3-0e7efd468e35', agentId: 'a2', username: 'לב מירב', emailaddress: 'esterohayon68@gmail.com', password: '0539460645', isactive: true },
   { id: 'a7e6b515-38a2-4df5-a82f-30391180304c', agentId: 'a3', username: 'בר ליה', emailaddress: 'liyabar2209@gmail.com', password: '0524667944', isactive: true },
   { id: '1dc5e685-2ae8-4943-be3a-3a26e3d99291', agentId: 'a4', username: 'אמר מאי', emailaddress: 'mayamar542002@gmail.com', password: '0547951430', isactive: true },
-  { id: '3ba731ff-404e-4219-95dd-fc3a353de466', agentId: 'a5', username: 'ודים קורוצקין', emailaddress: 'vadim2222@gmail.com', password: '0508462004', isactive: true }
+  { id: '3ba731ff-404e-4219-95dd-fc3a353de466', agentId: 'a5', username: 'ודים קורוצקין', emailaddress: 'vadim2222@gmail.com', password: '0508462004', isactive: true },
+  { id: 'k1-rika', agentId: 'a6', username: 'קרן ריקה', emailaddress: 'kerenrika@gmail.com', password: '0546891874', isactive: true }
 ];
 
 const mapAgentsToUsers = (data: any): FireberryUser[] => {
@@ -56,11 +56,20 @@ export const testApiConnection = async (): Promise<{ success: boolean, message: 
 export const getAllUsers = async (): Promise<FireberryUser[]> => {
   try {
     const queryUrl = `${FIREBERRY_CONFIG.API_URL}/record/customobject1012/query`;
-    const response = await fetchWithProxy(queryUrl, {
+    let response = await fetchWithProxy(queryUrl, {
       method: 'POST',
       headers: getHeaders(),
       body: JSON.stringify({ page_size: 100 })
     });
+
+    if (response.status === 404) {
+      const fallbackUrl = `${FIREBERRY_CONFIG.API_URL}/record/1012/query`;
+      response = await fetchWithProxy(fallbackUrl, {
+        method: 'POST',
+        headers: getHeaders(),
+        body: JSON.stringify({ page_size: 100 })
+      });
+    }
 
     if (!response.ok) return CACHED_USERS;
 
@@ -79,7 +88,7 @@ export const getAllUsers = async (): Promise<FireberryUser[]> => {
 export const getRecordCount = async (objectType: string, userIdField: string, id: string): Promise<number> => {
   try {
     const url = `${FIREBERRY_CONFIG.API_URL}/record/${objectType}/query`;
-    const response = await fetchWithProxy(url, {
+    let response = await fetchWithProxy(url, {
       method: 'POST',
       headers: getHeaders(),
       body: JSON.stringify({
@@ -88,6 +97,21 @@ export const getRecordCount = async (objectType: string, userIdField: string, id
         return_count: true // Request total results metadata
       })
     });
+
+    if (response.status === 404) {
+      // Try with numeric object type
+      const numericId = objectType.startsWith('customobject') ? objectType.replace('customobject', '') : objectType;
+      const fallbackUrl = `${FIREBERRY_CONFIG.API_URL}/record/${numericId}/query`;
+      response = await fetchWithProxy(fallbackUrl, {
+        method: 'POST',
+        headers: getHeaders(),
+        body: JSON.stringify({
+          where: [{ field: userIdField, value: id, operator: 'eq' }],
+          page_size: 1,
+          return_count: true
+        })
+      });
+    }
 
     if (!response.ok) {
       // Log for debugging but return mock data if in development/offline/failure
@@ -121,18 +145,31 @@ export const getRecordCount = async (objectType: string, userIdField: string, id
 export const getMyInquiries = async (agentId: string): Promise<FireberryInquiry[]> => {
   try {
     const url = `${FIREBERRY_CONFIG.API_URL}/record/customobject1014/query`;
-    const response = await fetchWithProxy(url, {
+    let response = await fetchWithProxy(url, {
       method: 'POST',
       headers: getHeaders(),
       body: JSON.stringify({
         where: [
           { field: 'pcfsystemfield758', value: agentId, operator: 'eq' }
         ],
-        limit: 500, // Increased limit to see more inquiries
+        limit: 500,
         sort_by: "createdon",
         sort_type: "desc"
       })
     });
+
+    // Fallback to numeric ID if customobjectName fails
+    if (response.status === 404) {
+      const fallbackUrl = `${FIREBERRY_CONFIG.API_URL}/record/1014/query`;
+      response = await fetchWithProxy(fallbackUrl, {
+        method: 'POST',
+        headers: getHeaders(),
+        body: JSON.stringify({
+          where: [{ field: 'pcfsystemfield758', value: agentId, operator: 'eq' }],
+          limit: 500
+        })
+      });
+    }
 
     if (!response.ok) {
       console.warn("API failure for inquiries, using mock data");

@@ -16,7 +16,8 @@ import {
   Eye,
   EyeOff,
   Settings,
-  Box
+  Box,
+  ExternalLink
 } from 'lucide-react';
 
 import { FireberryUser, FireberryInquiry, FireberryTask, SnoozeItem, ViewState, AgentStats } from './types';
