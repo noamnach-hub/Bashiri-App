@@ -14,14 +14,8 @@ const fetchWithProxy = async (endpointUrl: string, options: RequestInit) => {
   return fetch(proxyUrl, options);
 };
 
-const CACHED_USERS: FireberryUser[] = [
-  { id: '151e8f1d-4db3-4051-bcd1-670c5155a0a5', agentId: 'a1', username: 'רווח שירה', emailaddress: 'shirarev3@gmail.com', password: '0532213320', isactive: true },
-  { id: 'fab18467-1e42-427c-bfa3-0e7efd468e35', agentId: 'a2', username: 'לב מירב', emailaddress: 'esterohayon68@gmail.com', password: '0539460645', isactive: true },
-  { id: 'a7e6b515-38a2-4df5-a82f-30391180304c', agentId: 'a3', username: 'בר ליה', emailaddress: 'liyabar2209@gmail.com', password: '0524667944', isactive: true },
-  { id: '1dc5e685-2ae8-4943-be3a-3a26e3d99291', agentId: 'a4', username: 'אמר מאי', emailaddress: 'mayamar542002@gmail.com', password: '0547951430', isactive: true },
-  { id: '3ba731ff-404e-4219-95dd-fc3a353de466', agentId: 'a5', username: 'ודים קורוצקין', emailaddress: 'vadim2222@gmail.com', password: '0508462004', isactive: true },
-  { id: 'k1-rika', agentId: 'a6', username: 'קרן ריקה', emailaddress: 'kerenrika@gmail.com', password: '0546891874', isactive: true }
-];
+// Minimal cache just to prevent crash on total network failure, but empty mainly
+const CACHED_USERS: FireberryUser[] = [];
 
 const mapAgentsToUsers = (data: any): FireberryUser[] => {
   const results = Array.isArray(data) ? data : (data.Data || data.data || []);
@@ -71,13 +65,14 @@ export const getAllUsers = async (): Promise<FireberryUser[]> => {
       });
     }
 
-    if (!response.ok) return CACHED_USERS;
+    if (!response.ok) return [];
 
     const data = await response.json();
     const mapped = mapAgentsToUsers(data);
-    return mapped.length > 0 ? mapped : CACHED_USERS;
+    return mapped.length > 0 ? mapped : [];
   } catch (error) {
-    return CACHED_USERS;
+    console.error("Error fetching all users:", error);
+    return [];
   }
 };
 
@@ -114,17 +109,7 @@ export const getRecordCount = async (objectType: string, userIdField: string, id
     }
 
     if (!response.ok) {
-      // Log for debugging but return mock data if in development/offline/failure
-      console.warn(`API returned ${response.status} for ${objectType}, using mock fallback`);
-
-      // Fallback Logic
-      // Keren's Data (matching screenshot)
-      const isKerenAgent = id === '78b3751b-5381-4746-81a0-74f632c91ee1';
-      const isKerenUser = id === 'k1-rika';
-
-      if (objectType === 'customobject1014') return isKerenAgent ? 149 : 597; // Inquiries
-      if (objectType === 'customobject1004') return isKerenUser ? 102 : 12;   // Tours
-      if (objectType === 'Product') return isKerenUser ? 35 : 17;             // Properties
+      console.warn(`API returned ${response.status} for ${objectType}`);
       return 0;
     }
 
@@ -139,15 +124,8 @@ export const getRecordCount = async (objectType: string, userIdField: string, id
     }
 
     return total;
-  } catch {
-    // Mock data logic for demonstration when offline
-    // Keren's Data (matching screenshot)
-    const isKerenAgent = id === '78b3751b-5381-4746-81a0-74f632c91ee1';
-    const isKerenUser = id === 'k1-rika';
-
-    if (objectType === 'customobject1014') return isKerenAgent ? 149 : 597;
-    if (objectType === 'customobject1004') return isKerenUser ? 102 : 12; // סיור שלם ללקוח
-    if (objectType === 'Product') return isKerenUser ? 35 : 17; // נכסים
+  } catch (error) {
+    console.error("Error fetching record count:", error);
     return 0;
   }
 };

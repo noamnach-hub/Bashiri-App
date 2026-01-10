@@ -1,9 +1,8 @@
-export const FIREBERRY_CONFIG = {
-  // Raw API URL - Proxy will be handled in the service layer with encoding
-  // Switched to legacy Powerlink domain which is more reliable for this API structure
-  API_URL: 'https://api.powerlink.co.il/api',
+// Raw API URL - Proxy will be handled in the service layer with encoding
+// Updated to Fireberry domain based on user's environment
+API_URL: 'https://api.fireberry.com/api',
   TOKEN: 'e22544a5-7694-4654-ae33-ec8ba5e59ed8',
-  ORG_ID: 'd11d5d79-ddb5-4606-8381-6e342590cc7d'
+    ORG_ID: 'd11d5d79-ddb5-4606-8381-6e342590cc7d'
 };
 
 export const LEAD_STATUS_NEW = 'לא טופל';
