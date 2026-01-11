@@ -1,5 +1,6 @@
 import { FIREBERRY_CONFIG, LEAD_STATUS_NEW, TASK_STATUS_COMPLETED } from '../constants';
 import { FireberryTask, FireberryUser, FireberryInquiry } from '../types';
+import { addDebugLog } from './debugService';
 
 const getHeaders = () => {
   return {
@@ -17,15 +18,63 @@ const fetchWithProxy = async (endpointUrl: string, options: RequestInit) => {
 // Minimal cache just to prevent crash on total network failure, but empty mainly
 const CACHED_USERS: FireberryUser[] = [];
 
-const mapAgentsToUsers = (data: any): FireberryUser[] => {
-  const results = Array.isArray(data) ? data : (data.Data || data.data || []);
+const mapSystemUsersToUsers = (data: any): FireberryUser[] => {
+  const results = Array.isArray(data) ? data :
+    (data.data?.Records || data.data?.Data || data.Records || []);
+
+  return results.map((u: any) => ({
+    id: u.systemuserid || u.crmuserid || u.ownerid,
+    agentId: u.systemuserid || u.crmuserid || u.ownerid,
+    username: u.fullname || `${u.firstname} ${u.lastname}`, // Display Name
+    emailaddress: (u.username || u.emailaddress1 || '').trim(), // Login Email (User requested 'username' field)
+    password: (u.telephone2 || u.mobilephone || '').trim(), // Password (telephone2)
+    isactive: u.status === 'פעיל' // Check Hebrew status field
+  })).filter((u: FireberryUser) => u.isactive); // Only return active users
+};
+
+const mapAgents = (data: any): any[] => {
+  const results = Array.isArray(data) ? data :
+    (data.data?.Records || data.data?.Data || data.Records || []);
+
   return results.map((a: any) => ({
-    id: a.ownerid, // The System User ID
-    agentId: a.customobject1012id, // The Agent Record ID
-    username: a.name,
-    emailaddress: (a.pcfsystemfield446 || '').trim(),
-    password: (a.pcfsystemfield438 || '').trim(),
-    isactive: true
+    id: a.customobject1012id,
+    name: a.name,
+    status: a.statuscodename || a.statuscode,
+    phone: a.pcfsystemfield438 || a.telephone1 || '',
+    email: a.pcfsystemfield446 || a.emailaddress || '',
+    validUntil: a.pcfsystemfield439,
+    createdOn: a.createdon,
+    modifiedOn: a.modifiedon,
+    ownerId: a.ownerid,
+    ownerName: a.owneridname || '',
+    serialNumber: a.pcfsystemfield901 || '', // מספר סידורי
+    linkedLeadId: a.pcfsystemfield440 || '' // ליד מקושר
+  }));
+};
+
+const mapLeads = (data: any): any[] => {
+  const results = Array.isArray(data) ? data :
+    (data.data?.Records || data.data?.Data || data.Records || []);
+
+  return results.map((l: any) => ({
+    id: l.customobject1014id,
+    name: l.name, // שם ☎
+    phone: l.pcfsystemfield751 || l.telephone1 || '', // טלפון
+    email: l.pcfsystemfield753 || '', // מייל
+    status: l.pcfsystemfield875 || l.statuscodename || '', // סטטוס סוכן
+    description: l.pcfsystemfield754 || '', // תיאור פניה
+    createdOn: l.createdon,
+    ownerId: l.ownerid,
+    linkedCustomerName: l.pcfsystemfield740name || l.pcfsystemfield740 || '', // שם לקוח מקושר
+    customerType: l.pcfsystemfield145name || l.pcfsystemfield145 || '', // סוג לקוח 1
+    answeredBy: l.pcfsystemfield743name || l.pcfsystemfield743 || '', // מי ענה לשיחה
+    handledBy: l.pcfSochenMetapelPniya550name || l.pcfSochenMetapelPniya550 || '', // מי טיפל בליד 550
+    updateTime: l.pcfRishom550aiTariShsha || '', // 550 עדכון
+    leadSource: l.pcfsystemfield752name || l.pcfsystemfield752 || '', // מקור הגעה
+    receivedBy: l.owneridname || '', // מי קיבל את הליד
+    answerStatus: l.pcfsystemfield734 || '', // ענה/לא ענה
+    callDuration: l.pcfsystemfield750 || l.pcfsystemfield746 || '', // זמן שיחה
+    handlerType: l.pcfsystemfield900name || l.pcfsystemfield900 || '' // סוג מטפל
   }));
 };
 
@@ -48,30 +97,105 @@ export const testApiConnection = async (): Promise<{ success: boolean, message: 
 };
 
 export const getAllUsers = async (): Promise<FireberryUser[]> => {
+  addDebugLog("getAllUsers START", "Function called");
   try {
-    const queryUrl = `${FIREBERRY_CONFIG.API_URL}/record/customobject1012/query`;
+    // Use the /record/CrmUser endpoint as shown in the API documentation
+    const recordUrl = `${FIREBERRY_CONFIG.API_URL}/record/CrmUser`;
+    addDebugLog("getAllUsers URL", recordUrl);
+    let response = await fetchWithProxy(recordUrl, {
+      method: 'GET',
+      headers: getHeaders()
+    });
+
+    addDebugLog("getAllUsers Response", { ok: response.ok, status: response.status });
+    if (!response.ok) {
+      addDebugLog("getAllUsers FAIL", `Response not OK: ${response.status}`);
+      return [];
+    }
+
+    const data = await response.json();
+    addDebugLog("getAllUsers RAW", { keys: Object.keys(data), dataKeys: data.data ? Object.keys(data.data) : 'no data obj' });
+    const mapped = mapSystemUsersToUsers(data);
+
+    addDebugLog("getAllUsers", {
+      count: mapped.length,
+      sample: mapped.length > 0 ? {
+        display: mapped[0].username,
+        email: mapped[0].emailaddress,
+        pass: mapped[0].password,
+        active: mapped[0].isactive
+      } : "No users found"
+    });
+
+    return mapped.length > 0 ? mapped : [];
+  } catch (error) {
+    console.error("Error fetching all users:", error);
+    addDebugLog("getAllUsers Error", error);
+    return [];
+  }
+};
+
+export const getAgents = async (ownerId: string): Promise<any[]> => {
+  try {
+    const queryUrl = `${FIREBERRY_CONFIG.API_URL}/query`;
     let response = await fetchWithProxy(queryUrl, {
       method: 'POST',
       headers: getHeaders(),
-      body: JSON.stringify({ page_size: 100 })
+      body: JSON.stringify({
+        objecttype: "1012", // Agents table
+        query: `(ownerid = '${ownerId}')`,
+        sort_type: "desc",
+        page_size: 50
+      })
     });
-
-    if (response.status === 404) {
-      const fallbackUrl = `${FIREBERRY_CONFIG.API_URL}/record/1012/query`;
-      response = await fetchWithProxy(fallbackUrl, {
-        method: 'POST',
-        headers: getHeaders(),
-        body: JSON.stringify({ page_size: 100 })
-      });
-    }
 
     if (!response.ok) return [];
 
     const data = await response.json();
-    const mapped = mapAgentsToUsers(data);
-    return mapped.length > 0 ? mapped : [];
+    return mapAgents(data);
   } catch (error) {
-    console.error("Error fetching all users:", error);
+    console.error("Error fetching agents:", error);
+    return [];
+  }
+};
+
+export const getLeadsByAgentId = async (agentId: string): Promise<any[]> => {
+  try {
+    const queryUrl = `${FIREBERRY_CONFIG.API_URL}/query`;
+    let allLeads: any[] = [];
+    let pageNumber = 1;
+    let hasMorePages = true;
+
+    while (hasMorePages) {
+      let response = await fetchWithProxy(queryUrl, {
+        method: 'POST',
+        headers: getHeaders(),
+        body: JSON.stringify({
+          objecttype: "1014", // פניות table
+          query: `(pcfsystemfield758 = '${agentId}')`, // פניות שהסוכן מקושר אליהן
+          sort_type: "desc",
+          page_size: 100,
+          page_number: pageNumber
+        })
+      });
+
+      if (!response.ok) break;
+
+      const data = await response.json();
+      const leads = mapLeads(data);
+      allLeads = [...allLeads, ...leads];
+
+      // Check if there are more pages
+      if (leads.length < 100) {
+        hasMorePages = false;
+      } else {
+        pageNumber++;
+      }
+    }
+
+    return allLeads;
+  } catch (error) {
+    console.error("Error fetching leads for agent:", error);
     return [];
   }
 };
@@ -80,84 +204,88 @@ export const getAllUsers = async (): Promise<FireberryUser[]> => {
  * Robustly fetches total results for a query.
  * Handles the standard TotalResults field in Fireberry/Powerlink responses.
  */
+
 export const getRecordCount = async (objectType: string, userIdField: string, id: string): Promise<number> => {
   try {
-    const url = `${FIREBERRY_CONFIG.API_URL}/record/${objectType}/query`;
+    const url = `${FIREBERRY_CONFIG.API_URL}/query`;
+    const payload = {
+      objecttype: objectType,
+      query: `(${userIdField} = '${id}')`,
+      page_number: "1",
+      page_size: "5", // Drastically reduced to strict 1MB proxy limit
+      return_count: true,
+      sort_by: "modifiedon",
+      sort_type: "desc"
+    };
+
+    addDebugLog(`Count Request ${objectType}`, { payload, id, userIdField });
+
     let response = await fetchWithProxy(url, {
       method: 'POST',
       headers: getHeaders(),
-      body: JSON.stringify({
-        where: [{ field: userIdField, value: id, operator: 'eq' }],
-        page_size: 1,
-        return_count: true // Request total results metadata
-      })
+      body: JSON.stringify(payload)
     });
 
-    if (response.status === 404) {
-      // Try with numeric object type
-      const numericId = objectType.startsWith('customobject') ? objectType.replace('customobject', '') : objectType;
-      const fallbackUrl = `${FIREBERRY_CONFIG.API_URL}/record/${numericId}/query`;
-      response = await fetchWithProxy(fallbackUrl, {
-        method: 'POST',
-        headers: getHeaders(),
-        body: JSON.stringify({
-          where: [{ field: userIdField, value: id, operator: 'eq' }],
-          page_size: 1,
-          return_count: true
-        })
-      });
+    const rawText = await response.text();
+    let data;
+    try {
+      data = JSON.parse(rawText);
+    } catch {
+      addDebugLog(`Parse Error ${objectType}`, rawText);
+      return 0;
     }
+
+    addDebugLog(`Count ${objectType}`, {
+      payload,
+      keys: Object.keys(data),
+      dataKeys: data.data ? Object.keys(data.data) : 'No Data Object',
+      sample: JSON.stringify(data).substring(0, 200) + '...'
+    });
 
     if (!response.ok) {
       console.warn(`API returned ${response.status} for ${objectType}`);
       return 0;
     }
 
-    const data = await response.json();
-
     // Fireberry typically returns TotalResults at the root or within a 'data' wrapper
-    const total = data.TotalResults ?? data.totalResults ?? data.data?.TotalResults ?? 0;
+    // User JSON shows "Total_Records": 15970 inside "data" object
+    const total = data.Total_Records ?? data.data?.Total_Records ??
+      data.TotalResults ?? data.totalResults ?? data.data?.TotalResults ??
+      (data.success === true && data.data?.Total_Records) ?? 0;
 
-    // If we get data but no TotalResults metadata, fall back to array length
-    if (total === 0 && (Array.isArray(data.Data) || Array.isArray(data.data))) {
-      return (data.Data || data.data).length;
+    // If explicit count is 0, we check array length.
+    // Now with page_size 20, we can see if we get ANY records.
+    if (total === 0) {
+      const records = Array.isArray(data) ? data :
+        (data.data?.Records || data.data?.Data || data.Records || []);
+
+      // If we got 20 records, we might have more. But for now, returning 20 is better than 0.
+      return records.length;
     }
 
     return total;
   } catch (error) {
     console.error("Error fetching record count:", error);
+    addDebugLog(`Error ${objectType}`, error);
     return 0;
   }
 };
 
 export const getMyInquiries = async (agentId: string): Promise<FireberryInquiry[]> => {
   try {
-    const url = `${FIREBERRY_CONFIG.API_URL}/record/customobject1014/query`;
+    const url = `${FIREBERRY_CONFIG.API_URL}/query`;
     let response = await fetchWithProxy(url, {
       method: 'POST',
       headers: getHeaders(),
       body: JSON.stringify({
-        where: [
-          { field: 'pcfsystemfield758', value: agentId, operator: 'eq' }
-        ],
-        limit: 500,
-        sort_by: "createdon",
-        sort_type: "desc"
+        objecttype: "1014",
+        query: `(pcfsystemfield758 = '${agentId}')`, // Using pcfsystemfield758 as requested
+        sort_by: "modifiedon",
+        sort_type: "desc",
+        page_number: "1",
+        page_size: "50"
       })
     });
-
-    // Fallback to numeric ID if customobjectName fails
-    if (response.status === 404) {
-      const fallbackUrl = `${FIREBERRY_CONFIG.API_URL}/record/1014/query`;
-      response = await fetchWithProxy(fallbackUrl, {
-        method: 'POST',
-        headers: getHeaders(),
-        body: JSON.stringify({
-          where: [{ field: 'pcfsystemfield758', value: agentId, operator: 'eq' }],
-          limit: 500
-        })
-      });
-    }
 
     if (!response.ok) {
       console.warn("API failure for inquiries");
@@ -165,16 +293,17 @@ export const getMyInquiries = async (agentId: string): Promise<FireberryInquiry[
     }
 
     const data = await response.json();
-    const results = Array.isArray(data.Data) ? data.Data : (Array.isArray(data.data) ? data.data : []);
+    const results = Array.isArray(data) ? data :
+      (data.data?.Records || data.data?.Data || data.Records || []);
 
     return results.map((item: any) => ({
       id: item.customobject1014id,
       name: item.name,
       phone: item.telephone1 || item.phone || '',
-      email: item.pcfsystemfield753,
+      email: item.pcfsystemfield753, // Assuming these fields are correct, might need verification
       description: item.pcfsystemfield754,
       statuscode: item.pcfsystemfield751,
-      createdon: item.createdon,
+      // createdon: item.createdon, // Might need to be added if sort uses it
       agentId: item.pcfsystemfield758
     }));
   } catch (err) {

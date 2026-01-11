@@ -52,6 +52,9 @@ export interface AgentStats {
   inquiries: number;
   tours: number;
   properties: number;
+  accounts: number;
+  leases: number;
+  visits: number;
 }
 
 export enum ViewState {
