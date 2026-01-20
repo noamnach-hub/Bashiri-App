@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   Users,
   Phone,
@@ -87,6 +87,7 @@ const App = () => {
   const [loginError, setLoginError] = useState('');
 
   const [apiStatus, setApiStatus] = useState<{ connected: boolean, message: string } | null>(null);
+  const isNavigatingBack = useRef(false);
 
   useEffect(() => {
     addDebugLog("App Mount", "Application initialized");
@@ -94,6 +95,41 @@ const App = () => {
     localStorage.removeItem(LOCAL_STORAGE_USER_KEY);
     checkConnection();
   }, []);
+
+  // Sync View with Browser History (Back Button Support)
+  useEffect(() => {
+    // On mount, establish initial state
+    window.history.replaceState({ view: ViewState.LOGIN }, '');
+
+    const handlePopState = (event: PopStateEvent) => {
+      if (event.state && event.state.view) {
+        isNavigatingBack.current = true;
+        setView(event.state.view);
+      } else {
+        // If history runs out (user went back past start), default to Dashboard if logged in
+        if (currentUser) {
+          isNavigatingBack.current = true;
+          setView(ViewState.DASHBOARD);
+          window.history.replaceState({ view: ViewState.DASHBOARD }, '');
+        }
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, [currentUser]);
+
+  // Push new state when View changes (unless popping)
+  useEffect(() => {
+    if (isNavigatingBack.current) {
+      isNavigatingBack.current = false;
+      return;
+    }
+    // Don't push state for initial login view to avoid double entry
+    if (view === ViewState.LOGIN && !currentUser) return;
+
+    window.history.pushState({ view }, '');
+  }, [view, currentUser]);
 
   useEffect(() => {
     if (currentUser && view === ViewState.DASHBOARD) {
@@ -900,7 +936,11 @@ const App = () => {
                             <div className="w-8 h-8 bg-gradient-to-br from-[#111111] to-[#333333] rounded-full flex items-center justify-center text-[#A2D294] font-bold text-xs flex-shrink-0">
                               {(lead.linkedCustomerName || lead.name || '?').charAt(0)}
                             </div>
-                            <h4 className="font-semibold text-[#111111] text-sm truncate" title={lead.linkedCustomerName || lead.name}>
+                            <h4
+                              className="font-semibold text-[#111111] text-sm leading-tight"
+                              title={lead.linkedCustomerName || lead.name}
+                              style={{ display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}
+                            >
                               {lead.linkedCustomerName || lead.name || 'ללא שם'}
                             </h4>
                           </div>
@@ -935,20 +975,20 @@ const App = () => {
                           <div className="flex items-center gap-2 flex-shrink-0">
                             <a
                               href={`tel:${lead.phone}`}
-                              className="p-1.5 bg-[#111111] text-[#A2D294] rounded-md hover:bg-gray-800 transition-all active:scale-95 shadow-sm"
+                              className="p-3 bg-[#111111] text-[#A2D294] rounded-lg hover:bg-gray-800 transition-all active:scale-95 shadow-sm"
                               title="חייג"
                             >
-                              <Phone size={14} />
+                              <Phone size={20} />
                             </a>
 
                             <div className="relative">
                               <button
                                 onClick={() => setSnoozeDropdownOpen(snoozeDropdownOpen === lead.id ? null : lead.id)}
                                 disabled={loading}
-                                className="p-1.5 bg-yellow-50 text-yellow-700 rounded-md hover:bg-yellow-100 transition-all active:scale-95 disabled:opacity-50 border border-yellow-200"
+                                className="p-3 bg-yellow-50 text-yellow-700 rounded-lg hover:bg-yellow-100 transition-all active:scale-95 disabled:opacity-50 border border-yellow-200"
                                 title="תזכורת"
                               >
-                                <Clock size={14} />
+                                <Clock size={20} />
                               </button>
 
                               {/* Snooze Dropdown */}
@@ -970,10 +1010,10 @@ const App = () => {
                             <button
                               onClick={() => handleMarkAsHandled(lead.id)}
                               disabled={loading}
-                              className="p-1.5 bg-[#A2D294] text-[#111111] rounded-md hover:bg-[#8fbf81] transition-all active:scale-95 disabled:opacity-50 shadow-sm"
+                              className="p-3 bg-[#A2D294] text-[#111111] rounded-lg hover:bg-[#8fbf81] transition-all active:scale-95 disabled:opacity-50 shadow-sm"
                               title="טופל"
                             >
-                              <CheckCircle size={14} />
+                              <CheckCircle size={20} />
                             </button>
                           </div>
                         </div>
