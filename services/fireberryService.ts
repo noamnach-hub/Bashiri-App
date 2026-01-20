@@ -11,8 +11,20 @@ const getHeaders = () => {
 };
 
 const fetchWithProxy = async (endpointUrl: string, options: RequestInit) => {
-  const proxyUrl = `https://corsproxy.io/?${encodeURIComponent(endpointUrl)}`;
-  return fetch(proxyUrl, options);
+  // Add cache-busting timestamp to prevent proxy from returning stale data
+  const cacheBuster = `_cb=${Date.now()}`;
+  const urlWithCacheBuster = endpointUrl.includes('?')
+    ? `${endpointUrl}&${cacheBuster}`
+    : `${endpointUrl}?${cacheBuster}`;
+  const proxyUrl = `https://corsproxy.io/?${encodeURIComponent(urlWithCacheBuster)}`;
+  return fetch(proxyUrl, {
+    ...options,
+    headers: {
+      ...options.headers,
+      'Cache-Control': 'no-cache, no-store, must-revalidate',
+      'Pragma': 'no-cache'
+    }
+  });
 };
 
 // Minimal cache just to prevent crash on total network failure, but empty mainly
@@ -59,7 +71,7 @@ const mapLeads = (data: any): any[] => {
   return results.map((l: any) => ({
     id: l.customobject1014id,
     name: l.name, // שם ☎
-    phone: l.pcfsystemfield751 || l.telephone1 || '', // טלפון
+    phone: l.pcfsystemfield728 || l.pcfsystemfield751 || l.telephone1 || '', // טלפון של הליד
     email: l.pcfsystemfield753 || '', // מייל
     status: l.pcfsystemfield875 || l.statuscodename || '', // סטטוס סוכן
     statusRaw: l.pcfsystemfield875, // Raw status value for filtering
@@ -188,6 +200,8 @@ export const getAllLeadsByAgentId = async (agentId: string): Promise<any[]> => {
     let pageNumber = 1;
     let hasMorePages = true;
 
+    addDebugLog("getAllLeadsByAgentId START", { agentId });
+
     while (hasMorePages) {
       let response = await fetchWithProxy(queryUrl, {
         method: 'POST',
@@ -201,10 +215,25 @@ export const getAllLeadsByAgentId = async (agentId: string): Promise<any[]> => {
         })
       });
 
-      if (!response.ok) break;
+      if (!response.ok) {
+        addDebugLog("getAllLeadsByAgentId FETCH FAILED", { page: pageNumber, status: response.status });
+        break;
+      }
 
       const data = await response.json();
       const leads = mapLeads(data);
+
+      addDebugLog("getAllLeadsByAgentId PAGE", {
+        page: pageNumber,
+        leadsInPage: leads.length,
+        totalSoFar: allLeads.length + leads.length,
+        statusCounts: {
+          new: leads.filter(l => l.statusRaw === 2 || l.statusRaw === '2').length,
+          snooze: leads.filter(l => l.statusRaw === 3 || l.statusRaw === '3').length,
+          handled: leads.filter(l => l.statusRaw === 1 || l.statusRaw === '1').length,
+          other: leads.filter(l => l.statusRaw !== 1 && l.statusRaw !== 2 && l.statusRaw !== 3 && l.statusRaw !== '1' && l.statusRaw !== '2' && l.statusRaw !== '3').length
+        }
+      });
 
       if (leads.length > 0 && pageNumber === 1) {
         addDebugLog("ALL LEADS STATUS VALUES", leads.slice(0, 10).map(l => ({ name: l.name, status: l.status, statusRaw: l.statusRaw })));
@@ -219,9 +248,11 @@ export const getAllLeadsByAgentId = async (agentId: string): Promise<any[]> => {
       }
     }
 
+    addDebugLog("getAllLeadsByAgentId COMPLETE", { totalLeads: allLeads.length });
     return allLeads;
   } catch (error) {
     console.error("Error fetching all leads for agent:", error);
+    addDebugLog("getAllLeadsByAgentId ERROR", String(error));
     return [];
   }
 };
@@ -237,16 +268,35 @@ export const getLeadsByAgentId = async (agentId: string): Promise<any[]> => {
 export const updateLeadAgentStatus = async (leadId: string, newStatus: number): Promise<boolean> => {
   try {
     const url = `${FIREBERRY_CONFIG.API_URL}/record/customobject1014/${leadId}`;
-    addDebugLog("updateLeadAgentStatus", { leadId, newStatus });
+    // Only send the numeric status value (not the name field)
+    const payload = {
+      pcfsystemfield875: newStatus
+    };
+    addDebugLog("updateLeadAgentStatus START", { leadId, newStatus, url, payload });
+
     const response = await fetchWithProxy(url, {
       method: 'PUT',
       headers: getHeaders(),
-      body: JSON.stringify({ pcfsystemfield875: newStatus })
+      body: JSON.stringify(payload)
     });
-    addDebugLog("updateLeadAgentStatus Response", { ok: response.ok, status: response.status });
+
+    let responseData = null;
+    try {
+      responseData = await response.json();
+    } catch (e) {
+      // Response might not be JSON
+    }
+
+    addDebugLog("updateLeadAgentStatus Response", {
+      ok: response.ok,
+      status: response.status,
+      responseData
+    });
+
     return response.ok;
   } catch (error) {
     console.error("Error updating lead agent status:", error);
+    addDebugLog("updateLeadAgentStatus ERROR", String(error));
     return false;
   }
 };

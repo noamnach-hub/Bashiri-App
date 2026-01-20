@@ -8,6 +8,7 @@ import {
   TrendingUp,
   MapPin,
   ChevronRight,
+  ArrowRight,
   User,
   Plus,
   Bell,
@@ -198,47 +199,86 @@ const App = () => {
       const reminderTime = new Date();
       reminderTime.setMinutes(reminderTime.getMinutes() + delayMinutes);
 
-      // Send webhook to Airtable
+      // Send webhook to Airtable via CORS proxy
       try {
-        const webhookData = {
-          leadId: leadId,
-          leadName: lead.linkedCustomerName || lead.name || '',
-          leadPhone: lead.phone || '',
-          agentEmail: currentUser?.emailaddress || '',
-          agentName: currentUser?.username || '',
-          snoozeOption: delayLabel,
-          snoozeMinutes: delayMinutes,
-          reminderTime: reminderTime.toISOString(),
-          timestamp: new Date().toISOString()
+        // Format dates as DD-MM-YYYY HH:MM (adjusted for Airtable timezone)
+        const formatDateForAirtable = (date: Date) => {
+          // Airtable adds timezone offset, so we subtract it to get correct display
+          const adjustedDate = new Date(date.getTime() - (date.getTimezoneOffset() * 60000 * -1));
+          // Actually, let's just use UTC values which Airtable will convert to local
+          const day = date.getDate();
+          const month = date.getMonth() + 1;
+          const year = date.getFullYear();
+          // Subtract 2 hours (Israel timezone offset) so Airtable shows correct time
+          const adjustedHours = date.getHours() - 2;
+          const hours = adjustedHours.toString().padStart(2, '0');
+          const minutes = date.getMinutes().toString().padStart(2, '0');
+          return `${day}-${month}-${year} ${hours}:${minutes}`;
         };
 
-        await fetch('https://hooks.airtable.com/workflows/v1/genericWebhook/appJA1grYnl1RPY2S/wflfyctPSGM3r2IrS/wtrFhbuB8bcM7zStd', {
+        const webhookData = {
+          name: lead.linkedCustomerName || lead.name || '',
+          phone: lead.phone || '',
+          reminder_date: formatDateForAirtable(reminderTime),
+          lead_creation_time: lead.createdOn ? formatDateForAirtable(new Date(lead.createdOn)) : '',
+          agent: currentUser?.emailaddress || ''
+        };
+
+        addDebugLog("Sending Webhook", webhookData);
+
+        // Use CORS proxy to send webhook
+        const webhookUrl = 'https://hooks.airtable.com/workflows/v1/genericWebhook/appJA1grYnl1RPY2S/wflhCNJFhvgGbDkUI/wtrzLwDs8u0pGlUqW';
+        const proxyUrl = `https://corsproxy.io/?${encodeURIComponent(webhookUrl)}`;
+
+        const response = await fetch(proxyUrl, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(webhookData)
         });
 
-        addDebugLog("Snooze Webhook Sent", webhookData);
+        addDebugLog("Webhook Response", { ok: response.ok, status: response.status });
+
       } catch (webhookError) {
         console.error("Webhook error:", webhookError);
-        addDebugLog("Snooze Webhook Error", webhookError);
+        addDebugLog("Snooze Webhook Error", String(webhookError));
       }
 
-      // Create Google Tasks URL
-      const taskTitle = encodeURIComponent(`תזכורת: ${lead.name || 'ליד'} - ${lead.phone || ''}`);
+      // Create Google Calendar event
+      const taskTitle = encodeURIComponent(`תזכורת: ${lead.linkedCustomerName || lead.name || 'ליד'} - ${lead.phone || ''}`);
       const taskDetails = encodeURIComponent(`ליד לחזור אליו\nטלפון: ${lead.phone}\nנדחה ב: ${delayLabel}`);
-      const dueDate = reminderTime.toISOString();
 
-      // Open Google Calendar event (more reliable than Tasks API)
-      const calendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${taskTitle}&details=${taskDetails}&dates=${dueDate.replace(/[-:]/g, '').split('.')[0]}Z/${dueDate.replace(/[-:]/g, '').split('.')[0]}Z`;
+      // Format date for Google Calendar URL in LOCAL time (YYYYMMDDTHHmmss)
+      const formatGoogleDate = (date: Date) => {
+        const year = date.getFullYear();
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+        const day = date.getDate().toString().padStart(2, '0');
+        const hours = date.getHours().toString().padStart(2, '0');
+        const minutes = date.getMinutes().toString().padStart(2, '0');
+        const seconds = '00';
+        return `${year}${month}${day}T${hours}${minutes}${seconds}`;
+      };
+
+      // Event starts and ends at the same time (0 duration = just a reminder)
+      const startTime = formatGoogleDate(reminderTime);
+      const endTime = formatGoogleDate(reminderTime);
+
+      // Open Google Calendar event:
+      // - ctz=Asia/Jerusalem for Israel timezone
+      // - crm=AVAILABLE makes it "Free" (not blocking time)
+      const calendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${taskTitle}&details=${taskDetails}&dates=${startTime}/${endTime}&ctz=Asia/Jerusalem&crm=AVAILABLE`;
 
       // Open in new tab
       window.open(calendarUrl, '_blank');
 
-      // Remove from current filtered list immediately
-      setFilteredLeads(prev => prev.filter(l => l.id !== leadId));
-      // Refresh data in background
-      await fetchDashboardData();
+      // Remove from current filtered list immediately (this will re-render)
+      setFilteredLeads(prev => {
+        const updated = prev.filter(l => l.id !== leadId);
+        addDebugLog("Filtered Leads Updated", { before: prev.length, after: updated.length });
+        return updated;
+      });
+
+      // Refresh dashboard counts in background (don't wait)
+      fetchDashboardData();
     }
     setLoading(false);
   };
@@ -676,7 +716,32 @@ const App = () => {
 
     return (
       <div className="min-h-screen bg-[#F5F5F5]">
-        <Header title={`${statusTitle} (${filteredLeads.length})`} backAction={() => { setView(ViewState.DASHBOARD); setSnoozeDropdownOpen(null); }} />
+        {/* Header with back, refresh, logout */}
+        <div className="bg-[#111111] text-white p-4 flex items-center justify-between sticky top-0 z-10 shadow-md">
+          <div className="flex items-center gap-3">
+            <button onClick={() => { setView(ViewState.DASHBOARD); setSnoozeDropdownOpen(null); }} className="p-1">
+              <ArrowRight size={24} />
+            </button>
+            <h1 className="text-lg font-bold">{statusTitle} ({filteredLeads.length})</h1>
+          </div>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={fetchDashboardData}
+              disabled={loading}
+              className="p-2 rounded-full hover:bg-white/10 transition-colors disabled:opacity-50"
+              title="רענן נתונים"
+            >
+              <RefreshCw size={20} className={loading ? 'animate-spin' : ''} />
+            </button>
+            <button
+              onClick={() => { setCurrentUser(null); setView(ViewState.LOGIN); }}
+              className="p-2 rounded-full hover:bg-white/10 transition-colors"
+              title="יציאה"
+            >
+              <LogOut size={20} />
+            </button>
+          </div>
+        </div>
         <div className="p-4 max-w-2xl mx-auto">
           {loading ? <Loading /> : (
             filteredLeads.length === 0 ? (
@@ -715,13 +780,14 @@ const App = () => {
                       </div>
 
                       {/* Action Buttons */}
-                      <div className="flex items-center gap-1.5 sm:gap-2">
+                      <div className="flex items-center gap-2 flex-wrap">
                         {/* Call Button */}
                         <a
                           href={`tel:${lead.phone}`}
-                          className="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center bg-[#111111] text-[#A2D294] rounded-full hover:bg-gray-800 transition-all active:scale-95 shadow-sm"
+                          className="flex items-center gap-1.5 px-3 py-2 bg-[#111111] text-[#A2D294] rounded-lg hover:bg-gray-800 transition-all active:scale-95 shadow-sm text-sm font-medium"
                         >
-                          <Phone size={16} className="sm:w-[18px] sm:h-[18px]" />
+                          <Phone size={16} />
+                          <span>חייג עכשיו</span>
                         </a>
 
                         {/* Snooze Button with Dropdown */}
@@ -729,9 +795,10 @@ const App = () => {
                           <button
                             onClick={() => setSnoozeDropdownOpen(snoozeDropdownOpen === lead.id ? null : lead.id)}
                             disabled={loading}
-                            className="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center bg-yellow-50 text-yellow-600 rounded-full hover:bg-yellow-100 transition-all active:scale-95 disabled:opacity-50 border border-yellow-200"
+                            className="flex items-center gap-1.5 px-3 py-2 bg-yellow-50 text-yellow-700 rounded-lg hover:bg-yellow-100 transition-all active:scale-95 disabled:opacity-50 border border-yellow-200 text-sm font-medium"
                           >
-                            <Clock size={16} className="sm:w-[18px] sm:h-[18px]" />
+                            <Clock size={16} />
+                            <span>תזכורת</span>
                           </button>
 
                           {/* Snooze Dropdown */}
@@ -755,9 +822,10 @@ const App = () => {
                         <button
                           onClick={() => handleMarkAsHandled(lead.id)}
                           disabled={loading}
-                          className="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center bg-[#A2D294] text-[#111111] rounded-full hover:bg-[#8fbf81] transition-all active:scale-95 disabled:opacity-50 shadow-sm"
+                          className="flex items-center gap-1.5 px-3 py-2 bg-[#A2D294] text-[#111111] rounded-lg hover:bg-[#8fbf81] transition-all active:scale-95 disabled:opacity-50 shadow-sm text-sm font-medium"
                         >
-                          <CheckCircle size={16} className="sm:w-[18px] sm:h-[18px]" />
+                          <CheckCircle size={16} />
+                          <span>טופל</span>
                         </button>
                       </div>
                     </div>
