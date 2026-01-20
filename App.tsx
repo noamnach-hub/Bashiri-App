@@ -20,7 +20,12 @@ import {
   Box,
   ExternalLink,
   X,
-  RefreshCw
+  RefreshCw,
+  Search,
+  ArrowUp,
+  ArrowDown,
+  Calendar,
+  Filter
 } from 'lucide-react';
 
 import { FireberryUser, FireberryInquiry, FireberryTask, SnoozeItem, ViewState, AgentStats } from './types';
@@ -67,6 +72,12 @@ const App = () => {
   const [dailyCalls, setDailyCalls] = useState(0);
   const [snoozedItems, setSnoozedItems] = useState<SnoozeItem[]>([]);
   const [snoozeDropdownOpen, setSnoozeDropdownOpen] = useState<string | null>(null); // Lead ID with open dropdown
+
+  // Lead list filtering and sorting
+  const [searchQuery, setSearchQuery] = useState('');
+  const [sortField, setSortField] = useState<'name' | 'phone' | 'date'>('date');
+  const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
+  const [dateFilter, setDateFilter] = useState<'all' | 'today' | 'yesterday' | 'older'>('all');
 
   const [selectedInquiry, setSelectedInquiry] = useState<FireberryInquiry | null>(null);
 
@@ -716,142 +727,271 @@ const App = () => {
 
     return (
       <div className="min-h-screen bg-[#F5F5F5]">
-        {/* Header with back, refresh, logout */}
-        <div className="bg-[#111111] text-white p-4 flex items-center justify-between sticky top-0 z-10 shadow-md">
-          <div className="flex items-center gap-3">
-            <button onClick={() => { setView(ViewState.DASHBOARD); setSnoozeDropdownOpen(null); }} className="p-1">
-              <ArrowRight size={24} />
-            </button>
-            <h1 className="text-lg font-bold">{statusTitle} ({filteredLeads.length})</h1>
+        <div className="max-w-4xl mx-auto bg-white min-h-screen shadow-xl border-x border-gray-100 relative">
+          {/* Header with back, refresh, logout */}
+          <div className="bg-[#111111] text-white p-4 flex items-center justify-between sticky top-0 z-20 shadow-md">
+            <div className="flex items-center gap-3">
+              <button onClick={() => { setView(ViewState.DASHBOARD); setSnoozeDropdownOpen(null); }} className="p-1">
+                <ArrowRight size={24} />
+              </button>
+              <h1 className="text-lg font-bold">{statusTitle} ({filteredLeads.length})</h1>
+            </div>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={fetchDashboardData}
+                disabled={loading}
+                className="p-2 rounded-full hover:bg-white/10 transition-colors disabled:opacity-50"
+                title="רענן נתונים"
+              >
+                <RefreshCw size={20} className={loading ? 'animate-spin' : ''} />
+              </button>
+              <button
+                onClick={() => { setCurrentUser(null); setView(ViewState.LOGIN); }}
+                className="p-2 rounded-full hover:bg-white/10 transition-colors"
+                title="יציאה"
+              >
+                <LogOut size={20} />
+              </button>
+            </div>
           </div>
-          <div className="flex items-center gap-2">
-            <button
-              onClick={fetchDashboardData}
-              disabled={loading}
-              className="p-2 rounded-full hover:bg-white/10 transition-colors disabled:opacity-50"
-              title="רענן נתונים"
-            >
-              <RefreshCw size={20} className={loading ? 'animate-spin' : ''} />
-            </button>
-            <button
-              onClick={() => { setCurrentUser(null); setView(ViewState.LOGIN); }}
-              className="p-2 rounded-full hover:bg-white/10 transition-colors"
-              title="יציאה"
-            >
-              <LogOut size={20} />
-            </button>
-          </div>
-        </div>
-        <div className="p-4 max-w-2xl mx-auto">
-          {loading ? <Loading /> : (
-            filteredLeads.length === 0 ? (
-              <div className="text-center text-gray-400 mt-20">
-                <CheckCircle size={48} className="mx-auto mb-2 opacity-30 text-[#A2D294]" />
-                <p>אין לידים ברשימה זו</p>
+
+          <div className="bg-white border-b border-gray-200 sticky top-[68px] z-10 shadow-sm">
+            {/* Search and Date Filters */}
+            <div className="p-3 bg-gray-50 border-b border-gray-100">
+              <div className="flex flex-col sm:flex-row gap-3">
+                {/* Search Input */}
+                <div className="relative flex-1">
+                  <input
+                    type="text"
+                    placeholder="חפש לפי שם או טלפון..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full pl-4 pr-10 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#111111] focus:border-transparent text-sm"
+                  />
+                  <Search className="absolute right-3 top-2.5 text-gray-400" size={18} />
+                  {searchQuery && (
+                    <button
+                      onClick={() => setSearchQuery('')}
+                      className="absolute left-3 top-2.5 text-gray-400 hover:text-gray-600"
+                    >
+                      <X size={16} />
+                    </button>
+                  )}
+                </div>
+
+                {/* Date Filters */}
+                <div className="flex gap-2 overflow-x-auto pb-1 hide-scrollbar">
+                  {[
+                    { id: 'all', label: 'הכל' },
+                    { id: 'today', label: 'היום' },
+                    { id: 'yesterday', label: 'אתמול' },
+                    { id: 'older', label: 'ישן יותר' }
+                  ].map((filter) => (
+                    <button
+                      key={filter.id}
+                      onClick={() => setDateFilter(filter.id as any)}
+                      className={`whitespace-nowrap px-3 py-1.5 rounded-full text-xs font-medium transition-colors border ${dateFilter === filter.id
+                        ? 'bg-[#111111] text-white border-[#111111]'
+                        : 'bg-white text-gray-600 border-gray-200 hover:bg-gray-50'
+                        }`}
+                    >
+                      {filter.label}
+                    </button>
+                  ))}
+                </div>
               </div>
-            ) : (
-              <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-                {/* Sort by createdOn ascending (oldest first) */}
-                {[...filteredLeads].sort((a, b) => new Date(a.createdOn || 0).getTime() - new Date(b.createdOn || 0).getTime()).map((lead, index) => (
-                  <div
-                    key={lead.id}
-                    className={`bg-white border-b border-gray-100 last:border-b-0 relative`}
-                  >
-                    <div className="flex items-center gap-3 px-3 sm:px-4 py-3">
-                      {/* Avatar */}
-                      <div className="w-9 h-9 sm:w-10 sm:h-10 bg-gradient-to-br from-[#111111] to-[#333333] rounded-full flex items-center justify-center text-[#A2D294] font-bold text-xs sm:text-sm flex-shrink-0">
-                        {(lead.linkedCustomerName || lead.name || '?').charAt(0)}
-                      </div>
+            </div>
 
-                      {/* Customer Info */}
-                      <div className="flex-1 min-w-0">
-                        <h4 className="font-semibold text-[#111111] text-sm sm:text-base truncate">{lead.linkedCustomerName || lead.name || 'ללא שם'}</h4>
-                        <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-500 flex-wrap">
-                          <span dir="ltr" className="font-mono">{lead.phone || '-'}</span>
-                          {lead.createdOn && (
-                            <>
-                              <span className="text-gray-400">•</span>
-                              <span className="text-xs text-gray-400">
-                                {new Date(lead.createdOn).toLocaleString('he-IL', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' })}
-                              </span>
-                            </>
-                          )}
-                        </div>
-                      </div>
+            {/* Sortable Column Headers - Now strictly aligned with List Grid */}
+            <div className="grid grid-cols-12 gap-2 px-4 py-3 text-xs font-bold text-gray-500 bg-gray-50">
+              <button
+                onClick={() => {
+                  if (sortField === 'name') setSortDirection(prev => prev === 'asc' ? 'desc' : 'asc');
+                  else { setSortField('name'); setSortDirection('asc'); }
+                }}
+                className="col-span-4 text-right flex items-center gap-1 hover:text-[#111111]"
+              >
+                שם
+                {sortField === 'name' && (sortDirection === 'asc' ? <ArrowUp size={12} /> : <ArrowDown size={12} />)}
+              </button>
+              <button
+                onClick={() => {
+                  if (sortField === 'phone') setSortDirection(prev => prev === 'asc' ? 'desc' : 'asc');
+                  else { setSortField('phone'); setSortDirection('asc'); }
+                }}
+                className="col-span-4 text-right flex items-center gap-1 hover:text-[#111111]"
+              >
+                טלפון
+                {sortField === 'phone' && (sortDirection === 'asc' ? <ArrowUp size={12} /> : <ArrowDown size={12} />)}
+              </button>
+              <button
+                onClick={() => {
+                  if (sortField === 'date') setSortDirection(prev => prev === 'asc' ? 'desc' : 'asc');
+                  else { setSortField('date'); setSortDirection('desc'); } // Default desc for date
+                }}
+                className="col-span-4 text-right flex items-center gap-1 hover:text-[#111111]"
+              >
+                תאריך
+                {sortField === 'date' && (sortDirection === 'asc' ? <ArrowUp size={12} /> : <ArrowDown size={12} />)}
+              </button>
+            </div>
+          </div>
 
-                      {/* Action Buttons */}
-                      <div className="flex items-center gap-2 flex-wrap">
-                        {/* Call Button */}
-                        <a
-                          href={`tel:${lead.phone}`}
-                          className="flex items-center gap-1.5 px-3 py-2 bg-[#111111] text-[#A2D294] rounded-lg hover:bg-gray-800 transition-all active:scale-95 shadow-sm text-sm font-medium"
-                        >
-                          <Phone size={16} />
-                          <span>חייג עכשיו</span>
-                        </a>
+          <div className="">
+            {loading ? <Loading /> : (
+              filteredLeads.length === 0 ? (
+                <div className="text-center text-gray-400 mt-20">
+                  <CheckCircle size={48} className="mx-auto mb-2 opacity-30 text-[#A2D294]" />
+                  <p>אין לידים ברשימה זו</p>
+                </div>
+              ) : (
+                <div className="divide-y divide-gray-100">
+                  {/* Processed Leads List */}
+                  {filteredLeads
+                    .filter(lead => {
+                      // Search filter
+                      const searchLower = searchQuery.toLowerCase();
+                      const nameMatch = (lead.linkedCustomerName || lead.name || '').toLowerCase().includes(searchLower);
+                      const phoneMatch = (lead.phone || '').includes(searchLower);
+                      if (!nameMatch && !phoneMatch) return false;
 
-                        {/* Snooze Button with Dropdown */}
-                        <div className="relative">
-                          <button
-                            onClick={() => setSnoozeDropdownOpen(snoozeDropdownOpen === lead.id ? null : lead.id)}
-                            disabled={loading}
-                            className="flex items-center gap-1.5 px-3 py-2 bg-yellow-50 text-yellow-700 rounded-lg hover:bg-yellow-100 transition-all active:scale-95 disabled:opacity-50 border border-yellow-200 text-sm font-medium"
-                          >
-                            <Clock size={16} />
-                            <span>תזכורת</span>
-                          </button>
+                      // Date filter
+                      if (dateFilter !== 'all') {
+                        const leadDate = new Date(lead.createdOn);
+                        const today = new Date();
+                        const isToday = leadDate.getDate() === today.getDate() && leadDate.getMonth() === today.getMonth() && leadDate.getFullYear() === today.getFullYear();
 
-                          {/* Snooze Dropdown */}
-                          {snoozeDropdownOpen === lead.id && (
-                            <div className="absolute left-0 top-full mt-2 bg-white rounded-xl shadow-lg border border-gray-200 py-2 z-50 min-w-[160px]">
-                              <div className="px-3 py-1.5 text-xs font-bold text-gray-400 uppercase">נודניק ל...</div>
-                              {snoozeOptions.map((option) => (
-                                <button
-                                  key={option.label}
-                                  onClick={() => handleMarkAsSnooze(lead.id, lead, option.minutes, option.label)}
-                                  className="w-full text-right px-3 py-2 text-sm text-gray-700 hover:bg-yellow-50 hover:text-yellow-700 transition-colors"
-                                >
-                                  {option.label}
-                                </button>
-                              ))}
+                        const yesterday = new Date(today);
+                        yesterday.setDate(yesterday.getDate() - 1);
+                        const isYesterday = leadDate.getDate() === yesterday.getDate() && leadDate.getMonth() === yesterday.getMonth() && leadDate.getFullYear() === yesterday.getFullYear();
+
+                        if (dateFilter === 'today' && !isToday) return false;
+                        if (dateFilter === 'yesterday' && !isYesterday) return false;
+                        if (dateFilter === 'older' && (isToday || isYesterday)) return false;
+                      }
+                      return true;
+                    })
+                    .sort((a, b) => {
+                      let valA, valB;
+                      if (sortField === 'name') {
+                        valA = a.linkedCustomerName || a.name || '';
+                        valB = b.linkedCustomerName || b.name || '';
+                      } else if (sortField === 'phone') {
+                        valA = a.phone || '';
+                        valB = b.phone || '';
+                      } else { // date
+                        valA = new Date(a.createdOn || 0).getTime();
+                        valB = new Date(b.createdOn || 0).getTime();
+                      }
+
+                      if (valA < valB) return sortDirection === 'asc' ? -1 : 1;
+                      if (valA > valB) return sortDirection === 'asc' ? 1 : -1;
+                      return 0;
+                    })
+                    .map((lead, index) => (
+                      <div
+                        key={lead.id}
+                        className={`bg-white border-b border-gray-100 last:border-b-0 relative hover:bg-gray-50 transition-colors`}
+                      >
+                        {/* Grid Row for Data Columns */}
+                        <div className="grid grid-cols-12 gap-2 p-3 items-center">
+                          {/* Name Column */}
+                          <div className="col-span-4 flex items-center gap-2 overflow-hidden">
+                            <div className="w-8 h-8 bg-gradient-to-br from-[#111111] to-[#333333] rounded-full flex items-center justify-center text-[#A2D294] font-bold text-xs flex-shrink-0">
+                              {(lead.linkedCustomerName || lead.name || '?').charAt(0)}
                             </div>
-                          )}
+                            <h4 className="font-semibold text-[#111111] text-sm truncate" title={lead.linkedCustomerName || lead.name}>
+                              {lead.linkedCustomerName || lead.name || 'ללא שם'}
+                            </h4>
+                          </div>
+
+                          {/* Phone Column */}
+                          <div className="col-span-4 text-right">
+                            <a href={`tel:${lead.phone}`} className="font-mono text-xs text-gray-600 block truncate hover:text-blue-600" dir="ltr">
+                              {lead.phone || '-'}
+                            </a>
+                          </div>
+
+                          {/* Date Column */}
+                          <div className="col-span-4 text-right">
+                            <span className="text-xs text-gray-500 block truncate" dir="ltr">
+                              {lead.createdOn ? new Date(lead.createdOn).toLocaleString('he-IL', { day: '2-digit', month: '2-digit', year: '2-digit', hour: '2-digit', minute: '2-digit' }) : '-'}
+                            </span>
+                          </div>
                         </div>
 
-                        {/* Handled Button */}
-                        <button
-                          onClick={() => handleMarkAsHandled(lead.id)}
-                          disabled={loading}
-                          className="flex items-center gap-1.5 px-3 py-2 bg-[#A2D294] text-[#111111] rounded-lg hover:bg-[#8fbf81] transition-all active:scale-95 disabled:opacity-50 shadow-sm text-sm font-medium"
-                        >
-                          <CheckCircle size={16} />
-                          <span>טופל</span>
-                        </button>
-                      </div>
-                    </div>
+                        {/* Content & Actions Row */}
+                        <div className="px-3 pb-3 flex items-center justify-between gap-3 border-t border-gray-50 pt-2 mx-3">
+                          {/* Details/Content */}
+                          <div className="flex-1 min-w-0">
+                            {lead.content ? (
+                              <p className="text-xs text-gray-400 truncate">
+                                {lead.content}
+                              </p>
+                            ) : <span className="text-xs text-gray-300">אין תוכן</span>}
+                          </div>
 
-                    {/* Content Preview (if exists) - hidden on mobile */}
-                    {lead.content && (
-                      <div className="px-3 sm:px-4 pb-3 pt-0 hidden sm:block">
-                        <p className="text-xs text-gray-500 bg-gray-50 rounded-lg px-3 py-2 truncate">
-                          {lead.content}
-                        </p>
+                          {/* Action Buttons - Compact */}
+                          <div className="flex items-center gap-2 flex-shrink-0">
+                            <a
+                              href={`tel:${lead.phone}`}
+                              className="p-1.5 bg-[#111111] text-[#A2D294] rounded-md hover:bg-gray-800 transition-all active:scale-95 shadow-sm"
+                              title="חייג"
+                            >
+                              <Phone size={14} />
+                            </a>
+
+                            <div className="relative">
+                              <button
+                                onClick={() => setSnoozeDropdownOpen(snoozeDropdownOpen === lead.id ? null : lead.id)}
+                                disabled={loading}
+                                className="p-1.5 bg-yellow-50 text-yellow-700 rounded-md hover:bg-yellow-100 transition-all active:scale-95 disabled:opacity-50 border border-yellow-200"
+                                title="תזכורת"
+                              >
+                                <Clock size={14} />
+                              </button>
+
+                              {/* Snooze Dropdown */}
+                              {snoozeDropdownOpen === lead.id && (
+                                <div className="absolute left-0 bottom-full mb-2 bg-white rounded-xl shadow-lg border border-gray-200 py-2 z-50 min-w-[120px]">
+                                  {snoozeOptions.map((option) => (
+                                    <button
+                                      key={option.label}
+                                      onClick={() => handleMarkAsSnooze(lead.id, lead, option.minutes, option.label)}
+                                      className="w-full text-right px-3 py-2 text-xs text-gray-700 hover:bg-yellow-50 hover:text-yellow-700 transition-colors"
+                                    >
+                                      {option.label}
+                                    </button>
+                                  ))}
+                                </div>
+                              )}
+                            </div>
+
+                            <button
+                              onClick={() => handleMarkAsHandled(lead.id)}
+                              disabled={loading}
+                              className="p-1.5 bg-[#A2D294] text-[#111111] rounded-md hover:bg-[#8fbf81] transition-all active:scale-95 disabled:opacity-50 shadow-sm"
+                              title="טופל"
+                            >
+                              <CheckCircle size={14} />
+                            </button>
+                          </div>
+                        </div>
                       </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-            )
+                    ))}
+                </div>
+              )
+            )}
+          </div>
+
+          {/* Click outside to close dropdown */}
+          {snoozeDropdownOpen && (
+            <div
+              className="fixed inset-0 z-40"
+              onClick={() => setSnoozeDropdownOpen(null)}
+            />
           )}
         </div>
-
-        {/* Click outside to close dropdown */}
-        {snoozeDropdownOpen && (
-          <div
-            className="fixed inset-0 z-40"
-            onClick={() => setSnoozeDropdownOpen(null)}
-          />
-        )}
       </div>
     );
   }
