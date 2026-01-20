@@ -172,7 +172,8 @@ export const getLeadsByAgentId = async (agentId: string): Promise<any[]> => {
         headers: getHeaders(),
         body: JSON.stringify({
           objecttype: "1014", // פניות table
-          query: `(pcfsystemfield758 = '${agentId}')`, // פניות שהסוכן מקושר אליהן
+          // Re-applied Status filter using integer value 2 (matches '2. חדש')
+          query: `(pcfsystemfield758 = '${agentId}') AND (pcfsystemfield875 = 2)`,
           sort_type: "desc",
           page_size: 100,
           page_number: pageNumber
@@ -183,6 +184,23 @@ export const getLeadsByAgentId = async (agentId: string): Promise<any[]> => {
 
       const data = await response.json();
       const leads = mapLeads(data);
+
+      // DEBUG: Log the statuses we found to verify the correct value for "2. חדש"
+      // DEBUG: Log the statuses we found to verify the correct value for "2. חדש"
+      if (leads.length > 0 && pageNumber === 1) {
+        // Log mapped status
+        addDebugLog("MAPPED STATUS VALUES", leads.slice(0, 5).map(l => ({ name: l.name, status: l.status })));
+
+        // Let's verify what `pcfsystemfield875` raw value is - handling Data vs Records
+        const rawRecords = Array.isArray(data) ? data : (data.data?.Records || data.data?.Data || []);
+        addDebugLog("RAW STATUS VALUES", rawRecords.map((r: any) => ({
+          id: r.customobject1014id,
+          '758(Agent)': r.pcfsystemfield758,
+          '875(Status)': r.pcfsystemfield875,
+          '875name': r.pcfsystemfield875name
+        })).slice(0, 5));
+      }
+
       allLeads = [...allLeads, ...leads];
 
       // Check if there are more pages

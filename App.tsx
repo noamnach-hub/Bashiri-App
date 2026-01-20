@@ -46,6 +46,7 @@ const App = () => {
   const [inquiries, setInquiries] = useState<FireberryInquiry[]>([]);
   const [tasks, setTasks] = useState<FireberryTask[]>([]);
   const [agents, setAgents] = useState<any[]>([]); // New state for agents
+  const [totalNewLeads, setTotalNewLeads] = useState(0); // Total count for the big button
   const [stats, setStats] = useState<AgentStats>({
     inquiries: 0,
     tours: 0,
@@ -93,8 +94,31 @@ const App = () => {
     if (!currentUser) return;
     setLoading(true);
     try {
+      // 1. Fetch Agents
       const fetchedAgents = await getAgents(currentUser.id);
-      setAgents(fetchedAgents);
+
+      // 2. Fetch Leads for ALL agents in parallel
+      // We need this to get the counts for the top bar AND the total joint list for the main button
+      const leadsPromises = fetchedAgents.map(agent => getLeadsByAgentId(agent.id));
+      const leadsResults = await Promise.all(leadsPromises);
+
+      let allLeadsAggregated: any[] = [];
+
+      // Map results back to agents to add individual counts
+      const agentsWithCounts = fetchedAgents.map((agent, index) => {
+        const agentSpecificLeads = leadsResults[index] || [];
+        allLeadsAggregated = [...allLeadsAggregated, ...agentSpecificLeads];
+        return {
+          ...agent,
+          leadCount: agentSpecificLeads.length
+        };
+      });
+
+      setAgents(agentsWithCounts);
+      setInquiries(allLeadsAggregated); // Store ALL leads ready for the list view
+      setTotalNewLeads(allLeadsAggregated.length);
+      setAgentLeads(allLeadsAggregated); // Keep a backup or use shared state
+
     } catch (err) {
       console.error("Error fetching dashboard data:", err);
     } finally {
@@ -388,175 +412,54 @@ const App = () => {
           {loading ? (
             <Loading />
           ) : (
-            <div className="mb-6">
-              <h3 className="text-lg font-bold text-[#111111] mb-3">סוכנים מקושרים למשתמש מערכת ({agents.length})</h3>
-              <div className="space-y-3">
-                {agents.length === 0 ? (
-                  <div className="text-center text-gray-500 text-sm py-8 bg-white rounded-xl border border-gray-200">
-                    <User size={40} className="mx-auto mb-2 text-gray-300" />
-                    לא נמצאו סוכנים המשויכים אליך
-                  </div>
-                ) : (
-                  agents.map((agent, index) => (
-                    <div key={agent.id} className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-                      <div
-                        className="p-4 cursor-pointer hover:bg-gray-50 transition-colors"
-                        onClick={() => handleAgentExpand(agent.id)}
-                      >
-                        <div className="flex items-start gap-3">
-                          <div className="bg-[#111111] text-[#A2D294] w-12 h-12 rounded-full flex-shrink-0 flex items-center justify-center">
-                            <span className="text-lg font-bold">{index + 1}</span>
-                          </div>
-                          <div className="flex-1">
-                            <div className="flex justify-between items-start">
-                              <div>
-                                <h4 className="font-bold text-[#111111] text-lg">{agent.name}</h4>
-                                <p className="text-[10px] text-gray-400 font-mono" dir="ltr">ID: {agent.id}</p>
-                              </div>
-                              <div className="flex items-center gap-2">
-                                <span className={`text-xs px-2 py-1 rounded-full ${agent.status === 1 ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-600'}`}>
-                                  {agent.status === 1 ? 'פעיל' : agent.status || 'לא ידוע'}
-                                </span>
-                                <ChevronRight
-                                  size={20}
-                                  className={`text-gray-400 transition-transform ${expandedAgentId === agent.id ? 'rotate-90' : ''}`}
-                                />
-                              </div>
-                            </div>
-
-                            <div className="mt-2 space-y-1 text-sm text-gray-600">
-                              <div className="flex items-center gap-2">
-                                <span className="text-[#A2D294] font-medium">סטטוס:</span>
-                                <span>{agent.status === 1 ? 'פעיל' : agent.status || 'לא ידוע'}</span>
-                              </div>
-                              {agent.phone && (
-                                <div className="flex items-center gap-2">
-                                  <Phone size={14} className="text-[#A2D294]" />
-                                  <span dir="ltr">{agent.phone}</span>
-                                </div>
-                              )}
-                              {agent.email && (
-                                <div className="flex items-center gap-2">
-                                  <span className="text-[#A2D294]">@</span>
-                                  <span dir="ltr">{agent.email}</span>
-                                </div>
-                              )}
-                            </div>
-
-                            <div className="mt-3 pt-3 border-t border-gray-100 flex justify-between text-xs text-gray-400">
-                              <span>מספר סידורי: {agent.serialNumber || 'לא זמין'}</span>
-                              {agent.validUntil && (
-                                <span>בתוקף עד: {new Date(agent.validUntil).toLocaleDateString('he-IL')}</span>
-                              )}
-                              {agent.createdOn && (
-                                <span>נוצר: {new Date(agent.createdOn).toLocaleDateString('he-IL')}</span>
-                              )}
-                            </div>
-                          </div>
+            <>
+              {/* Agents Summary Section (Horizontal Scroll) */}
+              <div className="mb-8">
+                <h3 className="text-sm font-bold text-gray-500 uppercase tracking-wider mb-3">סוכנים ופניות ({agents.length})</h3>
+                <div className="flex gap-4 overflow-x-auto pb-4 custom-scrollbar" style={{ scrollbarWidth: 'none' }}>
+                  {agents.length === 0 ? (
+                    <div className="text-gray-400 text-sm italic">לא נמצאו סוכנים</div>
+                  ) : (
+                    agents.map((agent) => (
+                      <div key={agent.id} className="min-w-[140px] bg-white p-3 rounded-xl border border-gray-100 shadow-sm flex flex-col items-center text-center">
+                        <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-gray-600 font-bold mb-2 text-sm">
+                          {(agent.name || '?').charAt(0)}
                         </div>
+                        <h4 className="font-bold text-[#111] text-xs mb-1 truncate w-full">{agent.name || 'לא ידוע'}</h4>
+                        <span className={`text-[10px] px-2 py-0.5 rounded-full ${agent.leadCount > 0 ? 'bg-[#A2D294]/20 text-green-800 font-bold' : 'bg-gray-100 text-gray-400'}`}>
+                          {agent.leadCount || 0} פניות
+                        </span>
                       </div>
-
-                      {/* Leads Section */}
-                      {expandedAgentId === agent.id && (
-                        <div className="bg-gray-50 border-t border-gray-200 p-4">
-                          <div className="flex justify-between items-center mb-3">
-                            <h5 className="font-bold text-[#111111]">פניות מקושרות לסוכן</h5>
-                            <span className="bg-[#A2D294] text-[#111111] px-3 py-1 rounded-full text-sm font-bold">
-                              סה"כ: {agentLeads.length}
-                            </span>
-                          </div>
-                          {loadingLeads ? (
-                            <div className="text-center py-4 text-gray-500">טוען פניות...</div>
-                          ) : agentLeads.length === 0 ? (
-                            <div className="text-center py-4 text-gray-500 text-sm">לא נמצאו פניות מקושרות</div>
-                          ) : (
-                            <div className="bg-white rounded-lg border border-gray-200 overflow-x-auto">
-                              <table className="w-full min-w-[1200px] text-[11px]" style={{ tableLayout: 'auto' }}>
-                                <thead className="bg-gray-100 sticky top-0">
-                                  <tr className="border-b">
-                                    <th className="px-2 py-2 text-right font-bold text-gray-600 whitespace-nowrap">#</th>
-                                    <th className="px-2 py-2 text-right font-bold text-gray-600 whitespace-nowrap cursor-pointer hover:bg-gray-200" onClick={() => handleLeadSort('answerStatus')}>
-                                      ענה/לא ענה {leadSortField === 'answerStatus' && (leadSortDirection === 'asc' ? '▲' : '▼')}
-                                    </th>
-                                    <th className="px-2 py-2 text-right font-bold text-gray-600 whitespace-nowrap cursor-pointer hover:bg-gray-200" onClick={() => handleLeadSort('callDuration')}>
-                                      זמן שיחה {leadSortField === 'callDuration' && (leadSortDirection === 'asc' ? '▲' : '▼')}
-                                    </th>
-                                    <th className="px-2 py-2 text-right font-bold text-gray-600 whitespace-nowrap cursor-pointer hover:bg-gray-200" onClick={() => handleLeadSort('description')}>
-                                      תיאור פניה {leadSortField === 'description' && (leadSortDirection === 'asc' ? '▲' : '▼')}
-                                    </th>
-                                    <th className="px-2 py-2 text-right font-bold text-gray-600 whitespace-nowrap cursor-pointer hover:bg-gray-200" onClick={() => handleLeadSort('handlerType')}>
-                                      סוג מטפל {leadSortField === 'handlerType' && (leadSortDirection === 'asc' ? '▲' : '▼')}
-                                    </th>
-                                    <th className="px-2 py-2 text-right font-bold text-gray-600 whitespace-nowrap cursor-pointer hover:bg-gray-200" onClick={() => handleLeadSort('linkedCustomerName')}>
-                                      שם לקוח {leadSortField === 'linkedCustomerName' && (leadSortDirection === 'asc' ? '▲' : '▼')}
-                                    </th>
-                                    <th className="px-2 py-2 text-right font-bold text-gray-600 whitespace-nowrap cursor-pointer hover:bg-gray-200" onClick={() => handleLeadSort('phone')}>
-                                      טלפון {leadSortField === 'phone' && (leadSortDirection === 'asc' ? '▲' : '▼')}
-                                    </th>
-                                    <th className="px-2 py-2 text-right font-bold text-gray-600 whitespace-nowrap cursor-pointer hover:bg-gray-200" onClick={() => handleLeadSort('status')}>
-                                      סטטוס סוכן {leadSortField === 'status' && (leadSortDirection === 'asc' ? '▲' : '▼')}
-                                    </th>
-                                    <th className="px-2 py-2 text-right font-bold text-gray-600 whitespace-nowrap cursor-pointer hover:bg-gray-200" onClick={() => handleLeadSort('createdOn')}>
-                                      נוצר בתאריך {leadSortField === 'createdOn' && (leadSortDirection === 'asc' ? '▲' : '▼')}
-                                    </th>
-                                    <th className="px-2 py-2 text-right font-bold text-gray-600 whitespace-nowrap cursor-pointer hover:bg-gray-200" onClick={() => handleLeadSort('receivedBy')}>
-                                      מי קיבל {leadSortField === 'receivedBy' && (leadSortDirection === 'asc' ? '▲' : '▼')}
-                                    </th>
-                                    <th className="px-2 py-2 text-right font-bold text-gray-600 whitespace-nowrap cursor-pointer hover:bg-gray-200" onClick={() => handleLeadSort('leadSource')}>
-                                      מקור הגעה {leadSortField === 'leadSource' && (leadSortDirection === 'asc' ? '▲' : '▼')}
-                                    </th>
-                                    <th className="px-2 py-2 text-right font-bold text-gray-600 whitespace-nowrap cursor-pointer hover:bg-gray-200" onClick={() => handleLeadSort('handledBy')}>
-                                      מי טיפל 550 {leadSortField === 'handledBy' && (leadSortDirection === 'asc' ? '▲' : '▼')}
-                                    </th>
-                                  </tr>
-                                </thead>
-                                <tbody className="max-h-96 overflow-y-auto">
-                                  {sortedLeads.map((lead, idx) => (
-                                    <tr
-                                      key={lead.id}
-                                      className={`border-b border-gray-100 hover:bg-blue-50 ${idx % 2 === 0 ? 'bg-white' : 'bg-gray-50/50'}`}
-                                    >
-                                      <td className="px-2 py-1.5 text-gray-400 font-mono">{idx + 1}</td>
-                                      <td className="px-2 py-1.5">
-                                        <span className={`px-1.5 py-0.5 rounded text-[10px] font-medium ${lead.answerStatus === 'ANSWER' ? 'bg-green-100 text-green-700' :
-                                            lead.answerStatus?.includes('CANCEL') ? 'bg-red-100 text-red-700' :
-                                              lead.answerStatus === 'NOANSWER' ? 'bg-yellow-100 text-yellow-700' :
-                                                'bg-gray-100 text-gray-600'
-                                          }`}>
-                                          {lead.answerStatus || '-'}
-                                        </span>
-                                      </td>
-                                      <td className="px-2 py-1.5 text-gray-600">{lead.callDuration || '-'}</td>
-                                      <td className="px-2 py-1.5 text-gray-600 max-w-[150px] truncate" title={lead.description}>{lead.description || '-'}</td>
-                                      <td className="px-2 py-1.5 text-gray-600">{lead.handlerType || '-'}</td>
-                                      <td className="px-2 py-1.5 font-medium text-[#111]">{lead.linkedCustomerName || '-'}</td>
-                                      <td className="px-2 py-1.5 text-gray-600" dir="ltr">
-                                        <a href={`tel:${lead.phone}`} className="text-blue-600 hover:underline">{lead.phone || '-'}</a>
-                                      </td>
-                                      <td className="px-2 py-1.5">
-                                        {lead.status ? (
-                                          <span className="px-1.5 py-0.5 bg-blue-100 text-blue-700 rounded text-[10px]">{lead.status}</span>
-                                        ) : '-'}
-                                      </td>
-                                      <td className="px-2 py-1.5 text-gray-500">
-                                        {lead.createdOn ? new Date(lead.createdOn).toLocaleString('he-IL', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' }) : '-'}
-                                      </td>
-                                      <td className="px-2 py-1.5 text-gray-600">{lead.receivedBy || '-'}</td>
-                                      <td className="px-2 py-1.5 text-gray-600">{lead.leadSource || '-'}</td>
-                                      <td className="px-2 py-1.5 text-gray-600">{lead.handledBy || '-'}</td>
-                                    </tr>
-                                  ))}
-                                </tbody>
-                              </table>
-                            </div>
-                          )}
-                        </div>
-                      )}
-                    </div>
-                  ))
-                )}
+                    ))
+                  )}
+                </div>
               </div>
-            </div>
+
+              {/* Main "New Leads" Button */}
+              <div
+                onClick={() => setView(ViewState.LEAD_LIST)}
+                className="bg-white rounded-2xl p-6 shadow-sm border border-gray-200 cursor-pointer group hover:border-[#A2D294] transition-all relative overflow-hidden"
+              >
+                <div className="absolute top-0 left-0 w-2 h-full bg-[#A2D294]" />
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-5">
+                    <div className="bg-[#111111] text-[#A2D294] p-4 rounded-xl group-hover:scale-110 transition-transform duration-300">
+                      <Users size={32} />
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-bold text-[#111111]">
+                        לידים חדשים
+                        <span className="text-[#A2D294] font-mono mr-2">({totalNewLeads})</span>
+                      </h3>
+                      <p className="text-gray-500 text-sm mt-1">רשימה מרוכזת לטיפול מיידי</p>
+                    </div>
+                  </div>
+                  <div className="bg-gray-50 p-3 rounded-full group-hover:bg-[#A2D294] group-hover:text-black transition-colors">
+                    <ChevronRight size={24} />
+                  </div>
+                </div>
+              </div>
+            </>
           )}
 
           <div className="mt-8 flex justify-center">
@@ -609,7 +512,7 @@ const App = () => {
   if (view === ViewState.LEAD_LIST) {
     return (
       <div className="min-h-screen bg-[#F5F5F5]">
-        <Header title={`פניות (${stats.inquiries})`} backAction={() => setView(ViewState.DASHBOARD)} />
+        <Header title={`פניות לטיפול (${inquiries.length})`} backAction={() => setView(ViewState.DASHBOARD)} />
         <div className="p-4 space-y-3">
           {loading ? <Loading /> : (
             inquiries.length === 0 ? (
