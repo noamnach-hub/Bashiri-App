@@ -185,7 +185,7 @@ const App = () => {
   };
 
   // Handler to mark lead as snooze (Status 3 = נודניק)
-  // Also creates a Google Task reminder
+  // Also creates a Google Task reminder and sends webhook to Airtable
   const handleMarkAsSnooze = async (leadId: string, lead: any, delayMinutes: number, delayLabel: string) => {
     setSnoozeDropdownOpen(null); // Close dropdown
     setLoading(true);
@@ -197,6 +197,32 @@ const App = () => {
       // Calculate reminder time
       const reminderTime = new Date();
       reminderTime.setMinutes(reminderTime.getMinutes() + delayMinutes);
+
+      // Send webhook to Airtable
+      try {
+        const webhookData = {
+          leadId: leadId,
+          leadName: lead.linkedCustomerName || lead.name || '',
+          leadPhone: lead.phone || '',
+          agentEmail: currentUser?.emailaddress || '',
+          agentName: currentUser?.username || '',
+          snoozeOption: delayLabel,
+          snoozeMinutes: delayMinutes,
+          reminderTime: reminderTime.toISOString(),
+          timestamp: new Date().toISOString()
+        };
+
+        await fetch('https://hooks.airtable.com/workflows/v1/genericWebhook/appJA1grYnl1RPY2S/wflfyctPSGM3r2IrS/wtrFhbuB8bcM7zStd', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(webhookData)
+        });
+
+        addDebugLog("Snooze Webhook Sent", webhookData);
+      } catch (webhookError) {
+        console.error("Webhook error:", webhookError);
+        addDebugLog("Snooze Webhook Error", webhookError);
+      }
 
       // Create Google Tasks URL
       const taskTitle = encodeURIComponent(`תזכורת: ${lead.name || 'ליד'} - ${lead.phone || ''}`);
