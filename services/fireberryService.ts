@@ -62,7 +62,9 @@ const mapLeads = (data: any): any[] => {
     phone: l.pcfsystemfield751 || l.telephone1 || '', // טלפון
     email: l.pcfsystemfield753 || '', // מייל
     status: l.pcfsystemfield875 || l.statuscodename || '', // סטטוס סוכן
+    statusRaw: l.pcfsystemfield875, // Raw status value for filtering
     description: l.pcfsystemfield754 || '', // תיאור פניה
+    content: l.pcfTiorPniyaAi550 || '', // תוכן פנייה
     createdOn: l.createdon,
     ownerId: l.ownerid,
     linkedCustomerName: l.pcfsystemfield740name || l.pcfsystemfield740 || '', // שם לקוח מקושר
@@ -136,30 +138,50 @@ export const getAllUsers = async (): Promise<FireberryUser[]> => {
 };
 
 export const getAgents = async (ownerId: string): Promise<any[]> => {
+  addDebugLog("getAgents START", { ownerId });
   try {
     const queryUrl = `${FIREBERRY_CONFIG.API_URL}/query`;
+    const payload = {
+      objecttype: "1012", // Agents table
+      query: `(ownerid = '${ownerId}')`,
+      sort_type: "desc",
+      page_size: 50
+    };
+    addDebugLog("getAgents Query", payload);
+
     let response = await fetchWithProxy(queryUrl, {
       method: 'POST',
       headers: getHeaders(),
-      body: JSON.stringify({
-        objecttype: "1012", // Agents table
-        query: `(ownerid = '${ownerId}')`,
-        sort_type: "desc",
-        page_size: 50
-      })
+      body: JSON.stringify(payload)
     });
 
-    if (!response.ok) return [];
+    addDebugLog("getAgents Response", { ok: response.ok, status: response.status });
+
+    if (!response.ok) {
+      addDebugLog("getAgents FAIL", `Response not OK: ${response.status}`);
+      return [];
+    }
 
     const data = await response.json();
-    return mapAgents(data);
+    addDebugLog("getAgents RAW DATA", {
+      keys: Object.keys(data),
+      dataKeys: data.data ? Object.keys(data.data) : 'no data obj',
+      recordCount: data.data?.Records?.length || data.data?.Data?.length || 0
+    });
+
+    const agents = mapAgents(data);
+    addDebugLog("getAgents RESULT", { count: agents.length, first: agents[0] || 'none' });
+
+    return agents;
   } catch (error) {
     console.error("Error fetching agents:", error);
+    addDebugLog("getAgents ERROR", error);
     return [];
   }
 };
 
-export const getLeadsByAgentId = async (agentId: string): Promise<any[]> => {
+// Fetch ALL leads for an agent (no status filter) - for dashboard counts
+export const getAllLeadsByAgentId = async (agentId: string): Promise<any[]> => {
   try {
     const queryUrl = `${FIREBERRY_CONFIG.API_URL}/query`;
     let allLeads: any[] = [];
@@ -172,8 +194,7 @@ export const getLeadsByAgentId = async (agentId: string): Promise<any[]> => {
         headers: getHeaders(),
         body: JSON.stringify({
           objecttype: "1014", // פניות table
-          // Re-applied Status filter using integer value 2 (matches '2. חדש')
-          query: `(pcfsystemfield758 = '${agentId}') AND (pcfsystemfield875 = 2)`,
+          query: `(pcfsystemfield758 = '${agentId}')`, // No status filter - get ALL
           sort_type: "desc",
           page_size: 100,
           page_number: pageNumber
@@ -185,25 +206,12 @@ export const getLeadsByAgentId = async (agentId: string): Promise<any[]> => {
       const data = await response.json();
       const leads = mapLeads(data);
 
-      // DEBUG: Log the statuses we found to verify the correct value for "2. חדש"
-      // DEBUG: Log the statuses we found to verify the correct value for "2. חדש"
       if (leads.length > 0 && pageNumber === 1) {
-        // Log mapped status
-        addDebugLog("MAPPED STATUS VALUES", leads.slice(0, 5).map(l => ({ name: l.name, status: l.status })));
-
-        // Let's verify what `pcfsystemfield875` raw value is - handling Data vs Records
-        const rawRecords = Array.isArray(data) ? data : (data.data?.Records || data.data?.Data || []);
-        addDebugLog("RAW STATUS VALUES", rawRecords.map((r: any) => ({
-          id: r.customobject1014id,
-          '758(Agent)': r.pcfsystemfield758,
-          '875(Status)': r.pcfsystemfield875,
-          '875name': r.pcfsystemfield875name
-        })).slice(0, 5));
+        addDebugLog("ALL LEADS STATUS VALUES", leads.slice(0, 10).map(l => ({ name: l.name, status: l.status, statusRaw: l.statusRaw })));
       }
 
       allLeads = [...allLeads, ...leads];
 
-      // Check if there are more pages
       if (leads.length < 100) {
         hasMorePages = false;
       } else {
@@ -213,8 +221,33 @@ export const getLeadsByAgentId = async (agentId: string): Promise<any[]> => {
 
     return allLeads;
   } catch (error) {
-    console.error("Error fetching leads for agent:", error);
+    console.error("Error fetching all leads for agent:", error);
     return [];
+  }
+};
+
+// Legacy function - kept for compatibility but now fetches only "חדש" status
+export const getLeadsByAgentId = async (agentId: string): Promise<any[]> => {
+  const allLeads = await getAllLeadsByAgentId(agentId);
+  // Filter for "חדש" status (value 2 or contains "חדש")
+  return allLeads.filter(l => l.statusRaw === 2 || l.statusRaw === '2' || (l.status && l.status.includes('חדש')));
+};
+
+// Update lead's agent status (pcfsystemfield875)
+export const updateLeadAgentStatus = async (leadId: string, newStatus: number): Promise<boolean> => {
+  try {
+    const url = `${FIREBERRY_CONFIG.API_URL}/record/customobject1014/${leadId}`;
+    addDebugLog("updateLeadAgentStatus", { leadId, newStatus });
+    const response = await fetchWithProxy(url, {
+      method: 'PUT',
+      headers: getHeaders(),
+      body: JSON.stringify({ pcfsystemfield875: newStatus })
+    });
+    addDebugLog("updateLeadAgentStatus Response", { ok: response.ok, status: response.status });
+    return response.ok;
+  } catch (error) {
+    console.error("Error updating lead agent status:", error);
+    return false;
   }
 };
 

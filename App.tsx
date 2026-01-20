@@ -18,11 +18,12 @@ import {
   Settings,
   Box,
   ExternalLink,
-  X
+  X,
+  RefreshCw
 } from 'lucide-react';
 
 import { FireberryUser, FireberryInquiry, FireberryTask, SnoozeItem, ViewState, AgentStats } from './types';
-import { getRecordCount, getMyInquiries, getMyTasks, updateInquiryStatus, testApiConnection, getAllUsers, getAgents, getLeadsByAgentId } from './services/fireberryService';
+import { getRecordCount, getMyInquiries, getMyTasks, updateInquiryStatus, testApiConnection, getAllUsers, getAgents, getAllLeadsByAgentId, updateLeadAgentStatus } from './services/fireberryService';
 import { getDebugLogs, addDebugLog } from './services/debugService';
 import {
   LEAD_STATUS_HANDLED,
@@ -43,10 +44,17 @@ const App = () => {
   const [view, setView] = useState<ViewState>(ViewState.LOGIN);
   const [loading, setLoading] = useState(false);
 
+  // Lead lists by status
+  const [allLeads, setAllLeads] = useState<any[]>([]); // All leads from all agents
+  const [newLeads, setNewLeads] = useState<any[]>([]); // Status: חדש (2)
+  const [snoozeLeads, setSnoozeLeads] = useState<any[]>([]); // Status: נודניק (3)
+  const [handledLeads, setHandledLeads] = useState<any[]>([]); // Status: טופל (4)
+  const [currentStatusFilter, setCurrentStatusFilter] = useState<'new' | 'snooze' | 'handled' | null>(null);
+  const [filteredLeads, setFilteredLeads] = useState<any[]>([]); // Leads shown in list view
+
   const [inquiries, setInquiries] = useState<FireberryInquiry[]>([]);
   const [tasks, setTasks] = useState<FireberryTask[]>([]);
-  const [agents, setAgents] = useState<any[]>([]); // New state for agents
-  const [totalNewLeads, setTotalNewLeads] = useState(0); // Total count for the big button
+  const [agents, setAgents] = useState<any[]>([]); // Agents list
   const [stats, setStats] = useState<AgentStats>({
     inquiries: 0,
     tours: 0,
@@ -57,11 +65,7 @@ const App = () => {
   });
   const [dailyCalls, setDailyCalls] = useState(0);
   const [snoozedItems, setSnoozedItems] = useState<SnoozeItem[]>([]);
-  const [expandedAgentId, setExpandedAgentId] = useState<string | null>(null);
-  const [agentLeads, setAgentLeads] = useState<any[]>([]);
-  const [loadingLeads, setLoadingLeads] = useState(false);
-  const [leadSortField, setLeadSortField] = useState<string>('name');
-  const [leadSortDirection, setLeadSortDirection] = useState<'asc' | 'desc'>('asc');
+  const [snoozeDropdownOpen, setSnoozeDropdownOpen] = useState<string | null>(null); // Lead ID with open dropdown
 
   const [selectedInquiry, setSelectedInquiry] = useState<FireberryInquiry | null>(null);
 
@@ -97,27 +101,50 @@ const App = () => {
       // 1. Fetch Agents
       const fetchedAgents = await getAgents(currentUser.id);
 
-      // 2. Fetch Leads for ALL agents in parallel
-      // We need this to get the counts for the top bar AND the total joint list for the main button
-      const leadsPromises = fetchedAgents.map(agent => getLeadsByAgentId(agent.id));
+      // 2. Fetch ALL Leads (all statuses) for ALL agents in parallel
+      const leadsPromises = fetchedAgents.map(agent => getAllLeadsByAgentId(agent.id));
       const leadsResults = await Promise.all(leadsPromises);
 
       let allLeadsAggregated: any[] = [];
 
-      // Map results back to agents to add individual counts
+      // Map results back to agents
       const agentsWithCounts = fetchedAgents.map((agent, index) => {
         const agentSpecificLeads = leadsResults[index] || [];
         allLeadsAggregated = [...allLeadsAggregated, ...agentSpecificLeads];
         return {
           ...agent,
-          leadCount: agentSpecificLeads.length
+          leadCount: agentSpecificLeads.filter(l => l.statusRaw === 2 || l.statusRaw === '2').length // Count new leads
         };
       });
 
+      // Categorize leads by status (CORRECT VALUES from user):
+      // Status 2 = "חדש" (New/Open - Green)
+      // Status 3 = "נודניק" (Snooze - Yellow)
+      // Status 1 = "טופל" (Handled - Blue)
+      const newList = allLeadsAggregated.filter(l =>
+        l.statusRaw === 2 || l.statusRaw === '2'
+      );
+      const snoozeList = allLeadsAggregated.filter(l =>
+        l.statusRaw === 3 || l.statusRaw === '3'
+      );
+      const handledList = allLeadsAggregated.filter(l =>
+        l.statusRaw === 1 || l.statusRaw === '1'
+      );
+
+      addDebugLog("Lead Categorization", {
+        total: allLeadsAggregated.length,
+        new: newList.length,
+        snooze: snoozeList.length,
+        handled: handledList.length,
+        uniqueStatuses: [...new Set(allLeadsAggregated.map(l => l.statusRaw))],
+        sampleStatuses: allLeadsAggregated.slice(0, 10).map(l => ({ name: l.name, status: l.status, raw: l.statusRaw }))
+      });
+
       setAgents(agentsWithCounts);
-      setInquiries(allLeadsAggregated); // Store ALL leads ready for the list view
-      setTotalNewLeads(allLeadsAggregated.length);
-      setAgentLeads(allLeadsAggregated); // Keep a backup or use shared state
+      setAllLeads(allLeadsAggregated);
+      setNewLeads(newList);
+      setSnoozeLeads(snoozeList);
+      setHandledLeads(handledList);
 
     } catch (err) {
       console.error("Error fetching dashboard data:", err);
@@ -125,6 +152,93 @@ const App = () => {
       setLoading(false);
     }
   };
+
+  // Handler to open lead list by status
+  const openLeadsByStatus = (status: 'new' | 'snooze' | 'handled') => {
+    setCurrentStatusFilter(status);
+    switch (status) {
+      case 'new':
+        setFilteredLeads(newLeads);
+        break;
+      case 'snooze':
+        setFilteredLeads(snoozeLeads);
+        break;
+      case 'handled':
+        setFilteredLeads(handledLeads);
+        break;
+    }
+    setView(ViewState.LEAD_LIST);
+  };
+
+  // Handler to mark lead as handled (Status 1 = טופל)
+  const handleMarkAsHandled = async (leadId: string) => {
+    setLoading(true);
+    const success = await updateLeadAgentStatus(leadId, 1); // 1 = טופל
+    if (success) {
+      addDebugLog("Lead Marked Handled", { leadId, newStatus: 1 });
+      // Remove from current filtered list immediately
+      setFilteredLeads(prev => prev.filter(l => l.id !== leadId));
+      // Refresh data in background
+      await fetchDashboardData();
+    }
+    setLoading(false);
+  };
+
+  // Handler to mark lead as snooze (Status 3 = נודניק)
+  // Also creates a Google Task reminder
+  const handleMarkAsSnooze = async (leadId: string, lead: any, delayMinutes: number, delayLabel: string) => {
+    setSnoozeDropdownOpen(null); // Close dropdown
+    setLoading(true);
+
+    const success = await updateLeadAgentStatus(leadId, 3); // 3 = נודניק
+    if (success) {
+      addDebugLog("Lead Marked Snooze", { leadId, newStatus: 3, delay: delayLabel });
+
+      // Calculate reminder time
+      const reminderTime = new Date();
+      reminderTime.setMinutes(reminderTime.getMinutes() + delayMinutes);
+
+      // Create Google Tasks URL
+      const taskTitle = encodeURIComponent(`תזכורת: ${lead.name || 'ליד'} - ${lead.phone || ''}`);
+      const taskDetails = encodeURIComponent(`ליד לחזור אליו\nטלפון: ${lead.phone}\nנדחה ב: ${delayLabel}`);
+      const dueDate = reminderTime.toISOString();
+
+      // Open Google Calendar event (more reliable than Tasks API)
+      const calendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${taskTitle}&details=${taskDetails}&dates=${dueDate.replace(/[-:]/g, '').split('.')[0]}Z/${dueDate.replace(/[-:]/g, '').split('.')[0]}Z`;
+
+      // Open in new tab
+      window.open(calendarUrl, '_blank');
+
+      // Remove from current filtered list immediately
+      setFilteredLeads(prev => prev.filter(l => l.id !== leadId));
+      // Refresh data in background
+      await fetchDashboardData();
+    }
+    setLoading(false);
+  };
+
+  // Snooze time options
+  const snoozeOptions = [
+    { label: 'רבע שעה', minutes: 15 },
+    { label: 'חצי שעה', minutes: 30 },
+    { label: 'שעה', minutes: 60 },
+    {
+      label: 'מחר ב-10:00', minutes: (() => {
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        tomorrow.setHours(10, 0, 0, 0);
+        return Math.round((tomorrow.getTime() - Date.now()) / 60000);
+      })()
+    },
+    {
+      label: 'מחרתיים ב-10:00', minutes: (() => {
+        const dayAfter = new Date();
+        dayAfter.setDate(dayAfter.getDate() + 2);
+        dayAfter.setHours(10, 0, 0, 0);
+        return Math.round((dayAfter.getTime() - Date.now()) / 60000);
+      })()
+    }
+  ];
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -168,42 +282,6 @@ const App = () => {
       setLoading(false);
     }
   };
-
-  const handleAgentExpand = async (agentId: string) => {
-    if (expandedAgentId === agentId) {
-      setExpandedAgentId(null);
-      setAgentLeads([]);
-      return;
-    }
-
-    setExpandedAgentId(agentId);
-    setLoadingLeads(true);
-    try {
-      const leads = await getLeadsByAgentId(agentId);
-      setAgentLeads(leads);
-    } catch (error) {
-      console.error("Error fetching leads:", error);
-      setAgentLeads([]);
-    } finally {
-      setLoadingLeads(false);
-    }
-  };
-
-  const handleLeadSort = (field: string) => {
-    if (leadSortField === field) {
-      setLeadSortDirection(leadSortDirection === 'asc' ? 'desc' : 'asc');
-    } else {
-      setLeadSortField(field);
-      setLeadSortDirection('asc');
-    }
-  };
-
-  const sortedLeads = [...agentLeads].sort((a, b) => {
-    const aVal = a[leadSortField] || '';
-    const bVal = b[leadSortField] || '';
-    const comparison = aVal.toString().localeCompare(bVal.toString(), 'he');
-    return leadSortDirection === 'asc' ? comparison : -comparison;
-  });
 
   const handleLogout = () => {
     localStorage.removeItem(LOCAL_STORAGE_USER_KEY);
@@ -403,9 +481,18 @@ const App = () => {
               </div>
             </div>
           </div>
-          <button onClick={handleLogout} className="text-gray-400">
-            <LogOut size={20} />
-          </button>
+          <div className="flex items-center gap-3">
+            <button
+              onClick={fetchDashboardData}
+              disabled={loading}
+              className="text-[#A2D294] hover:text-[#8fbf81] disabled:opacity-50"
+            >
+              <RefreshCw size={20} className={loading ? 'animate-spin' : ''} />
+            </button>
+            <button onClick={handleLogout} className="text-gray-400 hover:text-red-500">
+              <LogOut size={20} />
+            </button>
+          </div>
         </header>
 
         <main className="p-4">
@@ -435,27 +522,74 @@ const App = () => {
                 </div>
               </div>
 
-              {/* Main "New Leads" Button */}
-              <div
-                onClick={() => setView(ViewState.LEAD_LIST)}
-                className="bg-white rounded-2xl p-6 shadow-sm border border-gray-200 cursor-pointer group hover:border-[#A2D294] transition-all relative overflow-hidden"
-              >
-                <div className="absolute top-0 left-0 w-2 h-full bg-[#A2D294]" />
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-5">
-                    <div className="bg-[#111111] text-[#A2D294] p-4 rounded-xl group-hover:scale-110 transition-transform duration-300">
-                      <Users size={32} />
+              {/* Status Cards - 3 Buttons */}
+              <div className="space-y-4">
+                {/* New Leads Button */}
+                <div
+                  onClick={() => openLeadsByStatus('new')}
+                  className="bg-white rounded-2xl p-5 shadow-sm border border-gray-200 cursor-pointer group hover:border-[#A2D294] transition-all relative overflow-hidden"
+                >
+                  <div className="absolute top-0 left-0 w-2 h-full bg-[#A2D294]" />
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-4">
+                      <div className="bg-[#A2D294] text-[#111111] p-3 rounded-xl group-hover:scale-110 transition-transform duration-300">
+                        <Users size={28} />
+                      </div>
+                      <div>
+                        <h3 className="text-xl font-bold text-[#111111]">
+                          לידים פתוחים
+                          <span className="text-[#A2D294] font-mono mr-2">({newLeads.length})</span>
+                        </h3>
+                        <p className="text-gray-500 text-sm">סטטוס: 2. חדש</p>
+                      </div>
                     </div>
-                    <div>
-                      <h3 className="text-2xl font-bold text-[#111111]">
-                        לידים חדשים
-                        <span className="text-[#A2D294] font-mono mr-2">({totalNewLeads})</span>
-                      </h3>
-                      <p className="text-gray-500 text-sm mt-1">רשימה מרוכזת לטיפול מיידי</p>
-                    </div>
+                    <ChevronRight size={24} className="text-gray-400 group-hover:text-[#A2D294]" />
                   </div>
-                  <div className="bg-gray-50 p-3 rounded-full group-hover:bg-[#A2D294] group-hover:text-black transition-colors">
-                    <ChevronRight size={24} />
+                </div>
+
+                {/* Snooze Leads Button */}
+                <div
+                  onClick={() => openLeadsByStatus('snooze')}
+                  className="bg-white rounded-2xl p-5 shadow-sm border border-gray-200 cursor-pointer group hover:border-yellow-400 transition-all relative overflow-hidden"
+                >
+                  <div className="absolute top-0 left-0 w-2 h-full bg-yellow-400" />
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-4">
+                      <div className="bg-yellow-100 text-yellow-700 p-3 rounded-xl group-hover:scale-110 transition-transform duration-300">
+                        <Clock size={28} />
+                      </div>
+                      <div>
+                        <h3 className="text-xl font-bold text-[#111111]">
+                          לידים בנודניק
+                          <span className="text-yellow-600 font-mono mr-2">({snoozeLeads.length})</span>
+                        </h3>
+                        <p className="text-gray-500 text-sm">סטטוס: 3. נודניק</p>
+                      </div>
+                    </div>
+                    <ChevronRight size={24} className="text-gray-400 group-hover:text-yellow-500" />
+                  </div>
+                </div>
+
+                {/* Handled Leads Button */}
+                <div
+                  onClick={() => openLeadsByStatus('handled')}
+                  className="bg-white rounded-2xl p-5 shadow-sm border border-gray-200 cursor-pointer group hover:border-blue-400 transition-all relative overflow-hidden"
+                >
+                  <div className="absolute top-0 left-0 w-2 h-full bg-blue-400" />
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-4">
+                      <div className="bg-blue-100 text-blue-700 p-3 rounded-xl group-hover:scale-110 transition-transform duration-300">
+                        <CheckCircle size={28} />
+                      </div>
+                      <div>
+                        <h3 className="text-xl font-bold text-[#111111]">
+                          לידים שטופלו
+                          <span className="text-blue-600 font-mono mr-2">({handledLeads.length})</span>
+                        </h3>
+                        <p className="text-gray-500 text-sm">סטטוס: 1. טופל</p>
+                      </div>
+                    </div>
+                    <ChevronRight size={24} className="text-gray-400 group-hover:text-blue-500" />
                   </div>
                 </div>
               </div>
@@ -510,30 +644,120 @@ const App = () => {
 
   // Views for lists
   if (view === ViewState.LEAD_LIST) {
+    const statusTitle = currentStatusFilter === 'new' ? 'לידים פתוחים' :
+      currentStatusFilter === 'snooze' ? 'לידים בנודניק' :
+        currentStatusFilter === 'handled' ? 'לידים שטופלו' : 'לידים';
+
     return (
       <div className="min-h-screen bg-[#F5F5F5]">
-        <Header title={`פניות לטיפול (${inquiries.length})`} backAction={() => setView(ViewState.DASHBOARD)} />
-        <div className="p-4 space-y-3">
+        <Header title={`${statusTitle} (${filteredLeads.length})`} backAction={() => { setView(ViewState.DASHBOARD); setSnoozeDropdownOpen(null); }} />
+        <div className="p-4 max-w-2xl mx-auto">
           {loading ? <Loading /> : (
-            inquiries.length === 0 ? (
+            filteredLeads.length === 0 ? (
               <div className="text-center text-gray-400 mt-20">
                 <CheckCircle size={48} className="mx-auto mb-2 opacity-30 text-[#A2D294]" />
-                <p>אין לידים חדשים לטיפול</p>
+                <p>אין לידים ברשימה זו</p>
               </div>
             ) : (
-              inquiries.map(inq => (
-                <LeadCard
-                  key={inq.id}
-                  lead={inq}
-                  onClick={() => {
-                    setSelectedInquiry(inq);
-                    setView(ViewState.LEAD_DETAIL);
-                  }}
-                />
-              ))
+              <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                {/* Sort by createdOn ascending (oldest first) */}
+                {[...filteredLeads].sort((a, b) => new Date(a.createdOn || 0).getTime() - new Date(b.createdOn || 0).getTime()).map((lead, index) => (
+                  <div
+                    key={lead.id}
+                    className={`bg-white border-b border-gray-100 last:border-b-0 relative`}
+                  >
+                    <div className="flex items-center gap-3 px-3 sm:px-4 py-3">
+                      {/* Avatar */}
+                      <div className="w-9 h-9 sm:w-10 sm:h-10 bg-gradient-to-br from-[#111111] to-[#333333] rounded-full flex items-center justify-center text-[#A2D294] font-bold text-xs sm:text-sm flex-shrink-0">
+                        {(lead.linkedCustomerName || lead.name || '?').charAt(0)}
+                      </div>
+
+                      {/* Customer Info */}
+                      <div className="flex-1 min-w-0">
+                        <h4 className="font-semibold text-[#111111] text-sm sm:text-base truncate">{lead.linkedCustomerName || lead.name || 'ללא שם'}</h4>
+                        <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-500 flex-wrap">
+                          <span dir="ltr" className="font-mono">{lead.phone || '-'}</span>
+                          {lead.createdOn && (
+                            <>
+                              <span className="text-gray-400">•</span>
+                              <span className="text-xs text-gray-400">
+                                {new Date(lead.createdOn).toLocaleString('he-IL', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' })}
+                              </span>
+                            </>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Action Buttons */}
+                      <div className="flex items-center gap-1.5 sm:gap-2">
+                        {/* Call Button */}
+                        <a
+                          href={`tel:${lead.phone}`}
+                          className="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center bg-[#111111] text-[#A2D294] rounded-full hover:bg-gray-800 transition-all active:scale-95 shadow-sm"
+                        >
+                          <Phone size={16} className="sm:w-[18px] sm:h-[18px]" />
+                        </a>
+
+                        {/* Snooze Button with Dropdown */}
+                        <div className="relative">
+                          <button
+                            onClick={() => setSnoozeDropdownOpen(snoozeDropdownOpen === lead.id ? null : lead.id)}
+                            disabled={loading}
+                            className="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center bg-yellow-50 text-yellow-600 rounded-full hover:bg-yellow-100 transition-all active:scale-95 disabled:opacity-50 border border-yellow-200"
+                          >
+                            <Clock size={16} className="sm:w-[18px] sm:h-[18px]" />
+                          </button>
+
+                          {/* Snooze Dropdown */}
+                          {snoozeDropdownOpen === lead.id && (
+                            <div className="absolute left-0 top-full mt-2 bg-white rounded-xl shadow-lg border border-gray-200 py-2 z-50 min-w-[160px]">
+                              <div className="px-3 py-1.5 text-xs font-bold text-gray-400 uppercase">נודניק ל...</div>
+                              {snoozeOptions.map((option) => (
+                                <button
+                                  key={option.label}
+                                  onClick={() => handleMarkAsSnooze(lead.id, lead, option.minutes, option.label)}
+                                  className="w-full text-right px-3 py-2 text-sm text-gray-700 hover:bg-yellow-50 hover:text-yellow-700 transition-colors"
+                                >
+                                  {option.label}
+                                </button>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Handled Button */}
+                        <button
+                          onClick={() => handleMarkAsHandled(lead.id)}
+                          disabled={loading}
+                          className="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center bg-[#A2D294] text-[#111111] rounded-full hover:bg-[#8fbf81] transition-all active:scale-95 disabled:opacity-50 shadow-sm"
+                        >
+                          <CheckCircle size={16} className="sm:w-[18px] sm:h-[18px]" />
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Content Preview (if exists) - hidden on mobile */}
+                    {lead.content && (
+                      <div className="px-3 sm:px-4 pb-3 pt-0 hidden sm:block">
+                        <p className="text-xs text-gray-500 bg-gray-50 rounded-lg px-3 py-2 truncate">
+                          {lead.content}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
             )
           )}
         </div>
+
+        {/* Click outside to close dropdown */}
+        {snoozeDropdownOpen && (
+          <div
+            className="fixed inset-0 z-40"
+            onClick={() => setSnoozeDropdownOpen(null)}
+          />
+        )}
       </div>
     );
   }
