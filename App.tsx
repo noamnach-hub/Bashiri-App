@@ -838,38 +838,49 @@ const App = () => {
               </div>
             </div>
 
-            {/* Sortable Column Headers - Now strictly aligned with List Grid */}
-            <div className="grid grid-cols-12 gap-2 px-4 py-3 text-xs font-bold text-gray-500 bg-gray-50">
-              <button
-                onClick={() => {
-                  if (sortField === 'name') setSortDirection(prev => prev === 'asc' ? 'desc' : 'asc');
-                  else { setSortField('name'); setSortDirection('asc'); }
-                }}
-                className="col-span-4 text-right flex items-center gap-1 hover:text-[#111111]"
-              >
-                שם
-                {sortField === 'name' && (sortDirection === 'asc' ? <ArrowUp size={12} /> : <ArrowDown size={12} />)}
-              </button>
-              <button
-                onClick={() => {
-                  if (sortField === 'phone') setSortDirection(prev => prev === 'asc' ? 'desc' : 'asc');
-                  else { setSortField('phone'); setSortDirection('asc'); }
-                }}
-                className="col-span-4 text-right flex items-center gap-1 hover:text-[#111111]"
-              >
-                טלפון
-                {sortField === 'phone' && (sortDirection === 'asc' ? <ArrowUp size={12} /> : <ArrowDown size={12} />)}
-              </button>
-              <button
-                onClick={() => {
-                  if (sortField === 'date') setSortDirection(prev => prev === 'asc' ? 'desc' : 'asc');
-                  else { setSortField('date'); setSortDirection('desc'); } // Default desc for date
-                }}
-                className="col-span-4 text-right flex items-center gap-1 hover:text-[#111111]"
-              >
-                תאריך
-                {sortField === 'date' && (sortDirection === 'asc' ? <ArrowUp size={12} /> : <ArrowDown size={12} />)}
-              </button>
+            {/* Sortable Column Headers - Aligned with new Flex Layout (Desktop only) */}
+            <div className="hidden md:flex items-center gap-4 px-4 py-3 text-xs font-bold text-gray-500 bg-gray-50 border-b border-gray-200">
+              <div className="flex-1 text-right flex items-center pr-14">
+                <button
+                  onClick={() => {
+                    if (sortField === 'name') setSortDirection(prev => prev === 'asc' ? 'desc' : 'asc');
+                    else { setSortField('name'); setSortDirection('asc'); }
+                  }}
+                  className="flex items-center gap-1 hover:text-[#111111]"
+                >
+                  שם
+                  {sortField === 'name' && (sortDirection === 'asc' ? <ArrowUp size={12} /> : <ArrowDown size={12} />)}
+                </button>
+              </div>
+
+              <div className="w-48 text-center flex justify-center">
+                <button
+                  onClick={() => {
+                    if (sortField === 'phone') setSortDirection(prev => prev === 'asc' ? 'desc' : 'asc');
+                    else { setSortField('phone'); setSortDirection('asc'); }
+                  }}
+                  className="flex items-center gap-1 hover:text-[#111111]"
+                >
+                  טלפון
+                  {sortField === 'phone' && (sortDirection === 'asc' ? <ArrowUp size={12} /> : <ArrowDown size={12} />)}
+                </button>
+              </div>
+
+              <div className="w-40 text-center flex justify-center">
+                <button
+                  onClick={() => {
+                    if (sortField === 'date') setSortDirection(prev => prev === 'asc' ? 'desc' : 'asc');
+                    else { setSortField('date'); setSortDirection('desc'); } // Default desc for date
+                  }}
+                  className="flex items-center gap-1 hover:text-[#111111]"
+                >
+                  תאריך
+                  {sortField === 'date' && (sortDirection === 'asc' ? <ArrowUp size={12} /> : <ArrowDown size={12} />)}
+                </button>
+              </div>
+
+              {/* Spacer for Action Buttons area */}
+              <div className="w-[180px]"></div>
             </div>
           </div>
 
@@ -927,78 +938,67 @@ const App = () => {
                     .map((lead, index) => (
                       <div
                         key={lead.id}
-                        className={`bg-white border-b border-gray-100 last:border-b-0 relative hover:bg-gray-50 transition-colors`}
+                        className={`bg-white border-b border-gray-100 last:border-b-0 hover:bg-gray-50 transition-colors py-4 px-4`}
                       >
-                        {/* Grid Row for Data Columns */}
-                        <div className="grid grid-cols-12 gap-2 p-3 items-center">
-                          {/* Name Column */}
-                          <div className="col-span-4 flex items-center gap-2 overflow-hidden">
-                            <div className="w-8 h-8 bg-gradient-to-br from-[#111111] to-[#333333] rounded-full flex items-center justify-center text-[#A2D294] font-bold text-xs flex-shrink-0">
+                        {/* Main Single Line Container */}
+                        <div className="flex flex-col md:flex-row md:items-center gap-4 text-right">
+
+                          {/* 1. Name Section */}
+                          <div className="flex-1 flex items-center gap-3 min-w-0">
+                            <div className="w-12 h-12 bg-gradient-to-br from-[#111111] to-[#333333] rounded-full flex items-center justify-center text-[#A2D294] font-bold text-xl flex-shrink-0 shadow-sm">
                               {(lead.linkedCustomerName || lead.name || '?').charAt(0)}
                             </div>
-                            <h4
-                              className="font-semibold text-[#111111] text-sm leading-tight"
-                              title={lead.linkedCustomerName || lead.name}
-                              style={{ display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}
-                            >
-                              {lead.linkedCustomerName || lead.name || 'ללא שם'}
-                            </h4>
+                            <div className="min-w-0">
+                              <h4
+                                className="font-bold text-[#111111] text-lg leading-tight"
+                                title={lead.linkedCustomerName || lead.name}
+                                style={{ display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}
+                              >
+                                {lead.linkedCustomerName || lead.name || 'ללא שם'}
+                              </h4>
+                            </div>
                           </div>
 
-                          {/* Phone Column */}
-                          <div className="col-span-4 text-right">
-                            <a href={`tel:${lead.phone}`} className="font-mono text-xs text-gray-600 block truncate hover:text-blue-600" dir="ltr">
+                          {/* 2. Phone Section */}
+                          <div className="md:w-48 text-right md:text-center flex-shrink-0">
+                            <a href={`tel:${lead.phone}`} className="font-mono text-lg text-gray-700 font-medium hover:text-blue-600 transition-colors" dir="ltr">
                               {lead.phone || '-'}
                             </a>
                           </div>
 
-                          {/* Date Column */}
-                          <div className="col-span-4 text-right">
-                            <span className="text-xs text-gray-500 block truncate" dir="ltr">
-                              {lead.createdOn ? new Date(lead.createdOn).toLocaleString('he-IL', { day: '2-digit', month: '2-digit', year: '2-digit', hour: '2-digit', minute: '2-digit' }) : '-'}
-                            </span>
-                          </div>
-                        </div>
-
-                        {/* Content & Actions Row */}
-                        <div className="px-3 pb-3 flex items-center justify-between gap-3 border-t border-gray-50 pt-2 mx-3">
-                          {/* Details/Content */}
-                          <div className="flex-1 min-w-0">
-                            {lead.content ? (
-                              <p className="text-xs text-gray-400 truncate">
-                                {lead.content}
-                              </p>
-                            ) : <span className="text-xs text-gray-300">אין תוכן</span>}
+                          {/* 3. Date Section */}
+                          <div className="md:w-40 text-right md:text-center text-gray-500 font-medium text-sm flex-shrink-0" dir="ltr">
+                            {lead.createdOn ? new Date(lead.createdOn).toLocaleString('he-IL', { day: '2-digit', month: '2-digit', year: '2-digit', hour: '2-digit', minute: '2-digit' }) : '-'}
                           </div>
 
-                          {/* Action Buttons - Compact */}
-                          <div className="flex items-center gap-2 flex-shrink-0">
+                          {/* 4. Actions Section */}
+                          <div className="flex items-center gap-3 justify-end md:w-auto mt-2 md:mt-0">
                             <a
                               href={`tel:${lead.phone}`}
-                              className="p-3 bg-[#111111] text-[#A2D294] rounded-lg hover:bg-gray-800 transition-all active:scale-95 shadow-sm"
+                              className="p-3 bg-[#111111] text-[#A2D294] rounded-xl hover:bg-gray-800 transition-all active:scale-95 shadow-md hover:shadow-lg"
                               title="חייג"
                             >
-                              <Phone size={20} />
+                              <Phone size={24} />
                             </a>
 
                             <div className="relative">
                               <button
                                 onClick={() => setSnoozeDropdownOpen(snoozeDropdownOpen === lead.id ? null : lead.id)}
                                 disabled={loading}
-                                className="p-3 bg-yellow-50 text-yellow-700 rounded-lg hover:bg-yellow-100 transition-all active:scale-95 disabled:opacity-50 border border-yellow-200"
+                                className="p-3 bg-yellow-50 text-yellow-700 rounded-xl hover:bg-yellow-100 transition-all active:scale-95 disabled:opacity-50 border border-yellow-200 shadow-sm hover:shadow-md"
                                 title="תזכורת"
                               >
-                                <Clock size={20} />
+                                <Clock size={24} />
                               </button>
 
                               {/* Snooze Dropdown */}
                               {snoozeDropdownOpen === lead.id && (
-                                <div className="absolute left-0 bottom-full mb-2 bg-white rounded-xl shadow-lg border border-gray-200 py-2 z-50 min-w-[120px]">
+                                <div className="absolute left-0 bottom-full mb-2 bg-white rounded-xl shadow-xl border border-gray-100 py-2 z-50 min-w-[160px]">
                                   {snoozeOptions.map((option) => (
                                     <button
                                       key={option.label}
                                       onClick={() => handleMarkAsSnooze(lead.id, lead, option.minutes, option.label)}
-                                      className="w-full text-right px-3 py-2 text-xs text-gray-700 hover:bg-yellow-50 hover:text-yellow-700 transition-colors"
+                                      className="w-full text-right px-4 py-3 text-sm text-gray-700 hover:bg-yellow-50 hover:text-yellow-800 transition-colors font-medium border-b border-gray-50 last:border-0"
                                     >
                                       {option.label}
                                     </button>
@@ -1010,13 +1010,24 @@ const App = () => {
                             <button
                               onClick={() => handleMarkAsHandled(lead.id)}
                               disabled={loading}
-                              className="p-3 bg-[#A2D294] text-[#111111] rounded-lg hover:bg-[#8fbf81] transition-all active:scale-95 disabled:opacity-50 shadow-sm"
+                              className="p-3 bg-[#A2D294] text-[#111111] rounded-xl hover:bg-[#8fbf81] transition-all active:scale-95 disabled:opacity-50 shadow-md hover:shadow-lg"
                               title="טופל"
                             >
-                              <CheckCircle size={20} />
+                              <CheckCircle size={24} />
                             </button>
                           </div>
+
                         </div>
+
+                        {/* Note / Content Row (Full Width, Below) */}
+                        {lead.content && (
+                          <div className="mt-3 pr-[60px] md:pr-[68px]"> {/* Align with text start */}
+                            <p className="text-sm text-gray-500 bg-gray-50 p-3 rounded-lg border border-gray-100 leading-relaxed md:max-w-[80%]">
+                              <span className="font-bold text-gray-400 text-xs ml-1">הערה:</span>
+                              {lead.content}
+                            </p>
+                          </div>
+                        )}
                       </div>
                     ))}
                 </div>
