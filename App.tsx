@@ -442,113 +442,157 @@ const App = () => {
 
   if (view === ViewState.LOGIN) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center p-6 bg-[#111111] text-white">
-        <div className="w-full max-w-md">
-          <div className="text-center mb-10 flex flex-col items-center">
-            <div className="mb-4">
-              <img
-                src="https://bashiri.co.il/wp-content/uploads/2021/11/logo.png"
-                alt="תיווך בשירי"
-                className="h-24 object-contain"
-              />
+      <div className="min-h-screen flex flex-col items-center justify-center p-6 relative overflow-hidden"
+        style={{
+          background: 'linear-gradient(135deg, #0D1F22 0%, #1A3A40 50%, #0D1F22 100%)'
+        }}
+      >
+        {/* Decorative gradient orbs */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-[-20%] right-[-10%] w-[500px] h-[500px] rounded-full opacity-20"
+            style={{ background: 'radial-gradient(circle, rgba(162,210,148,0.4) 0%, transparent 70%)' }} />
+          <div className="absolute bottom-[-30%] left-[-20%] w-[600px] h-[600px] rounded-full opacity-15"
+            style={{ background: 'radial-gradient(circle, rgba(162,210,148,0.3) 0%, transparent 70%)' }} />
+        </div>
+
+        <div className="w-full max-w-md relative z-10">
+          {/* Logo Section */}
+          <div className="text-center mb-10 flex flex-col items-center animate-fade-in-up">
+            <div className="mb-6 animate-float">
+              <div className="bg-white/10 backdrop-blur-xl p-5 rounded-2xl border border-white/20 shadow-2xl">
+                <img
+                  src="https://bashiri.co.il/wp-content/uploads/2021/11/logo.png"
+                  alt="תיווך בשירי"
+                  className="h-20 object-contain"
+                />
+              </div>
             </div>
-            <p className="text-gray-400 text-sm tracking-widest uppercase">Real Estate Experts</p>
-            <p className="text-[#A2D294] mt-2 font-medium">פורטל סוכנים</p>
+            <p className="text-white/50 text-xs tracking-[0.3em] uppercase font-medium">Real Estate Experts</p>
+            <h1 className="text-[#A2D294] mt-3 text-2xl font-bold tracking-tight">פורטל סוכנים</h1>
           </div>
 
-          <div className="bg-[#1F1F1F] rounded-2xl p-8 shadow-2xl border border-[#333]">
-            <form onSubmit={handleLogin} className="space-y-5">
+          {/* Login Card - Glassmorphism */}
+          <div className="glass-dark rounded-3xl p-8 shadow-2xl animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
+            <form onSubmit={handleLogin} className="space-y-6">
+              {/* Email Input */}
               <div>
-                <label className="block text-xs font-medium text-[#A2D294] mb-2 uppercase tracking-wide text-right">אימייל</label>
+                <label className="block text-xs font-semibold text-[#A2D294] mb-2 uppercase tracking-wider text-right">
+                  אימייל
+                </label>
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-4 py-3 rounded-lg bg-[#111111] border border-[#333] focus:border-[#A2D294] focus:ring-1 focus:ring-[#A2D294] outline-none text-white placeholder-gray-600 transition-all text-left"
+                  className="input-dark w-full px-4 py-3.5 rounded-xl text-white text-left"
                   dir="ltr"
                   placeholder="name@bashiri.co.il"
                   required
                 />
               </div>
+
+              {/* Password Input */}
               <div>
-                <label className="block text-xs font-medium text-[#A2D294] mb-2 uppercase tracking-wide text-right">סיסמה (מספר טלפון)</label>
+                <label className="block text-xs font-semibold text-[#A2D294] mb-2 uppercase tracking-wider text-right">
+                  סיסמה (מספר טלפון)
+                </label>
                 <div className="relative">
                   <input
                     type={showPassword ? "text" : "password"}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full px-4 py-3 rounded-lg bg-[#111111] border border-[#333] focus:border-[#A2D294] focus:ring-1 focus:ring-[#A2D294] outline-none text-white placeholder-gray-600 transition-all text-left"
+                    className="input-dark w-full px-4 py-3.5 rounded-xl text-white text-left pl-12"
                     dir="ltr"
-                    placeholder="******"
+                    placeholder="••••••••"
                     required
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-500 hover:text-[#A2D294]"
+                    className="absolute inset-y-0 left-0 pl-4 flex items-center text-white/40 hover:text-[#A2D294] transition-colors"
                   >
-                    {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                    {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                   </button>
                 </div>
               </div>
 
+              {/* Error Message */}
               {loginError && (
-                <p className="text-red-400 text-sm text-center bg-red-900/20 p-2 rounded border border-red-900/50">{loginError}</p>
+                <div className="flex items-center gap-2 p-3 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400 text-sm animate-fade-in-up">
+                  <X size={16} className="flex-shrink-0" />
+                  {loginError}
+                </div>
               )}
 
+              {/* Login Button */}
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-[#A2D294] hover:bg-[#8fbf81] text-black font-bold py-3.5 rounded-lg shadow-lg transition-all active:scale-95 disabled:opacity-50 mt-4"
+                className="w-full btn-primary text-lg py-4 rounded-xl font-bold shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 group"
               >
-                {loading ? 'מתחבר...' : 'כניסה למערכת'}
+                {loading ? (
+                  <div className="flex items-center justify-center gap-2">
+                    <RefreshCw size={20} className="animate-spin" />
+                    <span>מתחבר...</span>
+                  </div>
+                ) : (
+                  <span className="group-hover:tracking-wide transition-all">כניסה למערכת</span>
+                )}
               </button>
             </form>
           </div>
 
-          <div className="mt-8 text-center">
+          {/* Connection Status */}
+          <div className="mt-8 text-center animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
             {apiStatus ? (
-              <div className={`flex items-center justify-center gap-2 text-xs ${apiStatus.connected ? 'text-green-500' : 'text-red-500'}`}>
+              <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-medium ${apiStatus.connected
+                ? 'bg-green-500/10 text-green-400 border border-green-500/20'
+                : 'bg-red-500/10 text-red-400 border border-red-500/20'
+                }`}>
                 {apiStatus.connected ? <Wifi size={14} /> : <WifiOff size={14} />}
                 <span>{apiStatus.message}</span>
               </div>
             ) : (
-              <div className="text-gray-600 text-xs">בודק חיבור למערכת...</div>
+              <div className="inline-flex items-center gap-2 text-white/30 text-xs">
+                <div className="w-2 h-2 rounded-full bg-white/30 animate-pulse" />
+                בודק חיבור למערכת...
+              </div>
             )}
           </div>
 
-          <div className="mt-4 text-center">
-            <button onClick={() => setShowDebug(true)} className="text-gray-500 text-xs underline hover:text-[#A2D294]">
-              Show Debug Logs
+          {/* Debug Link */}
+          <div className="mt-6 text-center">
+            <button
+              onClick={() => setShowDebug(true)}
+              className="text-white/20 text-xs hover:text-[#A2D294] transition-colors"
+            >
+              Debug Logs
             </button>
           </div>
 
+          {/* Debug Modal */}
           {showDebug && (
-            <div className="fixed inset-0 bg-black/80 flex items-center justify-center p-4 z-50">
-              <div className="bg-white rounded-lg p-6 max-w-2xl w-full max-h-[80vh] flex flex-col">
+            <div className="modal-overlay">
+              <div className="modal-content p-6">
                 <div className="flex justify-between items-center mb-4">
-                  <h3 className="text-lg font-bold text-black">Debug Logs</h3>
-                  <button onClick={() => setShowDebug(false)} className="text-gray-500 hover:text-gray-700">
+                  <h3 className="text-lg font-bold text-gray-900">Debug Logs</h3>
+                  <button onClick={() => setShowDebug(false)} className="btn-icon-sm btn-ghost text-gray-500 hover:text-gray-700">
                     <X size={20} />
                   </button>
                 </div>
-                <div className="flex-1 overflow-auto bg-gray-100 p-4 rounded text-xs font-mono whitespace-pre-wrap mb-4 custom-scrollbar text-black text-left" dir="ltr">
+                <div className="h-[50vh] overflow-auto bg-gray-50 p-4 rounded-xl text-xs font-mono whitespace-pre-wrap text-gray-800" dir="ltr">
                   {JSON.stringify(getDebugLogs(), null, 2)}
                 </div>
-                <div className="flex justify-end gap-2">
+                <div className="flex justify-end gap-3 mt-4">
                   <button
                     onClick={() => {
                       navigator.clipboard.writeText(JSON.stringify(getDebugLogs(), null, 2));
-                      alert("Logs copied to clipboard!");
+                      alert("Logs copied!");
                     }}
-                    className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+                    className="btn btn-secondary"
                   >
-                    Copy to Clipboard
+                    Copy
                   </button>
-                  <button
-                    onClick={() => setShowDebug(false)}
-                    className="bg-gray-200 text-gray-800 px-4 py-2 rounded hover:bg-gray-300 transition"
-                  >
+                  <button onClick={() => setShowDebug(false)} className="btn btn-ghost">
                     Close
                   </button>
                 </div>
@@ -580,170 +624,206 @@ const App = () => {
 
   if (view === ViewState.DASHBOARD) {
     return (
-      <div className="min-h-screen bg-[#F5F5F5] pb-20">
-        <header className="bg-white border-b border-gray-100 px-6 py-4 flex justify-between items-center shadow-sm">
-          <div className="flex items-center space-x-3 space-x-reverse">
-            <div className="bg-[#111111] p-2 rounded-lg">
-              <img src="https://bashiri.co.il/wp-content/uploads/2021/11/logo.png" className="h-6" alt="Bashiri" />
-            </div>
-            <div>
-              <h2 className="text-xl font-bold text-[#111111]">{currentUser?.username}</h2>
-              <div className="text-xs text-gray-500 font-mono flex flex-col">
-                <span>ID: {currentUser?.id}</span>
-                <span>Pass: {currentUser?.password}</span>
+      <div className="min-h-screen gradient-mesh pb-24">
+        {/* Premium Header */}
+        <header className="gradient-primary text-white px-6 py-5 shadow-lg sticky top-0 z-20">
+          <div className="max-w-4xl mx-auto flex justify-between items-center">
+            <div className="flex items-center gap-4">
+              <div className="bg-white/10 backdrop-blur p-2.5 rounded-xl border border-white/10">
+                <img src="https://bashiri.co.il/wp-content/uploads/2021/11/logo.png" className="h-7" alt="Bashiri" />
+              </div>
+              <div>
+                <h2 className="text-xl font-bold tracking-tight">{currentUser?.username}</h2>
+                <p className="text-white/50 text-xs font-medium">פורטל ניהול לידים</p>
               </div>
             </div>
-          </div>
-          <div className="flex items-center gap-3">
-            <button
-              onClick={fetchDashboardData}
-              disabled={loading}
-              className="text-[#A2D294] hover:text-[#8fbf81] disabled:opacity-50"
-            >
-              <RefreshCw size={20} className={loading ? 'animate-spin' : ''} />
-            </button>
-            <button onClick={handleLogout} className="text-gray-400 hover:text-red-500">
-              <LogOut size={20} />
-            </button>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={fetchDashboardData}
+                disabled={loading}
+                className="btn-icon p-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white/70 hover:text-white transition-all disabled:opacity-50"
+                title="רענן נתונים"
+              >
+                <RefreshCw size={20} className={loading ? 'animate-spin' : ''} />
+              </button>
+              <button
+                onClick={handleLogout}
+                className="btn-icon p-2.5 rounded-xl bg-white/10 hover:bg-red-500/80 text-white/70 hover:text-white transition-all"
+                title="התנתק"
+              >
+                <LogOut size={20} />
+              </button>
+            </div>
           </div>
         </header>
 
-        <main className="p-4">
+        <main className="px-4 py-6 max-w-4xl mx-auto">
           {loading ? (
             <Loading />
           ) : (
             <>
-              {/* Agents Summary Section (Horizontal Scroll) */}
-              <div className="mb-8">
-                <h3 className="text-sm font-bold text-gray-500 uppercase tracking-wider mb-3">סוכנים ופניות ({agents.length})</h3>
-                <div className="flex gap-4 overflow-x-auto pb-4 custom-scrollbar" style={{ scrollbarWidth: 'none' }}>
+              {/* Agents Summary Section */}
+              <section className="mb-8 animate-fade-in-up">
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-sm font-bold text-gray-500 uppercase tracking-wider flex items-center gap-2">
+                    <Users size={16} className="text-[#A2D294]" />
+                    סוכנים ופניות
+                  </h3>
+                  <span className="badge badge-accent">{agents.length} סוכנים</span>
+                </div>
+
+                <div className="flex gap-4 overflow-x-auto pb-4 hide-scrollbar">
                   {agents.length === 0 ? (
-                    <div className="text-gray-400 text-sm italic">לא נמצאו סוכנים</div>
+                    <div className="flex-1 text-center py-8 text-gray-400 text-sm italic">לא נמצאו סוכנים</div>
                   ) : (
-                    agents.map((agent) => (
-                      <div key={agent.id} className="min-w-[140px] bg-white p-3 rounded-xl border border-gray-100 shadow-sm flex flex-col items-center text-center">
-                        <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-gray-600 font-bold mb-2 text-sm">
+                    agents.map((agent, index) => (
+                      <div
+                        key={agent.id}
+                        className="min-w-[160px] card p-4 flex flex-col items-center text-center animate-fade-in-up"
+                        style={{ animationDelay: `${index * 0.05}s` }}
+                      >
+                        <div className="avatar avatar-lg mb-3 shadow-md">
                           {(agent.name || '?').charAt(0)}
                         </div>
-                        <h4 className="font-bold text-[#111] text-xs mb-1 truncate w-full">{agent.name || 'לא ידוע'}</h4>
-                        <span className={`text-[10px] px-2 py-0.5 rounded-full ${agent.leadCount > 0 ? 'bg-[#A2D294]/20 text-green-800 font-bold' : 'bg-gray-100 text-gray-400'}`}>
-                          {agent.leadCount || 0} פניות
+                        <h4 className="font-bold text-gray-900 text-sm mb-2 truncate w-full">{agent.name || 'לא ידוע'}</h4>
+                        <span className={`badge ${agent.leadCount > 0 ? 'badge-new' : 'bg-gray-100 text-gray-400'}`}>
+                          {agent.leadCount || 0} פניות חדשות
                         </span>
                       </div>
                     ))
                   )}
                 </div>
-              </div>
+              </section>
 
-              {/* Status Cards - 3 Buttons */}
-              <div className="space-y-4">
-                {/* New Leads Button */}
+              {/* Status Cards */}
+              <section className="space-y-4">
+                <h3 className="text-sm font-bold text-gray-500 uppercase tracking-wider mb-4 flex items-center gap-2">
+                  <TrendingUp size={16} className="text-[#A2D294]" />
+                  סטטוס לידים
+                </h3>
+
+                {/* New Leads Card */}
                 <div
                   onClick={() => openLeadsByStatus('new')}
-                  className="bg-white rounded-2xl p-5 shadow-sm border border-gray-200 cursor-pointer group hover:border-[#A2D294] transition-all relative overflow-hidden"
+                  className="card card-interactive p-5 group animate-fade-in-up"
+                  style={{ animationDelay: '0.1s' }}
                 >
-                  <div className="absolute top-0 left-0 w-2 h-full bg-[#A2D294]" />
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-4">
-                      <div className="bg-[#A2D294] text-[#111111] p-3 rounded-xl group-hover:scale-110 transition-transform duration-300">
-                        <Users size={28} />
+                      <div className="relative">
+                        <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform duration-300">
+                          <Users size={26} />
+                        </div>
+                        {newLeads.length > 0 && (
+                          <div className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 rounded-full flex items-center justify-center text-white text-[10px] font-bold animate-pulse">
+                            {newLeads.length > 9 ? '9+' : newLeads.length}
+                          </div>
+                        )}
                       </div>
                       <div>
-                        <h3 className="text-xl font-bold text-[#111111]">
-                          לידים פתוחים
-                          <span className="text-[#A2D294] font-mono mr-2">({newLeads.length})</span>
-                        </h3>
-                        <p className="text-gray-500 text-sm">סטטוס: 2. חדש</p>
+                        <h3 className="text-lg font-bold text-gray-900 mb-0.5">לידים פתוחים</h3>
+                        <p className="text-gray-500 text-sm flex items-center gap-1">
+                          <span className="status-dot status-dot-new" />
+                          ממתינים לטיפול
+                        </p>
                       </div>
                     </div>
-                    <ChevronRight size={24} className="text-gray-400 group-hover:text-[#A2D294]" />
+                    <div className="flex items-center gap-3">
+                      <span className="text-2xl font-bold text-emerald-600">{newLeads.length}</span>
+                      <ChevronRight size={22} className="text-gray-300 group-hover:text-emerald-500 group-hover:translate-x-[-4px] transition-all" />
+                    </div>
                   </div>
                 </div>
 
-                {/* Snooze Leads Button */}
+                {/* Snooze Leads Card */}
                 <div
                   onClick={() => openLeadsByStatus('snooze')}
-                  className="bg-white rounded-2xl p-5 shadow-sm border border-gray-200 cursor-pointer group hover:border-yellow-400 transition-all relative overflow-hidden"
+                  className="card card-interactive p-5 group animate-fade-in-up"
+                  style={{ animationDelay: '0.15s' }}
                 >
-                  <div className="absolute top-0 left-0 w-2 h-full bg-yellow-400" />
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-4">
-                      <div className="bg-yellow-100 text-yellow-700 p-3 rounded-xl group-hover:scale-110 transition-transform duration-300">
-                        <Clock size={28} />
+                      <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform duration-300">
+                        <Clock size={26} />
                       </div>
                       <div>
-                        <h3 className="text-xl font-bold text-[#111111]">
-                          לידים בנודניק
-                          <span className="text-yellow-600 font-mono mr-2">({snoozeLeads.length})</span>
-                        </h3>
-                        <p className="text-gray-500 text-sm">סטטוס: 3. נודניק</p>
+                        <h3 className="text-lg font-bold text-gray-900 mb-0.5">לידים בנודניק</h3>
+                        <p className="text-gray-500 text-sm flex items-center gap-1">
+                          <span className="status-dot status-dot-snooze" />
+                          תזכורת מתוזמנת
+                        </p>
                       </div>
                     </div>
-                    <ChevronRight size={24} className="text-gray-400 group-hover:text-yellow-500" />
+                    <div className="flex items-center gap-3">
+                      <span className="text-2xl font-bold text-amber-600">{snoozeLeads.length}</span>
+                      <ChevronRight size={22} className="text-gray-300 group-hover:text-amber-500 group-hover:translate-x-[-4px] transition-all" />
+                    </div>
                   </div>
                 </div>
 
-                {/* Handled Leads Button */}
+                {/* Handled Leads Card */}
                 <div
                   onClick={() => openLeadsByStatus('handled')}
-                  className="bg-white rounded-2xl p-5 shadow-sm border border-gray-200 cursor-pointer group hover:border-blue-400 transition-all relative overflow-hidden"
+                  className="card card-interactive p-5 group animate-fade-in-up"
+                  style={{ animationDelay: '0.2s' }}
                 >
-                  <div className="absolute top-0 left-0 w-2 h-full bg-blue-400" />
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-4">
-                      <div className="bg-blue-100 text-blue-700 p-3 rounded-xl group-hover:scale-110 transition-transform duration-300">
-                        <CheckCircle size={28} />
+                      <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform duration-300">
+                        <CheckCircle size={26} />
                       </div>
                       <div>
-                        <h3 className="text-xl font-bold text-[#111111]">
-                          לידים שטופלו
-                          <span className="text-blue-600 font-mono mr-2">({handledLeads.length})</span>
-                        </h3>
-                        <p className="text-gray-500 text-sm">סטטוס: 1. טופל</p>
+                        <h3 className="text-lg font-bold text-gray-900 mb-0.5">לידים שטופלו</h3>
+                        <p className="text-gray-500 text-sm flex items-center gap-1">
+                          <span className="status-dot status-dot-handled" />
+                          הושלמו בהצלחה
+                        </p>
                       </div>
                     </div>
-                    <ChevronRight size={24} className="text-gray-400 group-hover:text-blue-500" />
+                    <div className="flex items-center gap-3">
+                      <span className="text-2xl font-bold text-blue-600">{handledLeads.length}</span>
+                      <ChevronRight size={22} className="text-gray-300 group-hover:text-blue-500 group-hover:translate-x-[-4px] transition-all" />
+                    </div>
                   </div>
                 </div>
-              </div>
+              </section>
             </>
           )}
 
-          <div className="mt-8 flex justify-center">
+          {/* Debug Button */}
+          <div className="mt-12 flex justify-center">
             <button
               onClick={() => setShowDebug(true)}
-              className="bg-gray-800 text-white px-4 py-2 rounded shadow text-xs font-mono"
+              className="text-gray-400 text-xs hover:text-gray-600 transition-colors"
             >
-              Show Debug Logs
+              Debug Logs
             </button>
           </div>
 
+          {/* Debug Modal */}
           {showDebug && (
-            <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-              <div className="bg-white rounded-lg p-6 max-w-2xl w-full max-h-[80vh] flex flex-col">
+            <div className="modal-overlay">
+              <div className="modal-content p-6">
                 <div className="flex justify-between items-center mb-4">
-                  <h3 className="text-lg font-bold">Debug Logs</h3>
-                  <button onClick={() => setShowDebug(false)} className="text-gray-500 hover:text-gray-700">
+                  <h3 className="text-lg font-bold text-gray-900">Debug Logs</h3>
+                  <button onClick={() => setShowDebug(false)} className="btn-icon-sm btn-ghost">
                     <X size={20} />
                   </button>
                 </div>
-                <div className="flex-1 overflow-auto bg-gray-100 p-4 rounded text-xs font-mono whitespace-pre-wrap mb-4 custom-scrollbar">
+                <div className="h-[50vh] overflow-auto bg-gray-50 p-4 rounded-xl text-xs font-mono whitespace-pre-wrap text-gray-800" dir="ltr">
                   {JSON.stringify(getDebugLogs(), null, 2)}
                 </div>
-                <div className="flex justify-end gap-2">
+                <div className="flex justify-end gap-3 mt-4">
                   <button
                     onClick={() => {
                       navigator.clipboard.writeText(JSON.stringify(getDebugLogs(), null, 2));
-                      alert("Logs copied to clipboard!");
+                      alert("Logs copied!");
                     }}
-                    className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+                    className="btn btn-secondary"
                   >
-                    Copy to Clipboard
+                    Copy
                   </button>
-                  <button
-                    onClick={() => setShowDebug(false)}
-                    className="bg-gray-200 text-gray-800 px-4 py-2 rounded hover:bg-gray-300 transition"
-                  >
+                  <button onClick={() => setShowDebug(false)} className="btn btn-ghost">
                     Close
                   </button>
                 </div>
@@ -761,39 +841,49 @@ const App = () => {
       currentStatusFilter === 'snooze' ? 'לידים בנודניק' :
         currentStatusFilter === 'handled' ? 'לידים שטופלו' : 'לידים';
 
+    const statusColor = currentStatusFilter === 'new' ? 'from-emerald-500 to-emerald-700' :
+      currentStatusFilter === 'snooze' ? 'from-amber-500 to-orange-600' :
+        currentStatusFilter === 'handled' ? 'from-blue-500 to-blue-700' : 'from-gray-600 to-gray-800';
+
     return (
-      <div className="min-h-screen bg-[#F5F5F5]">
-        <div className="max-w-4xl mx-auto bg-white min-h-screen shadow-xl border-x border-gray-100 relative">
-          {/* Header with back, refresh, logout */}
-          <div className="bg-[#111111] text-white p-4 flex items-center justify-between sticky top-0 z-20 shadow-md">
+      <div className="min-h-screen gradient-mesh">
+        <div className="max-w-4xl mx-auto bg-white min-h-screen shadow-2xl relative">
+          {/* Premium Header */}
+          <header className={`bg-gradient-to-r ${statusColor} text-white px-5 py-4 flex items-center justify-between sticky top-0 z-20 shadow-lg`}>
             <div className="flex items-center gap-3">
-              <button onClick={() => { setView(ViewState.DASHBOARD); setSnoozeDropdownOpen(null); }} className="p-1">
-                <ArrowRight size={24} />
+              <button
+                onClick={() => { setView(ViewState.DASHBOARD); setSnoozeDropdownOpen(null); }}
+                className="p-2 rounded-xl bg-white/10 hover:bg-white/20 transition-all"
+              >
+                <ArrowRight size={22} />
               </button>
-              <h1 className="text-lg font-bold">{statusTitle} ({filteredLeads.length})</h1>
+              <div>
+                <h1 className="text-lg font-bold tracking-tight">{statusTitle}</h1>
+                <p className="text-white/70 text-xs">{filteredLeads.length} לידים</p>
+              </div>
             </div>
             <div className="flex items-center gap-2">
               <button
                 onClick={fetchDashboardData}
                 disabled={loading}
-                className="p-2 rounded-full hover:bg-white/10 transition-colors disabled:opacity-50"
+                className="p-2.5 rounded-xl bg-white/10 hover:bg-white/20 transition-all disabled:opacity-50"
                 title="רענן נתונים"
               >
-                <RefreshCw size={20} className={loading ? 'animate-spin' : ''} />
+                <RefreshCw size={18} className={loading ? 'animate-spin' : ''} />
               </button>
               <button
                 onClick={() => { setCurrentUser(null); setView(ViewState.LOGIN); }}
-                className="p-2 rounded-full hover:bg-white/10 transition-colors"
+                className="p-2.5 rounded-xl bg-white/10 hover:bg-red-500/80 transition-all"
                 title="יציאה"
               >
-                <LogOut size={20} />
+                <LogOut size={18} />
               </button>
             </div>
-          </div>
+          </header>
 
-          <div className="bg-white border-b border-gray-200 sticky top-[68px] z-10 shadow-sm">
-            {/* Search and Date Filters */}
-            <div className="p-3 bg-gray-50 border-b border-gray-100">
+          {/* Search and Filters */}
+          <div className="bg-white border-b border-gray-100 sticky top-[72px] z-10 shadow-sm">
+            <div className="p-4">
               <div className="flex flex-col sm:flex-row gap-3">
                 {/* Search Input */}
                 <div className="relative flex-1">
@@ -802,33 +892,33 @@ const App = () => {
                     placeholder="חפש לפי שם או טלפון..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full pl-4 pr-10 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#111111] focus:border-transparent text-sm"
+                    className="input w-full pl-10 pr-12"
                   />
-                  <Search className="absolute right-3 top-2.5 text-gray-400" size={18} />
+                  <Search className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
                   {searchQuery && (
                     <button
                       onClick={() => setSearchQuery('')}
-                      className="absolute left-3 top-2.5 text-gray-400 hover:text-gray-600"
+                      className="absolute left-4 top-1/2 -translate-y-1/2 p-1 rounded-full text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-all"
                     >
-                      <X size={16} />
+                      <X size={14} />
                     </button>
                   )}
                 </div>
 
-                {/* Date Filters */}
+                {/* Date Filter Pills */}
                 <div className="flex gap-2 overflow-x-auto pb-1 hide-scrollbar">
                   {[
-                    { id: 'all', label: 'הכל' },
-                    { id: 'today', label: 'היום' },
-                    { id: 'yesterday', label: 'אתמול' },
-                    { id: 'older', label: 'ישן יותר' }
+                    { id: 'all', label: 'הכל', icon: null },
+                    { id: 'today', label: 'היום', icon: null },
+                    { id: 'yesterday', label: 'אתמול', icon: null },
+                    { id: 'older', label: 'ישן יותר', icon: null }
                   ].map((filter) => (
                     <button
                       key={filter.id}
                       onClick={() => setDateFilter(filter.id as any)}
-                      className={`whitespace-nowrap px-3 py-1.5 rounded-full text-xs font-medium transition-colors border ${dateFilter === filter.id
-                        ? 'bg-[#111111] text-white border-[#111111]'
-                        : 'bg-white text-gray-600 border-gray-200 hover:bg-gray-50'
+                      className={`whitespace-nowrap px-4 py-2 rounded-xl text-xs font-semibold transition-all ${dateFilter === filter.id
+                        ? 'bg-gray-900 text-white shadow-md'
+                        : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                         }`}
                     >
                       {filter.label}
