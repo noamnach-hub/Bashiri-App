@@ -88,7 +88,8 @@ const mapLeads = (data: any): any[] => {
     receivedBy: l.owneridname || '', // מי קיבל את הליד
     answerStatus: l.pcfsystemfield734 || '', // ענה/לא ענה
     callDuration: l.pcfsystemfield750 || l.pcfsystemfield746 || '', // זמן שיחה
-    handlerType: l.pcfsystemfield900name || l.pcfsystemfield900 || '' // סוג מטפל
+    handlerType: l.pcfsystemfield900name || l.pcfsystemfield900 || '', // סוג מטפל
+    agentReceivedDate: l.pcfwhenagentgotlead || l.createdon // מתי סוכן קיבל את הליד (fallback to createdon)
   }));
 };
 

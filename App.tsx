@@ -43,6 +43,7 @@ import { DashboardCard } from './components/DashboardCard';
 import { LeadCard } from './components/LeadCard';
 import { TaskCard } from './components/TaskCard';
 import { Loading } from './components/Loading';
+import { formatPhoneNumber } from './utils';
 
 const App = () => {
   const [showDebug, setShowDebug] = useState(false);
@@ -88,6 +89,7 @@ const App = () => {
 
   const [apiStatus, setApiStatus] = useState<{ connected: boolean, message: string } | null>(null);
   const isNavigatingBack = useRef(false);
+  const isFetchingRef = useRef(false);
 
   useEffect(() => {
     addDebugLog("App Mount", "Application initialized");
@@ -143,8 +145,14 @@ const App = () => {
   };
 
   const fetchDashboardData = async () => {
-    if (!currentUser) return;
-    setLoading(true);
+    if (!currentUser || isFetchingRef.current) return;
+
+    isFetchingRef.current = true;
+
+    // Only show full screen loading if we don't have data yet
+    if (agents.length === 0) {
+      setLoading(true);
+    }
     try {
       // 1. Fetch Agents
       const fetchedAgents = await getAgents(currentUser.id);
@@ -176,7 +184,8 @@ const App = () => {
         l.statusRaw === 3 || l.statusRaw === '3'
       );
       const handledList = allLeadsAggregated.filter(l =>
-        l.statusRaw === 1 || l.statusRaw === '1'
+        (l.statusRaw === 1 || l.statusRaw === '1') &&
+        (!l.agentReceivedDate || new Date(l.agentReceivedDate).getTime() > Date.now() - (14 * 24 * 60 * 60 * 1000))
       );
 
       addDebugLog("Lead Categorization", {
@@ -198,6 +207,7 @@ const App = () => {
       console.error("Error fetching dashboard data:", err);
     } finally {
       setLoading(false);
+      isFetchingRef.current = false;
     }
   };
 
@@ -994,7 +1004,7 @@ const App = () => {
 
                       // Date filter
                       if (dateFilter !== 'all') {
-                        const leadDate = new Date(lead.createdOn);
+                        const leadDate = new Date(lead.agentReceivedDate || lead.createdOn);
                         const today = new Date();
                         const isToday = leadDate.getDate() === today.getDate() && leadDate.getMonth() === today.getMonth() && leadDate.getFullYear() === today.getFullYear();
 
@@ -1017,8 +1027,8 @@ const App = () => {
                         valA = a.phone || '';
                         valB = b.phone || '';
                       } else { // date
-                        valA = new Date(a.createdOn || 0).getTime();
-                        valB = new Date(b.createdOn || 0).getTime();
+                        valA = new Date(a.agentReceivedDate || a.createdOn || 0).getTime();
+                        valB = new Date(b.agentReceivedDate || b.createdOn || 0).getTime();
                       }
 
                       if (valA < valB) return sortDirection === 'asc' ? -1 : 1;
@@ -1051,14 +1061,14 @@ const App = () => {
 
                           {/* 2. Phone Section */}
                           <div className="md:w-48 text-right md:text-center flex-shrink-0">
-                            <a href={`tel:${lead.phone}`} className="font-mono text-lg text-gray-700 font-medium hover:text-blue-600 transition-colors" dir="ltr">
-                              {lead.phone || '-'}
-                            </a>
+                            <span className="text-lg text-gray-700 font-bold tracking-wider" dir="ltr">
+                              {formatPhoneNumber(lead.phone)}
+                            </span>
                           </div>
 
                           {/* 3. Date Section */}
                           <div className="md:w-40 text-right md:text-center text-gray-500 font-medium text-sm flex-shrink-0" dir="ltr">
-                            {lead.createdOn ? new Date(lead.createdOn).toLocaleString('he-IL', { day: '2-digit', month: '2-digit', year: '2-digit', hour: '2-digit', minute: '2-digit' }) : '-'}
+                            {lead.agentReceivedDate ? new Date(lead.agentReceivedDate).toLocaleString('he-IL', { day: '2-digit', month: '2-digit', year: '2-digit', hour: '2-digit', minute: '2-digit' }) : '-'}
                           </div>
 
                           {/* 4. Actions Section */}
@@ -1147,7 +1157,7 @@ const App = () => {
               <User size={36} />
             </div>
             <h2 className="text-2xl font-bold text-[#111111]">{selectedInquiry.name}</h2>
-            <p className="text-xl text-[#A2D294] font-medium mt-1">{selectedInquiry.phone}</p>
+            <p className="text-xl text-[#A2D294] font-medium mt-1 font-mono tracking-wide">{formatPhoneNumber(selectedInquiry.phone)}</p>
           </div>
           <div className="bg-[#FAFAFA] rounded-xl p-5 border border-gray-100 mb-6">
             <h3 className="text-xs font-bold text-[#A2D294] mb-3 uppercase tracking-wider">תקציר הפנייה</h3>
